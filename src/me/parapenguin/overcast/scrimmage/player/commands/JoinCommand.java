@@ -1,5 +1,7 @@
 package me.parapenguin.overcast.scrimmage.player.commands;
 
+import com.sk89q.minecraft.util.commands.CommandContext;
+import com.sk89q.minecraft.util.commands.CommandException;
 import me.parapenguin.overcast.scrimmage.Scrimmage;
 import me.parapenguin.overcast.scrimmage.map.Map;
 import me.parapenguin.overcast.scrimmage.map.MapTeam;
@@ -11,30 +13,26 @@ import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
-public class JoinCommand implements CommandExecutor {
-	
-	@Override
-	public boolean onCommand(CommandSender sender, Command cmd, String cmdl, String[] args) {
+public class JoinCommand{
+
+	@com.sk89q.minecraft.util.commands.Command(aliases = { "join", "j", "p"}, desc = "Joins the game", usage = "[team]", min = 0, max = 1)
+	public static void join(final CommandContext args, CommandSender sender) throws Exception {
 		if(sender instanceof Player == false) {
-			sender.sendMessage(ChatColor.RED + "This command is for players only!");
-			return false;
+			throw new CommandException("This command is for players only!");
 		}
-		
 		Map map = Scrimmage.getRotation().getSlot().getMap();
 		Client client = Client.getClient((Player) sender);
 		
 		MapTeam team = map.getObservers();
-		if(args.length == 0) {
+		if(args.argsLength() == 0) {
 			team = map.getLowest();
-		} else if(args.length == 1) {
-			team = map.getTeam(args[0]);
+		} else if(args.argsLength() == 1) {
+			team = map.getTeam(args.getString(0));
 			if(team == null) {
-				sender.sendMessage(ChatColor.RED + "No teams matched query.");
-				return false;
+				throw new CommandException("No teams matched query.");
 			}
 		} else {
 			sender.sendMessage(ChatColor.RED + "/join (team)");
-			return false;
 		}
 		if (client.getTeam().equals(team)) {
 			sender.sendMessage(ChatColor.RED + "You are already on that team!");
@@ -42,8 +40,7 @@ public class JoinCommand implements CommandExecutor {
 			Scrimmage.broadcast(team.getColor() + sender.getName() + ChatColor.GRAY + " has joined the " + team.getColor() + team.getDisplayName() + ChatColor.GRAY + ".");
 	    }
 		client.setTeam(team);
-		
-		return false;
+
 	}
 	
 }

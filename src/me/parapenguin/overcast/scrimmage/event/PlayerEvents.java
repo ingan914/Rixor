@@ -130,17 +130,12 @@ public class PlayerEvents implements Listener {
 		Map map = Scrimmage.getRotation().getSlot().getMap();
 
 		ChatColor color = ChatColor.GRAY;
-		/* if(Scrimmage.getRotation().getSlot().getMatch().isCurrentlyRunning()) color = ChatColor.GRAY;
-		else if(Scrimmage.getRotation().getSlot().getMatch().isCurrentlyCycling()) color = ChatColor.GREEN;
-		else if(!Scrimmage.getRotation().getSlot().getMatch().isCurrentlyRunning()) color = ChatColor.RED;
-		else color = ChatColor.GRAY;
-		*/
 		
 		String team = "";
 		if(!Scrimmage.isPublic())
-			team = ChatColor.GRAY + "(" + ChatColor.GOLD + Scrimmage.getTeam() + ChatColor.GRAY + ")";
+			team = ChatColor.GRAY + "Server Owner: (" + ChatColor.GOLD + Scrimmage.getTeam() + ChatColor.GRAY + ")";
 		
-		event.setMotd(color + " " + Characters.raquo + " " + ChatColor.AQUA + map.getName() + color + " " + Characters.laquo + " "  + team);
+		event.setMotd(color + " " + Characters.raquo + " " + ChatColor.AQUA + map.getName() + color + " " + Characters.laquo + " " + "\n" + team);
 	}
 	
 	@EventHandler

@@ -5,30 +5,20 @@ author: [ParaPenguin]
 website: http://teamloading.com/
 load: STARTUP
 commands:
-  join:
-    aliases: [play]
-    description: Join the match.
   setteam:
     aliases: [st]
     description: Set the name of a team.
   setnext:
     aliases: [sn]
     description: Set the next map.
-  global:
-    aliases: [g]
-    description: Global chat.
   end:
     aliases: [cancel]
     description: Stop/End the game.
   start:
     description: Start the starting timer.
-  cycle:
-    description: Cycle to the next map.
   bb:
     aliases: [breakblocks]
     description: Break Blocks. (Buggy)
-  a:
-    description: Admins chat.
   staff:
     description: Lists off staff.
   help:
@@ -38,8 +28,6 @@ commands:
     description: Stops the server.
   request:
     description: Send a request to online staff.
-  force:
-    description: Force a player onto a team.
   match:
     aliases: [info,next,map]
     description: Check the map status.

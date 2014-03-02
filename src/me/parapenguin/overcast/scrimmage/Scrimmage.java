@@ -8,9 +8,19 @@ import java.net.URLClassLoader;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.sk89q.bukkit.util.CommandsManagerRegistration;
+import com.sk89q.minecraft.util.commands.CommandException;
+import com.sk89q.minecraft.util.commands.CommandPermissionsException;
+import com.sk89q.minecraft.util.commands.CommandUsageException;
+import com.sk89q.minecraft.util.commands.CommandsManager;
+import com.sk89q.minecraft.util.commands.MissingNestedCommandException;
+import com.sk89q.minecraft.util.commands.WrappedCommandException;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
+import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
+import org.bukkit.command.CommandSender;
+import org.bukkit.command.ConsoleCommandSender;
 import org.bukkit.event.Event;
 import org.bukkit.event.Listener;
 import org.bukkit.plugin.java.JavaPlugin;
@@ -52,7 +62,9 @@ public class Scrimmage extends JavaPlugin {
 	private @Getter @Setter File rootDirectory;
 	private @Getter @Setter String mapDirectory;
 	
-	@Getter public static double MINIMUM_MOVEMENT = 0.125;	
+	@Getter public static double MINIMUM_MOVEMENT = 0.125;
+
+	private CommandsManager<CommandSender> commands;
 	
 	public void onEnable() {
 		
@@ -108,8 +120,53 @@ public class Scrimmage extends JavaPlugin {
 				e.printStackTrace();
 			}
 		}
+		setupCommands();
 	}
-	
+
+
+	@Override
+	public boolean onCommand(CommandSender sender, Command cmd, String commandLabel, String[] args) {
+		try {
+			this.commands.execute(cmd.getName(), args, sender, sender);
+		} catch (CommandPermissionsException e) {
+			sender.sendMessage(ChatColor.RED + "You don't have permission.");
+		} catch (MissingNestedCommandException e) {
+			sender.sendMessage(ChatColor.RED + e.getUsage());
+		} catch (CommandUsageException e) {
+			sender.sendMessage(ChatColor.RED + e.getMessage());
+			sender.sendMessage(ChatColor.RED + e.getUsage());
+		} catch (WrappedCommandException e) {
+			if (e.getCause() instanceof NumberFormatException) {
+				sender.sendMessage(ChatColor.RED + "Number expected, string received instead.");
+			} else {
+				sender.sendMessage(ChatColor.RED + "An error has occurred. See console.");
+				e.printStackTrace();
+			}
+		} catch (CommandException e) {
+			sender.sendMessage(ChatColor.RED + e.getMessage());
+		}
+
+		return true;
+	}
+
+
+	private void setupCommands() {
+		this.commands = new CommandsManager<CommandSender>() {
+			@Override
+			public boolean hasPermission(CommandSender sender, String perm) {
+				return sender instanceof ConsoleCommandSender|| sender.hasPermission(perm);
+			}
+		};
+		CommandsManagerRegistration cmdRegister = new CommandsManagerRegistration(this, this.commands);
+		//Register your commands here
+		cmdRegister.register(AdminChat.class);
+		cmdRegister.register(CycleCommand.class);
+		cmdRegister.register(ForceCommand.class);
+		cmdRegister.register(GlobalCommand.class);
+		cmdRegister.register(JoinCommand.class);
+
+	}
+
 	public void startup() {
 		team = getConfig().getString("team");
 		if(team == null)
@@ -134,19 +191,19 @@ public class Scrimmage extends JavaPlugin {
 		registerListener(new ObjectiveEvents());
 		getRotation().start();
 		
-		registerCommand("join", new JoinCommand());
+
 		registerCommand("setteam", new SetTeamCommand());
 		registerCommand("setnext", new SetNextCommand());
-		registerCommand("global", new GlobalCommand());
+
 		registerCommand("start", new StartCommand());
-		registerCommand("cycle", new CycleCommand());
+
 		registerCommand("end", new StopCommand());
-		registerCommand("a", new AdminChat());
+
 		registerCommand("staff", new StaffCommand());
 		registerCommand("help", new HelpCommand());
 		registerCommand("stoptheserver", new StopTheServer());
 		registerCommand("request", new RequestCommand());
-		registerCommand("force", new ForceCommand());
+
 		registerCommand("match", new MatchCommand());
 		registerCommand("test", new TestCommand());
 		enableTracker();

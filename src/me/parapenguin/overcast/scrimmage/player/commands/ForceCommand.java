@@ -1,5 +1,7 @@
 package me.parapenguin.overcast.scrimmage.player.commands;
 
+import com.sk89q.minecraft.util.commands.CommandContext;
+import com.sk89q.minecraft.util.commands.CommandException;
 import me.parapenguin.overcast.scrimmage.Scrimmage;
 import me.parapenguin.overcast.scrimmage.map.Map;
 import me.parapenguin.overcast.scrimmage.map.MapTeam;
@@ -12,33 +14,25 @@ import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
-public class ForceCommand implements CommandExecutor {
-	
-	@Override
-	public boolean onCommand(CommandSender sender, Command cmd, String cmdl, String[] args) {
+public class ForceCommand {
+
+	@com.sk89q.minecraft.util.commands.Command(aliases = { "force"}, desc = "Forces a player onto a team", usage = "[name], [team]", min = 2, max = 2)
+	public static void force(final CommandContext args, CommandSender sender) throws Exception {
 		if(sender instanceof Player == false) {
-			sender.sendMessage(ChatColor.RED + "This command is for players only!");
-			return false;
+			throw new CommandException("This command is for players only!");
 		}
 		
-		if(args.length < 1) {
-			sender.sendMessage(ChatColor.RED + "/force <name> <team>");
-			return false;
-		}
-		Player target = Bukkit.getPlayer(args[0]);
+
+		Player target = Bukkit.getPlayer(args.getString(0));
 		Map map = Scrimmage.getRotation().getSlot().getMap();
 		Client targetClient = Client.getClient((Player) target);
 		
 		MapTeam team = map.getObservers();
-		if(args.length == 2) {
-			team = map.getTeam(args[1]);
+		if(args.argsLength() == 2) {
+			team = map.getTeam(args.getString(0));
 			if(team == null) {
-				sender.sendMessage(ChatColor.RED + "No teams matched query.");
-				return false;
+				throw new CommandException("No teams matched query.");
 			}
-		} else {
-			sender.sendMessage(ChatColor.RED + "/force <name> <team>");
-			return false;
 		}
 		if (targetClient.getTeam().equals(team)) {
 			sender.sendMessage(ChatColor.RED + "That person is already on that team!");
@@ -51,8 +45,7 @@ public class ForceCommand implements CommandExecutor {
 			}
 	    }
 		targetClient.setTeam(team);
-		
-		return false;
+
 	}
 	
 }
