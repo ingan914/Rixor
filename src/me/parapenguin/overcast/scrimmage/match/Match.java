@@ -168,6 +168,10 @@ public class Match {
 		}
 		if(starting == 0) {
 			Scrimmage.broadcast(ChatColor.GREEN + "Match has begun!");
+			for(MapTeam team : getMap().getTeams()) {
+				team.setScore(0);
+			}
+			Scrimmage.getMap().reloadSidebar(true, SidebarType.OBJECTIVES);
 			for (Player Online : Bukkit.getOnlinePlayers()) {
 				Online.playSound(Online.getLocation(), Sound.NOTE_PIANO, 100, 1);
 				}
