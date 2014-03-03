@@ -370,6 +370,7 @@ public class MapTeam {
 		List<String> names = new ArrayList<String>();
 		for(TeamObjective objective : this.objectives) {
 			String name = " " + objective.getColor() + objective.getName() + objective.getSpaces();
+			Scrimmage.getInstance().getLogger().severe(name.length() + " Thats's " + name + "(" + objective.getName() + " AND " + objective.getSpaces() + ")");
 			if(name.length() > 16) {
 				int extra = name.length() - 16;
 				String trimmed = objective.getName().substring(0, objective.getName().length() - 1 - extra);
@@ -389,16 +390,6 @@ public class MapTeam {
 		
 		int score = start;
 		for(String offlineName : names) {
-		/*	ScoreboardManager manager = Scrimmage.getInstance().getServer().getScoreboardManager();
-			Scoreboard news = manager.getNewScoreboard();
-			
-			Team newTeam = news.registerNewTeam(score + "");
-			newTeam.setPrefix(offlineName + "test");
-			OfflinePlayer player = Scrimmage.getInstance().getServer().getOfflinePlayer(score + "");
-			newTeam.addPlayer(player);
-			getMap().getBoardObjective().getScore(player).setScore(score);
-			score++;
-			*/
 			Scrimmage.getInstance().getServer().getScoreboardManager().getNewScoreboard().registerNewTeam("" + score);
 			OfflinePlayer player = Scrimmage.getInstance().getServer().getOfflinePlayer(offlineName);
 			//Scrimmage.getInstance().getServer().getScoreboardManager().getMainScoreboard().getTeam(offlineName + score).addPlayer(player);

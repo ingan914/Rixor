@@ -137,17 +137,17 @@ public class Map {
 			
 			if(objectives) {
 				int i = 1;
-				for(MapTeam team : teams) {
+				for(MapTeam team : getTeams()) {
 					if(team.getObjectives() == null || team.getObjectives().size() == 0)
 						i = team.loadTeamObjectives(true, i);
 					else i = team.loadTeamObjectives(false, i);
-					if(teams.get(teams.size() - 1) != team) {
+					//if(teams.get(teams.size() - 1) != team) {
 						i++;
 						OfflinePlayer player = Scrimmage.getInstance().getServer().getOfflinePlayer(getSpaces(i));
 						getBoardObjective().getScore(player).setScore(i);
 						i++;
 						
-					}
+				//	}
 				}
 			}
 		} else if(getSidebar() == SidebarType.SCORE && (sidebar == SidebarType.SCORE || sidebar == null)) {

@@ -47,11 +47,6 @@ public class PlayerEvents implements Listener {
 	public void onPlayerJoin(PlayerJoinEvent event) {
 		Player player = event.getPlayer();
 		player.sendMessage(ChatColor.DARK_AQUA + "ParaPGM v1.0 made by " + ChatColor.GOLD + "ParaPenguin" + ChatColor.DARK_AQUA + ".");
-		/*if(Scrimmage.isPublic())
-			player.sendMessage(ChatColor.DARK_AQUA + "Public Scrimmage Server: " + ChatColor.GOLD + "#" + Scrimmage.getID());
-		else
-			player.sendMessage(ChatColor.GOLD + Scrimmage.getTeam() + ChatColor.DARK_AQUA + "'s Private Scrimmage Server");
-		*/
 		Client client = new Client(player);
 		
 		Client.getClients().add(client);
@@ -59,9 +54,6 @@ public class PlayerEvents implements Listener {
 		
 		event.setJoinMessage(client.getStars() + client.getTeam().getColor() + event.getPlayer().getName() + ChatColor.YELLOW + " joined the game");
 		Client clients = Client.getClient(event.getPlayer());
-	/*	if (clients.getClient(player).isRanked()) {	
-			Var.staffNumber = Var.staffNumber + 1;
-		}*/
 	}
 	
 	@EventHandler
@@ -89,9 +81,6 @@ public class PlayerEvents implements Listener {
 			onPlayerExit(event.getPlayer());
 			event.setReason(ChatColor.RED + "You have been kicked!");
 			Client clients = Client.getClient(event.getPlayer());
-			/*if (clients.getClient(kicked).isRanked()) {	
-				Var.staffNumber = Var.staffNumber - 1;
-			}*/
 		} catch(NullPointerException e) {}
 	}
 	

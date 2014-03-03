@@ -52,7 +52,7 @@ public class TeamObjective {
 	}
 	
 	public String getSpaces() {
-		return Map.getSpaces(used);
+		return Map.getSpaces(used - 1);
 	}
 	
 	public ObjectiveType getType() {
