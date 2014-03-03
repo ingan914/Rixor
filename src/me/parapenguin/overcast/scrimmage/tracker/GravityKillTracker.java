@@ -569,7 +569,7 @@ public class GravityKillTracker implements Listener {
 		
 		try {
 			if (was) {
-				if (!victim.getTeam().equals(attacker.getTeam())) was = true;
+				if (!victim.getTeam().equals(attacker.getTeam()) && !(victim.getPlayer().getDisplayName().equals(attacker.getPlayer().getDisplayName()))) was = true;
 			}
 		} catch (NullPointerException e) {
 			return false;
