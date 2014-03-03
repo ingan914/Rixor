@@ -5,6 +5,7 @@ author: [ParaPenguin]
 website: http://teamloading.com/
 load: STARTUP
 commands:
+smartgit
   setteam:
     aliases: [st]
     description: Set the name of a team.
