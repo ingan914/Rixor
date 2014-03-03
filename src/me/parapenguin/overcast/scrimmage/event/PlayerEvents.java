@@ -98,16 +98,6 @@ public class PlayerEvents implements Listener {
 
 	@EventHandler
 	public void onPlayerDeath(PlayerDeathEvent event) {
-		/*Player player = event.getEntity();
-		Player killer = player.getKiller();
-		/*String killername = killer.getDisplayName();
-		String deadname = player.getDisplayName();
-		ItemStack item = killer.getItemInHand();
-		if (item.getData().equals("AIR")) {
-		Bukkit.broadcastMessage(deadname + ChatColor.GRAY + " felt the fury of " + killername + "'s fists!");
-		} else {
-		Bukkit.broadcastMessage(deadname + ChatColor.GRAY + " was slain by " + killername + ChatColor.GRAY + "'s " + item.getType());
-		}*/
 	}
 	@EventHandler
 	public void onPlayerQuit(PlayerQuitEvent event) {

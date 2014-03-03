@@ -14,7 +14,7 @@ import org.bukkit.entity.Player;
 public class AdminChat  {
 
 
-	@Command(aliases = { "admin", "a" , "adminchat"}, desc = "Speaks in admin chat", usage = "[message]", min = 1, max = 1)
+	@Command(aliases = { "admin", "a" , "adminchat"}, desc = "Speaks in admin chat", usage = "[message]", min = 1, max = -1)
 	public static void admin(final CommandContext args, CommandSender sender) throws Exception { {
 		if(sender instanceof Player) {
 			if(!Client.getClient((Player) sender).isRanked()) {

@@ -177,18 +177,12 @@ public class MapTeam {
 			
 			for(Element element : rootDestroyables) {
 				List<Element> destroyables = new ArrayList<Element>();
-				
-				List<Element> destroyableGroups = MapLoader.getElements(element, "destroyables");
-				for(Element destroyableGroup : destroyableGroups) {
+
+				for(Element destroyableGroup : rootDestroyables) {
 					destroyables.addAll(MapLoader.getElements(destroyableGroup, "destroyable"));
 					ServerLog.info("Found " + MapLoader.getElements(destroyableGroup, "destroyable").size() + " destroyables! (Search)");
 				}
-				
-				List<Element> coreGroup = MapLoader.getElements(element, "destroyable");
-				for(Element core : coreGroup) {
-					destroyables.add(core);
-					ServerLog.info("Found a destroyable! (Search)");
-				}
+
 				
 				for(Element destroyable : destroyables) {
 					ServerLog.info("Found a destroyable! (Loop)");

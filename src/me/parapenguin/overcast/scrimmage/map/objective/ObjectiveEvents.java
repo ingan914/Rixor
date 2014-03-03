@@ -180,9 +180,14 @@ public class ObjectiveEvents implements Listener {
 		if(event.getCause() instanceof BlockBreakEvent) {
 			List<MonumentObjective> monuments = event.getMap().getMonuments();
 			for(MonumentObjective monument : monuments) {
-				if(monument.isLocation(event.getNewState().getLocation()) && monument.getTeam() == client.getTeam() || monument.isDestroyed()) {
+				if(monument.isLocation(event.getNewState().getLocation()) && monument.getTeam() == client.getTeam()) {
 					event.setCancelled(true);
 					client.getPlayer().sendMessage(ChatColor.RED + "You may not break this monument!");
+					return;
+				}
+				else if ( monument.isDestroyed())  {
+					event.setCancelled(true);
+					client.getPlayer().sendMessage(ChatColor.RED + "That monument is already destroyed!");
 					return;
 				}
 			}
