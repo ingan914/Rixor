@@ -361,7 +361,7 @@ public class Match {
 			if(next != null) {
 				BarAPI.setMessage(Online, ChatColor.DARK_AQUA + "Cycling to " + ChatColor.AQUA + next.getLoader().getName() + ChatColor.DARK_AQUA
 						+ " in " + ChatColor.DARK_RED + cycling + ChatColor.DARK_AQUA + " second" + p + "!", 100f);
-			} else { BarAPI.setMessage(Online, ChatColor.DARK_AQUA + "Cycling to " + ChatColor.AQUA + "Sticky Situation" + ChatColor.DARK_AQUA
+			} else { BarAPI.setMessage(Online, ChatColor.DARK_AQUA + "Cycling to " + ChatColor.AQUA + "ERROR!!!!" + ChatColor.DARK_AQUA
 					+ " in " + ChatColor.DARK_RED + cycling + ChatColor.DARK_AQUA + " second" + p + "!", 100f);
 			}
 		}
@@ -369,7 +369,7 @@ public class Match {
 		setCurrentlyCycling(true);
 		if(cycling == 5 && next == null) {
 			
-			String name = "Sticky Situation";
+			String name = "";
 			MapLoader found = Rotation.getMap(name);
 			Rotation rot = Scrimmage.getRotation();
 			rot.setNext(new RotationSlot(found));

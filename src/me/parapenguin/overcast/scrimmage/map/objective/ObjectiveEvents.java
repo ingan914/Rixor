@@ -175,7 +175,6 @@ public class ObjectiveEvents implements Listener {
 	
 	@EventHandler(priority = EventPriority.HIGH)
 	public void onBlockBreakForMonument(BlockChangeEvent event) {
-		//Scrimmage.debug("monu1", "monu");
 		Client client = event.getClient();
 		if(event.getCause() instanceof BlockBreakEvent) {
 			List<MonumentObjective> monuments = event.getMap().getMonuments();
@@ -185,11 +184,7 @@ public class ObjectiveEvents implements Listener {
 					client.getPlayer().sendMessage(ChatColor.RED + "You may not break this monument!");
 					return;
 				}
-				else if ( monument.isDestroyed())  {
-					event.setCancelled(true);
-					client.getPlayer().sendMessage(ChatColor.RED + "That monument is already destroyed!");
-					return;
-				}
+
 			}
 		}
 		//Scrimmage.debug("monu2", "monu");
