@@ -246,20 +246,20 @@ public class Match {
 			if(timing % Var.oldMapTime == 0) {
 				Var.edHealth = Var.edHealth - 1;
 			}
-			
 			if (timing % 1 == 0) {
-				float edhealth = (float) Var.edHealth;
 				String score = ChatColor.AQUA + "Score: ";
 				for(MapTeam team : getMap().getTeams())
 					score += team.getColor() + "" + team.getScore() + " ";
-				int timing = getTiming();
-				if (timing <= 0) {
-					timing = 1;
-				}
 				if(getMap().getTimeLimit() > 0)
 					score += ChatColor.RED + ConversionUtil.formatTime(getMap().getTimeLimit() - getTiming());
+				int limit = getMap().getTimeLimit();
+				int percentage = (int)((limit - getTiming()) * 100.0 / limit + 0.5);
+				float realPercentage = (float) percentage;
+				if (realPercentage < 0) {
+					realPercentage = 0;
+				}
 				for (Player Online : Bukkit.getOnlinePlayers()) {
-				BarAPI.setMessage(Online, score, 100f);
+				BarAPI.setMessage(Online, score, realPercentage);
 				}
 				/*for (Player Online : Bukkit.getOnlinePlayers()) {
 					if ((getMap().getTimeLimit() - getTiming())/100 > 1) {
