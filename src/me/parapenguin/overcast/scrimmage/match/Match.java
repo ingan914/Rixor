@@ -87,8 +87,10 @@ public class Match {
 	public void start() {
 		start(9001);
 	}
-	
+
+	int startingTime;
 	public void start(int time) {
+		startingTime = time;
 		if(time == -2)
 			time = 30;
 		
@@ -108,8 +110,11 @@ public class Match {
 	public void cycle() {
 		cycle(30);
 	}
-	
+
+	int cycleTime;
+
 	public void cycle(int time) {
+		cycleTime = time;
 		if(time == 0)
 			time = 30;
 		
@@ -150,7 +155,7 @@ public class Match {
 		String p = "s";
 		if(starting == 1) p = "";
 		for (Player Online : Bukkit.getOnlinePlayers()) {
-			BarAPI.setMessage(Online, ChatColor.GREEN + "Match starting in " + ChatColor.DARK_RED + starting + ChatColor.GREEN + " second" + p + "!", 100f);
+			BarAPI.setMessage(Online, ChatColor.GREEN + "Match starting in " + ChatColor.DARK_RED + starting + ChatColor.GREEN + " second" + p + "!", (float) starting / startingTime * 100);
 			}
 		setCurrentlyStarting(true);
 		if(starting > 8000) {
@@ -360,9 +365,9 @@ public class Match {
 		for (Player Online : Bukkit.getOnlinePlayers()) {
 			if(next != null) {
 				BarAPI.setMessage(Online, ChatColor.DARK_AQUA + "Cycling to " + ChatColor.AQUA + next.getLoader().getName() + ChatColor.DARK_AQUA
-						+ " in " + ChatColor.DARK_RED + cycling + ChatColor.DARK_AQUA + " second" + p + "!", 100f);
+						+ " in " + ChatColor.DARK_RED + cycling + ChatColor.DARK_AQUA + " second" + p + "!", (float) cycling / cycleTime * 100);
 			} else { BarAPI.setMessage(Online, ChatColor.DARK_AQUA + "Cycling to " + ChatColor.AQUA + "ERROR!!!!" + ChatColor.DARK_AQUA
-					+ " in " + ChatColor.DARK_RED + cycling + ChatColor.DARK_AQUA + " second" + p + "!", 100f);
+					+ " in " + ChatColor.DARK_RED + cycling + ChatColor.DARK_AQUA + " second" + p + "!", (float) cycling / cycleTime * 100);
 			}
 		}
 		
