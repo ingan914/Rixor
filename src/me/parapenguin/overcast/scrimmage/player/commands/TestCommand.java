@@ -16,11 +16,7 @@ public class TestCommand implements CommandExecutor {
 	
 	@Override
 	public boolean onCommand(CommandSender sender, Command cmd, String cmdl, String[] args) {
-		float test = 1;
-		Var.edHealth = Var.edHealth - 1;
-		for (Player Online : Bukkit.getOnlinePlayers()) {
-				BarAPI.setHealth(Online, test);
-	}
+
 		return false;
 	}
 }

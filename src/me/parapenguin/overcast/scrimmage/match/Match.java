@@ -35,6 +35,10 @@ public class Match {
 	@Getter @Setter int starting = 30;
 	@Getter @Setter boolean currentlyStarting = false;
 
+	@Getter SchedulerUtil restartingTask;
+	@Getter @Setter int restarting = 30;
+	@Getter @Setter boolean currentlyRestarting = false;
+
 	@Getter SchedulerUtil timingTask;
 	@Getter int timing = 0;
 	@Getter double doubleTiming = 0;
@@ -67,6 +71,15 @@ public class Match {
 				timing();
 			}
 			
+		};
+
+		this.restartingTask = new SchedulerUtil() {
+
+			@Override
+			public void runnable() {
+				restarting();
+			}
+
 		};
 		
 		this.cyclingTask = new SchedulerUtil() {
@@ -129,15 +142,36 @@ public class Match {
 		this.starting = 30;
 		this.cyclingTask.repeat(20, 0);
 	}
+
+
+	int originalRestart;
+	public void restart(int time){
+		restarting = time;
+		originalRestart = time;
+		if(time == 0)
+			time = 30;
+
+		try {
+			stop();
+		} catch(Exception e) {
+			// meh
+		}
+		this.timing = 0;
+		this.restarting = time;
+		this.starting = 30;
+		this.restartingTask.repeat(20, 0);
+	}
 	
 	public void stop() throws NullPointerException {
 		if(this.startingTask.getTask() != null) this.startingTask.getTask().cancel();
 		if(this.cyclingTask.getTask() != null) this.cyclingTask.getTask().cancel();
 		if(this.timingTask.getTask() != null) this.timingTask.getTask().cancel();
+		if(this.restartingTask.getTask() != null) this.restartingTask.getTask().cancel();
 		
 		setCurrentlyStarting(true);
 		setCurrentlyRunning(false);
 		setCurrentlyCycling(false);
+		setCurrentlyRestarting(false);
 	}
 	
 	private boolean doubleStarting() {
@@ -171,7 +205,7 @@ public class Match {
 			for(MapTeam team : getMap().getTeams()) {
 				team.setScore(0);
 			}
-			Scrimmage.getMap().reloadSidebar(true, SidebarType.OBJECTIVES);
+			Scrimmage.getMap().reloadSidebar(true,SidebarType.OBJECTIVES);
 			for (Player Online : Bukkit.getOnlinePlayers()) {
 				Online.playSound(Online.getLocation(), Sound.NOTE_PIANO, 100, 1);
 				}
@@ -360,6 +394,24 @@ public class Match {
 		
 		setCurrentlyRunning(false);
 		setCurrentlyCycling(true);
+	}
+
+
+	public void restarting(){
+		String p = "s";
+
+		if(restarting == 1) p = "";
+		for (Player Online : Bukkit.getOnlinePlayers()) {
+				BarAPI.setMessage(Online, ChatColor.DARK_AQUA + "Restarting "
+						+ "in " + ChatColor.DARK_RED + restarting + ChatColor.DARK_AQUA + " second" + p + "!", (float) restarting / originalRestart * 100);
+
+		}
+		setCurrentlyRestarting(true);
+		if (restarting == 0){
+			this.restartingTask.getTask().cancel();
+			Scrimmage.getInstance().getServer().shutdown();
+		}
+		restarting--;
 	}
 	
 	public boolean cycling(RotationSlot next) {

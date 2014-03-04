@@ -46,7 +46,7 @@ public class PlayerEvents implements Listener {
 	@EventHandler
 	public void onPlayerJoin(PlayerJoinEvent event) {
 		Player player = event.getPlayer();
-		player.sendMessage(ChatColor.DARK_AQUA + "ParaPGM v1.0 made by " + ChatColor.GOLD + "ParaPenguin" + ChatColor.DARK_AQUA + ".");
+		//player.sendMessage(ChatColor.DARK_AQUA + "ParaPGM v1.0 made by " + ChatColor.GOLD + "ParaPenguin" + ChatColor.DARK_AQUA + ".");
 		Client client = new Client(player);
 		
 		Client.getClients().add(client);

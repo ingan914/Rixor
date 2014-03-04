@@ -164,6 +164,8 @@ public class Scrimmage extends JavaPlugin {
 		cmdRegister.register(ForceCommand.class);
 		cmdRegister.register(GlobalCommand.class);
 		cmdRegister.register(JoinCommand.class);
+		cmdRegister.register(IdCommand.class);
+		cmdRegister.register(RestartCommand.class);
 
 	}
 

@@ -1,8 +1,7 @@
 name: OCN-Scrim
 main: me.parapenguin.overcast.scrimmage.Scrimmage
 version: 0.2.7
-author: [ParaPenguin]
-website: http://teamloading.com/
+author: [ParaPenguin, MasterEjzz, ShinyDialga45]
 load: STARTUP
 commands:
 smartgit
