@@ -50,6 +50,7 @@ public class Map {
 	@Getter MapLoader loader;
 	@Getter RotationSlot slot;
 	@Getter World world;
+	@Getter File folder;
 	
 	@Getter String name;
 	@Getter String version;
@@ -228,14 +229,15 @@ public class Map {
 		if(load) {
 			File src = loader.getFolder();
 			File dest = new File(name);
-			
+
 			dest.mkdirs();
+
 			try {
 				FileUtil.copyFolder(src, dest);
 			} catch (IOException e) {
-				e.printStackTrace();
+				Scrimmage.getInstance().getLogger().severe("ERROR COPYING WORLDS!!!!!!!!!!!!!!!! \n" + e.getMessage());
 			}
-			
+			folder = dest;
 			WorldCreator wc = new WorldCreator(name);
 			wc.generator(new ChunkGenerator() {
 				

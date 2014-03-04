@@ -33,7 +33,7 @@ public class StartCommand implements CommandExecutor {
 			return false;
 		}
 		
-		int time = -2;
+		int time = 30;
 		if(args.length == 1)
 			if(ConversionUtil.convertStringToInteger(args[0], -1) > -1)
 				time = ConversionUtil.convertStringToInteger(args[0], -1);

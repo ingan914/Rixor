@@ -51,9 +51,9 @@ public class Client {
 		return (getStars().length() !=0 && (!(getStars().equals(ChatColor.BLUE + "*"))));
 	}
 	
-	public String getStars() {;
+	public String getStars() {
 	
-		String[] devs = new String[]{"ParaPenguin", "Haribo98"};
+		String[] devs = new String[]{"ParaPenguin", "Haribo98", "MasterEjzz", "ShinyDialga45"};
 		/*String[] lgs = new String[]{"Mikeg542", "MaximusEvo", "Omar_Glow", "Scoola", "WoodenAx", "Im_Uber_1337", "jonniedo", "Vetches", "uplm", "NeWminEr37", "ShinyDialga45", "chickolympics", "TikoRocks", "iEli2tyree011", "_XxRobinHoodxX_", "MonstroGato", "varis5hawk", "Briskyy"};
 	*/	List<String> authors = new ArrayList<String>();
 		for(Contributor author1 : Scrimmage.getMap().getAuthors()) {

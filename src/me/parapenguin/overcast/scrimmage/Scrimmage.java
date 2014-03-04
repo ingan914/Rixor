@@ -50,6 +50,7 @@ public class Scrimmage extends JavaPlugin {
 	
 	static @Getter Scrimmage instance;
 	static @Getter @Setter Rotation rotation;
+	static @Getter List<Map> mapsPlayed = new ArrayList<Map>();
 	@Getter List<File> libs = new ArrayList<File>();
 	@Getter List<String> files = new ArrayList<String>();
 
@@ -259,6 +260,10 @@ public class Scrimmage extends JavaPlugin {
 	
 	public static int random(int min, int max) {
 		return (int) (min + (Math.random() * (max - min)));
+	}
+
+	public static void addMapToMapsPlayed(Map map){
+		mapsPlayed.add(map);
 	}
 	
 	public static File getRootFolder() {

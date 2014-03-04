@@ -1,8 +1,14 @@
 package me.parapenguin.overcast.scrimmage.match;
 
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+
+import net.minecraft.util.org.apache.commons.io.FileDeleteStrategy;
+import net.minecraft.util.org.apache.commons.io.FileUtils;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Sound;
@@ -412,65 +418,66 @@ public class Match {
 			for (Player p1 : Bukkit.getOnlinePlayers()){
 				p1.kickPlayer(ChatColor.GREEN + "Server has shutdown! " + ChatColor.GOLD + "Rejoin!");
 			}
+
+			for (Map m : Scrimmage.getMapsPlayed()){
+				Scrimmage.getInstance().getServer().unloadWorld(m.getWorld(), false);
+				Scrimmage.getInstance().getLogger().info(m.getName() + " " + m.getFolder().getAbsolutePath());
+				for (File file : m.getFolder().listFiles()) {
+					try{
+						FileDeleteStrategy.FORCE.delete(file);
+					}catch(IOException e){
+						Scrimmage.getInstance().getLogger().info(e.getMessage());
+					}
+				}
+			}
 			Scrimmage.getInstance().getServer().shutdown();
 		}
 		restarting--;
 	}
+
+	public static boolean delete(File path) {
+		if( path.exists() ) {
+			File files[] = path.listFiles();
+			for(int i=0; i<files.length; i++) {
+				if(files[i].isDirectory()) {
+					delete(files[i]);
+				}
+				else {
+					files[i].delete();
+				} //end else
+			}
+		}
+		return( path.delete() );
+	}
 	
 	public boolean cycling(RotationSlot next) {
 		String p = "s";
-		
+		if (next == null){
+			restart(30);
+			return true;
+		}
 		if(cycling == 1) p = "";
 		for (Player Online : Bukkit.getOnlinePlayers()) {
-			if(next != null) {
-				BarAPI.setMessage(Online, ChatColor.DARK_AQUA + "Cycling to " + ChatColor.AQUA + next.getLoader().getName() + ChatColor.DARK_AQUA
-						+ " in " + ChatColor.DARK_RED + cycling + ChatColor.DARK_AQUA + " second" + p + "!", (float) cycling / cycleTime * 100);
-			} else { BarAPI.setMessage(Online, ChatColor.DARK_AQUA + "Cycling to " + ChatColor.AQUA + "ERROR!!!!" + ChatColor.DARK_AQUA
+			BarAPI.setMessage(Online, ChatColor.DARK_AQUA + "Cycling to " + ChatColor.AQUA + next.getLoader().getName() + ChatColor.DARK_AQUA
 					+ " in " + ChatColor.DARK_RED + cycling + ChatColor.DARK_AQUA + " second" + p + "!", (float) cycling / cycleTime * 100);
-			}
 		}
 		
 		setCurrentlyCycling(true);
-		if(cycling == 5 && next == null) {
-			
-			String name = "";
-			MapLoader found = Rotation.getMap(name);
-			Rotation rot = Scrimmage.getRotation();
-			rot.setNext(new RotationSlot(found));
-		}
 		if(cycling == 0) {
 			Var.canSetNext = 0;
 			cyclingTask.getTask().cancel();
 			setCurrentlyCycling(false);
-			if(next == null) {
-				String name = "Sticky Situation";
-				MapLoader found = Rotation.getMap(name);
-				Rotation rot = Scrimmage.getRotation();
-				rot.setNext(new RotationSlot(found));
-				Scrimmage.getRotation().setSlot(next);
-				/*Scrimmage.getInstance().getServer().shutdown();*/
-				return true;
-			}
-
 			Scrimmage.getRotation().setSlot(next);
 			for(Client client : Client.getClients())
 				client.setTeam(next.getMap().getObservers(), true, true, true);
 			next.getMatch().start();
-			
+			Scrimmage.addMapToMapsPlayed(next.getMap());
 			return true;
 		}
 		
 		if(cycling == 1 && !loaded && next != null) {
 			setLoaded(true);
 			next.load();
-		} 
-		if(cycling % 5 == 0 || cycling <= 5) {
-			/*if(next != null) {
-		      Scrimmage.broadcast(ChatColor.DARK_AQUA + "Cycling to " + ChatColor.AQUA + next.getLoader().getName() + ChatColor.DARK_AQUA
-				 + " in " + ChatColor.DARK_RED + cycling + ChatColor.DARK_AQUA + " second" + p + "!");
-			} else { Scrimmage.broadcast(ChatColor.DARK_AQUA + "Cycling to " + ChatColor.AQUA + "Sticky Situation" + ChatColor.DARK_AQUA
-				 + " in " + ChatColor.DARK_RED + cycling + ChatColor.DARK_AQUA + " second" + p + "!");
-			}*/
 		}
 		
 		cycling--;

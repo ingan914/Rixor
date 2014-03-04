@@ -19,12 +19,11 @@ public class Rotation {
 		List<MapLoader> maps = new ArrayList<MapLoader>();
 		List<RotationSlot> slots = new ArrayList<RotationSlot>();
 
-		String rotation = Scrimmage.getInstance().getConfig().getString("rotation");
+		List<String> rotation = Scrimmage.getInstance().getConfig().getStringList("rotation");
 		if(rotation == null)
 			maps.addAll(loaded);
 		else {
-			String[] split = rotation.split(",");
-			for(String map : split)
+			for(String map : rotation)
 				maps.add(getMap(loaded, map));
 		}
 		
@@ -34,8 +33,8 @@ public class Rotation {
 		this.rotation = slots;
 		
 		Scrimmage.getInstance().getLogger().info("Rotation: " + getRotationString());
-		Scrimmage.getInstance().getConfig().set("rotation", getRotationString());
-		Scrimmage.getInstance().saveConfig();
+		//Scrimmage.getInstance().getConfig().set("rotation", getRotationString());
+		//Scrimmage.getInstance().saveConfig();
 	}
 	
 	public void start() {
@@ -64,7 +63,9 @@ public class Rotation {
 		List<RotationSlot> aft = new ArrayList<RotationSlot>();
 		try {
 			aft = rotation.subList(current + 1, rotation.size() - 1);
-		} catch(Exception e) {}
+		} catch(Exception e) {
+
+		}
 		
 		List<RotationSlot> rotation = new ArrayList<RotationSlot>();
 		rotation.addAll(pre);
