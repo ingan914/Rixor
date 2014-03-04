@@ -4,7 +4,6 @@ version: 0.2.7
 author: [ParaPenguin, MasterEjzz, ShinyDialga45]
 load: STARTUP
 commands:
-smartgit
   setteam:
     aliases: [st]
     description: Set the name of a team.

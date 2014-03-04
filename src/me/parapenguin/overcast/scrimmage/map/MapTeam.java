@@ -370,7 +370,7 @@ public class MapTeam {
 		List<String> names = new ArrayList<String>();
 		for(TeamObjective objective : this.objectives) {
 			String name = " " + objective.getColor() + objective.getName() + objective.getSpaces();
-			Scrimmage.getInstance().getLogger().severe(name.length() + " Thats's " + name + "(" + objective.getName() + " AND " + objective.getSpaces() + ")");
+			//Scrimmage.getInstance().getLogger().severe(name.length() + " Thats's " + name + "(" + objective.getName() + " AND " + objective.getSpaces() + ")");
 			if(name.length() > 16) {
 				int extra = name.length() - 16;
 				String trimmed = objective.getName().substring(0, objective.getName().length() - 1 - extra);

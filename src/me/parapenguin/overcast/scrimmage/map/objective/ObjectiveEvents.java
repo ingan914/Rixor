@@ -93,13 +93,8 @@ public class ObjectiveEvents implements Listener {
 	@EventHandler(priority = EventPriority.HIGH)
 	public void onBlockPlaceForWool(BlockPlaceEvent event) {
 		Client client = Client.getClient(event.getPlayer());
-		/*
-		 * ServerLog.info("Placed Block: "
-				+ "Z(" + event.getBlockPlaced().getLocation().getBlockX() + "), "
-				+ "Y(" + event.getBlockPlaced().getLocation().getBlockY() + "), "
-				+ "Z(" + event.getBlockPlaced().getLocation().getBlockZ() + ")");
-		 */
-		
+
+
 		for(WoolObjective wool : client.getTeam().getMap().getWools())
 			if(wool.isLocation(event.getBlockPlaced().getLocation()) && wool.getTeam() != client.getTeam() && !wool.getColor().equals(wool.getColor())) {
 				event.setCancelled(true);
@@ -138,15 +133,14 @@ public class ObjectiveEvents implements Listener {
 		} catch(Exception e) {
 			e.printStackTrace();
 		}
-		
-		wool.setComplete(true);
-		client.getTeam().getMap().reloadSidebar(true, SidebarType.OBJECTIVES);
-		
+
 		String who = client.getTeam().getColor() + client.getPlayer().getName();
-		String placed = ChatColor.WHITE + " placed the " + wool.getColor() + wool.getName().toUpperCase();
-		String team = ChatColor.WHITE + " for " + client.getTeam().getColor() + client.getTeam().getDisplayName();
+		String placed = ChatColor.GRAY + " placed the " + wool.getName().toUpperCase();
+		String team = ChatColor.GRAY + " WOOL for " + client.getTeam().getColor() + client.getTeam().getDisplayName();
 		String message = who + placed + team;
 		Scrimmage.broadcast(message);
+		wool.setComplete(true);
+		client.getTeam().getMap().reloadSidebar(true, SidebarType.OBJECTIVES);
 	}
 	
 	@EventHandler(priority = EventPriority.HIGH)

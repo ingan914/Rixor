@@ -71,18 +71,7 @@ public class PlayerEvents implements Listener {
 			Bukkit.broadcastMessage("test");
 		}
 	}
-	
-	@EventHandler
-	public void onPlayerKick(PlayerKickEvent event) {
-		Client client = Client.getClient(event.getPlayer());
-		Player kicked = event.getPlayer();
-		try {
-			event.setLeaveMessage(client.getStars() + kicked + client.getTeam().getColor() + event.getPlayer().getName() + ChatColor.YELLOW + " left the game");
-			onPlayerExit(event.getPlayer());
-			event.setReason(ChatColor.RED + "You have been kicked!");
-			Client clients = Client.getClient(event.getPlayer());
-		} catch(NullPointerException e) {}
-	}
+
 	
 
 	@EventHandler
@@ -134,8 +123,7 @@ public class PlayerEvents implements Listener {
 		Match match = Scrimmage.getRotation().getSlot().getMatch();
 		Client client = Client.getClient(event.getPlayer());
 		if ((Loc.getY() < -30 && client.isObserver()) || (!match.isCurrentlyRunning() && Loc.getY() < -30)) {
-			Loc.setY(Loc.getY() + 29.5);
-			event.getPlayer().teleport(Loc);
+			event.getPlayer().teleport(Scrimmage.getMap().getObservers().getSpawn().getSpawn());
 		}
 		
 	}
@@ -177,17 +165,7 @@ public class PlayerEvents implements Listener {
 		Scrimmage.broadcast(format, team);
 		ServerLog.info(format);
 	}
-	
-	/*@EventHandler
-	public void onSignCreate(SignChangeEvent event) {
-		Block block = event.getBlock();
-		Sign sign = (Sign) block.getState();
-		if (block.getType() == Material.WALL_SIGN) {
-			if (sign.getLine(0).equalsIgnoreCase("HI")) {
-				Bukkit.broadcastMessage("you just got signed");
-			} 
-		} 
-	}*/
+
 	
 	@EventHandler
 	public void onEntityDamageEvent(EntityDamageByEntityEvent event) {

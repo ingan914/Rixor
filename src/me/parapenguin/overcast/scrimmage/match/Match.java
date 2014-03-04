@@ -409,6 +409,9 @@ public class Match {
 		setCurrentlyRestarting(true);
 		if (restarting == 0){
 			this.restartingTask.getTask().cancel();
+			for (Player p1 : Bukkit.getOnlinePlayers()){
+				p1.kickPlayer(ChatColor.GREEN + "Server has shutdown! " + ChatColor.GOLD + "Rejoin!");
+			}
 			Scrimmage.getInstance().getServer().shutdown();
 		}
 		restarting--;
