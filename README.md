@@ -1,7 +1,7 @@
-Overcast-Scrimmage
+Rixor
 ==================
 
-Private Overcast Scrimmage plugin utilising the OCN XML system!
+Overcast Scrimmage plugin utilising the OCN XML system!
 
 Todo List
 ---------
@@ -24,7 +24,7 @@ After that, export the plugin and you're ready to roll! Just add it to your plug
 
 2. Getting the libraries you need
 ---------------------------------
-ParaPGM requires a few libraries, these are pretty easy to setup.
+Rixor requires a few libraries, these are pretty easy to setup.
 Where your craftbukkit.jar is located, make a folder called "**libs**", and add [dom4j] [2] to it.
 
 3. Creating and adding to the maps repository
