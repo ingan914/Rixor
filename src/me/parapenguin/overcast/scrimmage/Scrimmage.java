@@ -167,6 +167,7 @@ public class Scrimmage extends JavaPlugin {
 		cmdRegister.register(JoinCommand.class);
 		cmdRegister.register(IdCommand.class);
 		cmdRegister.register(RestartCommand.class);
+		cmdRegister.register(StartCommand.class);
 
 	}
 
@@ -198,7 +199,6 @@ public class Scrimmage extends JavaPlugin {
 		registerCommand("setteam", new SetTeamCommand());
 		registerCommand("setnext", new SetNextCommand());
 
-		registerCommand("start", new StartCommand());
 
 		registerCommand("end", new StopCommand());
 

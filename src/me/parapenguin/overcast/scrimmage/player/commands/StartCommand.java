@@ -1,5 +1,8 @@
 package me.parapenguin.overcast.scrimmage.player.commands;
 
+import com.sk89q.minecraft.util.commands.CommandContext;
+import com.sk89q.minecraft.util.commands.CommandException;
+import com.sk89q.minecraft.util.commands.CommandPermissionsException;
 import me.parapenguin.overcast.scrimmage.Scrimmage;
 import me.parapenguin.overcast.scrimmage.match.Match;
 import me.parapenguin.overcast.scrimmage.player.Client;
@@ -9,38 +12,40 @@ import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.World;
 import org.bukkit.command.Command;
-import org.bukkit.command.CommandException;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
-public class StartCommand implements CommandExecutor {
+public class StartCommand {
 
-	@Override
-	public boolean onCommand(CommandSender sender, Command cmd, String cmdl, String[] args) {
+	@com.sk89q.minecraft.util.commands.Command(aliases = { "start"}, desc = "Starts the match", usage = "[seconds]", flags = "f", min = 1, max = 1)
+	public static void start(final CommandContext args, CommandSender sender) throws Exception {
 
 		if(sender instanceof Player) {
 			if(!Client.getClient((Player) sender).isRanked()) {
 				sender.sendMessage(ChatColor.RED + "No permission!");
-				return false;
+				throw new CommandPermissionsException();
 			}
 		}
 
 		Match match = Scrimmage.getRotation().getSlot().getMatch();
-		//Scrimmage.getInstance().getLogger().info(match.isCurrentlyCycling() + "  " + match.isCurrentlyRunning() + "  " + match.isCurrentlyStarting() + " ");
 		if(!match.isCurrentlyStarting()) {
-			sender.sendMessage(ChatColor.RED + "A match is already running!");
-			return false;
+			throw new CommandException("A match is already running!");
 		}
 		
 		int time = 30;
-		if(args.length == 1)
-			if(ConversionUtil.convertStringToInteger(args[0], -1) > -1)
-				time = ConversionUtil.convertStringToInteger(args[0], -1);
+		if(args.argsLength() == 1)
+			if(ConversionUtil.convertStringToInteger(args.getString(0), -1) > -1)
+				time = ConversionUtil.convertStringToInteger(args.getString(0), -1);
 			else {
-				sender.sendMessage(ChatColor.RED + "Please supply a valid time greater than -1");
-				return false;
+				throw new CommandException("Please supply a valid time greater than -1");
 			}
+		if (match.isHasEnded() && args.hasFlag('f')){
+			Scrimmage.getRotation().getSlot().getMatch().start(time);
+		}
+		else if (match.isHasEnded()) {
+			throw new CommandException("This match has already ended. Use -f to force start.");
+		}
 		Scrimmage.getRotation().getSlot().getMatch().start(time);
 		/*Scrimmage.broadcast(ChatColor.RED + sender.getName() + ChatColor.DARK_PURPLE + " has started the countdown.");*/
 		for (Player Online : Bukkit.getOnlinePlayers()) {
@@ -51,11 +56,6 @@ public class StartCommand implements CommandExecutor {
 			}
 		}
 
-		//Bukkit.dispatchCommand(sender, "weather clear 999999999");
-		/*Scrimmage.broadcast(ChatColor.RED + "The match you are playing has the current ID of" + ChatColor.GREEN + " #" + ChatColor.BLUE + world.getName() + ChatColor.RED + "! If you would like a copy of this match, ask " + ChatColor.RED + "*" + ChatColor.YELLOW + "*" + ChatColor.AQUA + "ShinyDialga45 " + ChatColor.RED + "for this ID.");
-		*/
-		
-		return true;
 	}
 	
 }

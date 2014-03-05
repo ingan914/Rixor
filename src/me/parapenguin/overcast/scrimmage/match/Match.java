@@ -34,7 +34,9 @@ public class Match {
 
 	@Getter Map map;
 	@Getter RotationSlot slot;
-	
+
+	@Getter @Setter boolean hasEnded = false;
+
 	@Getter SchedulerUtil schedule;
 	
 	@Getter SchedulerUtil startingTask;
@@ -382,13 +384,13 @@ public class Match {
 			Scrimmage.broadcast(ChatColor.BOLD + text + ChatColor.GRAY + " wins!");
 
 			for (Player p : Bukkit.getOnlinePlayers()){
-				if (text.equals(Client.getClient(p).getTeam().getName()) || text.equalsIgnoreCase("tie")){
+				if (text.equals(Client.getClient(p).getTeam().getDisplayName()) || text.equalsIgnoreCase("tie")){
 					p.playSound(p.getLocation(), Sound.LEVEL_UP, 5, 1);
 				}
 				else {
 					p.playSound(p.getLocation(), Sound.ENDERDRAGON_GROWL, 5, 1);
 				}
-
+			  hasEnded = true;
 			}
 		}
 		return true;
@@ -490,6 +492,7 @@ public class Match {
 				client.setTeam(next.getMap().getObservers(), true, true, true);
 			next.getMatch().start();
 			Scrimmage.addMapToMapsPlayed(next.getMap());
+			hasEnded = false;
 			return true;
 		}
 		
