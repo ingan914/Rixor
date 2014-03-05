@@ -207,7 +207,9 @@ public class Match {
 			}
 		}
 		if(starting == 0) {
-			Scrimmage.broadcast(ChatColor.GREEN + "Match has begun!");
+			Scrimmage.broadcast(ChatColor.DARK_PURPLE + "# # # # # # # # # # # # # # # # ");
+			Scrimmage.broadcast(ChatColor.DARK_PURPLE + "# # " + ChatColor.GOLD + "The match has started!" + ChatColor.DARK_PURPLE + " # #");
+			Scrimmage.broadcast(ChatColor.DARK_PURPLE + "# # # # # # # # # # # # # # # #");
 			for(MapTeam team : getMap().getTeams()) {
 				team.setScore(0);
 			}
@@ -220,8 +222,12 @@ public class Match {
 			timingTask.repeat(20, 0);
 			
 			for(MapTeam team : getMap().getTeams())
-				for(Client client : team.getPlayers())
+				for(Client client : team.getPlayers()) {
 					client.setTeam(team, true, true, true);
+					client.getPlayer().setFoodLevel(20);
+				}
+
+
 			
 			return true;
 		}
@@ -373,7 +379,17 @@ public class Match {
 			for (Player Online : Bukkit.getOnlinePlayers()) {
 				BarAPI.setMessage(Online, text + ChatColor.RED + " wins!", 100f);
 				}
-			Scrimmage.broadcast(text + ChatColor.GRAY + " wins!");
+			Scrimmage.broadcast(ChatColor.BOLD + text + ChatColor.GRAY + " wins!");
+
+			for (Player p : Bukkit.getOnlinePlayers()){
+				if (text.equals(Client.getClient(p).getTeam().getName()) || text.equalsIgnoreCase("tie")){
+					p.playSound(p.getLocation(), Sound.LEVEL_UP, 5, 1);
+				}
+				else {
+					p.playSound(p.getLocation(), Sound.ENDERDRAGON_GROWL, 5, 1);
+				}
+
+			}
 		}
 		return true;
 	}
@@ -390,7 +406,9 @@ public class Match {
 			BarAPI.setMessage(Online, text + ChatColor.RED + " Wins!", 100f);
 			}
 		Var.teams.remove(Var.teams);
-		Scrimmage.broadcast(ChatColor.GOLD + "" + ChatColor.BOLD + "Game Over!");
+		Scrimmage.broadcast(ChatColor.DARK_PURPLE + "# # # # # # # # # # # # # # # # ");
+		Scrimmage.broadcast(ChatColor.DARK_PURPLE + "# # " + ChatColor.GOLD + "The match has ended!" + ChatColor.DARK_PURPLE + " # #");
+		Scrimmage.broadcast(ChatColor.DARK_PURPLE + "# # # # # # # # # # # # # # # #");
 		timingTask.getTask().cancel();
 		/* cyclingTask.repeatAsync(20, 20);
 		Auto Cycle*/

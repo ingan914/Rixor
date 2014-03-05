@@ -82,7 +82,7 @@ public class TeamObjective {
 	}
 	
 	public void setComplete(boolean complete, MapTeam whoCompleted) {
-		Scrimmage.getInstance().getLogger().info(getName() + " and " + getType().toString() + " and " + getTeam().getDisplayName() + " and " + getTouched());
+		//Scrimmage.getInstance().getLogger().info(getName() + " and " + getType().toString() + " and " + getTeam().getDisplayName() + " and " + getTouched());
 		if (complete){
 			for (TeamObjective t : whoCompleted.getObjectives()){
 				if (t.getName().equals(getName())){
