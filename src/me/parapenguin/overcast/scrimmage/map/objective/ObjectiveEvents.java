@@ -21,6 +21,7 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.BlockBreakEvent;
+import org.bukkit.event.block.BlockFromToEvent;
 import org.bukkit.event.block.BlockPistonExtendEvent;
 import org.bukkit.event.block.BlockPistonRetractEvent;
 import org.bukkit.event.block.BlockPlaceEvent;
@@ -43,9 +44,9 @@ public class ObjectiveEvents implements Listener {
 	}
 	
 	@EventHandler(priority = EventPriority.HIGH)
-	
 	public void onCoreBlockChange(BlockChangeEvent event) {
-	//	Scrimmage.debug("First message", "core");
+
+		Scrimmage.debug("First message  " + event.getCause().getEventName(), "core");
 		if(event.getNewState().getWorld() != event.getMap().getWorld())
 			return;
 
@@ -57,8 +58,9 @@ public class ObjectiveEvents implements Listener {
 		if(event.getClient() != null) {
 			Client client = event.getClient();
 			List<CoreObjective> cores = event.getMap().getCores();
-			
+
 			if(event.getCause() instanceof BlockBreakEvent) {
+				//Scrimmage.debug(event.getNewState().getLocation().toString(), "core");
 				for(CoreObjective core : cores)
 					if(core.isLocation(event.getNewState().getLocation()) && core.getTeam() == client.getTeam()) {
 						event.setCancelled(true);
@@ -74,14 +76,17 @@ public class ObjectiveEvents implements Listener {
 						Scrimmage.broadcast(format, obs);
 			}
 			
-			if(event.getNewState().getType().equals(Material.LAVA)) {
-			//	Scrimmage.debug("First message3", "core");
+			if(event.getNewState().getType() == Material.LAVA) {
+				Scrimmage.debug("First message3", "core");
 				event.setCancelled(true);
-				return;
 			}
-		} else {
+		} if (event.getCause() instanceof BlockFromToEvent || !(event.getCause() instanceof BlockBreakEvent) || event.getCause().getEventName().equalsIgnoreCase("BlockFromToEvent")) {
+				Scrimmage.debug("NOT BLOCK", "core");
+		    if (event.getNewState().getType() == Material.LAVA){
+			    Scrimmage.debug("LAVA", "core");
+		    }
 			if(event.getNewState().getType() == Material.LAVA && event.getMap().getCoreLeak(event.getNewState().getLocation()) != null) {
-		//		Scrimmage.debug("First2 message", "core");
+
 				CoreObjective core = event.getMap().getCoreLeak(event.getNewState().getLocation());
 				core.setComplete(true, client.getTeam());
 				

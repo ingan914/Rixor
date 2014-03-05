@@ -384,7 +384,7 @@ public class Match {
 			Scrimmage.broadcast(ChatColor.BOLD + text + ChatColor.GRAY + " wins!");
 
 			for (Player p : Bukkit.getOnlinePlayers()){
-				if (text.equals(Client.getClient(p).getTeam().getDisplayName()) || text.equalsIgnoreCase("tie")){
+				if (text.equals(Client.getClient(p).getTeam().getDisplayName()) || text.equalsIgnoreCase("tie!")){
 					p.playSound(p.getLocation(), Sound.LEVEL_UP, 5, 1);
 				}
 				else {

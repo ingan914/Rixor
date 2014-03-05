@@ -8,6 +8,7 @@ import me.parapenguin.overcast.scrimmage.map.MapTeam;
 import me.parapenguin.overcast.scrimmage.utils.RegionUtil;
 
 import org.bukkit.Location;
+import org.bukkit.Material;
 import org.bukkit.scheduler.BukkitRunnable;
 
 public class CoreObjective extends TeamObjective {
@@ -24,8 +25,12 @@ public class CoreObjective extends TeamObjective {
 	}
 	
 	public boolean isLeak(Location location) {
-		double closest = RegionUtil.closest(location, blocks);
-		return closest >= leak && closest <= leak + 4;
+		if (location.add(0, leak, 0).getBlock().getType() == Material.LAVA && blocks.contains(location)){
+			return true;
+		}
+		else {
+			return false;
+		}
 	}
 	
 	public boolean isLocation(Location location) {
