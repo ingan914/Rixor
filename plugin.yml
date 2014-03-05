@@ -1,5 +1,5 @@
 name: Rixor
-main: com.projectrixor.rixor.Scrimmage
+main: com.projectrixor.rixor.scrimmage.Scrimmage
 version: 0.2.7
 author: [ParaPenguin, MasterEjzz, ShinyDialga45]
 load: STARTUP
