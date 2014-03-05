@@ -2,7 +2,9 @@ package com.projectrixor.rixor.scrimmage.player.commands;
 
 import com.projectrixor.rixor.scrimmage.Scrimmage;
 import com.projectrixor.rixor.scrimmage.Var;
+import com.projectrixor.rixor.scrimmage.map.Map;
 import com.projectrixor.rixor.scrimmage.map.MapTeam;
+import com.projectrixor.rixor.scrimmage.map.extras.Contributor;
 import com.projectrixor.rixor.scrimmage.player.Client;
 import com.projectrixor.rixor.scrimmage.rotation.Rotation;
 
@@ -12,79 +14,55 @@ import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class MatchCommand implements CommandExecutor {
 	@Override
-	
 	public boolean onCommand(CommandSender sender, Command cmd, String cmdl, String[] args) {
+		List<String> pendingSend = new ArrayList<>();
 		/*Current Map*/
-		String mapname = Scrimmage.getRotation().getSlot().getMap().getName();
+		Map map = Scrimmage.getRotation().getSlot().getMap();
 		
-		Client client = Client.getClient((Player) sender);	
+		//Client client = Client.getClient((Player) sender);
 		
 		String score = ChatColor.AQUA + "Score: ";
 		
 		Rotation rot = Scrimmage.getRotation();
-		
-		for(MapTeam team : Scrimmage.getMap().getTeams())
-		score += team.getColor() + "" + team.getScore() + " ";
-		
-		sender.sendMessage(ChatColor.GOLD + "" + ChatColor.STRIKETHROUGH + "---------------------" + ChatColor.DARK_AQUA + "Info" + ChatColor.GOLD + "" + ChatColor.STRIKETHROUGH + "---------------------");
-		sender.sendMessage(ChatColor.RED + "Map " + ChatColor.GRAY + ": " + mapname);
-		
-		sender.sendMessage(ChatColor.RED + "Next Map " + ChatColor.GRAY + ": " + Var.nextMap);
+
+		pendingSend.add(ChatColor.GOLD + "" + ChatColor.STRIKETHROUGH + "---------------------" + ChatColor.DARK_AQUA + map.getName() + ChatColor.GOLD + "" + ChatColor.STRIKETHROUGH + "---------------------");
+		pendingSend.add(ChatColor.DARK_PURPLE + "" + ChatColor.BOLD + "Objective: " + ChatColor.RESET + "" + ChatColor.GOLD + map.getObjective());
+		if (map.getAuthors().size() == 1){
+			pendingSend.add(ChatColor.DARK_PURPLE + "" + ChatColor.BOLD + "Author: " + ChatColor.RESET + "" + ChatColor.GOLD + map.getAuthors().get(0).getName());
+		}
+		else {
+			pendingSend.add(ChatColor.DARK_PURPLE + "" + ChatColor.BOLD + "Authors: " + ChatColor.RESET + "" + ChatColor.GOLD + map.getAuthors());
+			for (Contributor c : map.getAuthors()){
+				if (c.getContribution() != null){
+					pendingSend.add(ChatColor.WHITE + "- " + ChatColor.DARK_AQUA + c.getName() + ChatColor.ITALIC + c.getContribution());
+				}
+				else {
+					pendingSend.add(ChatColor.WHITE + "- " + ChatColor.DARK_AQUA + c.getName());
+				}
+			}
+		}
+		if (map.getRules().size() > 0){
+			pendingSend.add(ChatColor.DARK_PURPLE + "" + ChatColor.BOLD + "Rules:");
+			int ruleNumber = 1;
+			for (final String rule : map.getRules()) {
+				pendingSend.add(ChatColor.RESET + "" + ChatColor.GOLD + ruleNumber + ") " + rule);
+				++ruleNumber;
+			}
+
+		}
+
+		pendingSend.add(ChatColor.DARK_PURPLE + "" + ChatColor.BOLD + "Next Map: " + ChatColor.RESET + "" + ChatColor.GOLD + Var.nextMap);
+
+		for (String s : pendingSend){
+			sender.sendMessage(s);
+		}
+		pendingSend.clear();
 		return true;
 	}
 	
 }
-/*
- * public void reloadSidebar(boolean objectives, SidebarType sidebar) {
-		if(getSidebar() == SidebarType.OBJECTIVES && (sidebar == SidebarType.OBJECTIVES || sidebar == null)) {
-			if(boardObjective != null)
-				this.boardObjective.unregister();
-			
-			this.boardObjective = board.registerNewObjective("Objectives", "dummy");
-			this.boardObjective.setDisplayName(ChatColor.GOLD + "Objectives");
-			this.boardObjective.setDisplaySlot(DisplaySlot.SIDEBAR);
-			
-			if(objectives) {
-				int i = 1;
-				for(MapTeam team : teams) {
-					if(team.getObjectives() == null || team.getObjectives().size() == 0)
-						i = team.loadTeamObjectives(true, i);
-					else i = team.loadTeamObjectives(false, i);
-					if(teams.get(teams.size() - 1) != team) {
-						i++;
-						OfflinePlayer player = Scrimmage.getInstance().getServer().getOfflinePlayer(getSpaces(i));
-						getBoardObjective().getScore(player).setScore(i);
-						i++;
-						
-					}
-				}
-			}
-		} else if(getSidebar() == SidebarType.SCORE && (sidebar == SidebarType.SCORE || sidebar == null)) {
-			if(objectives) {
-				if(boardObjective != null)
-					this.boardObjective.unregister();
-				
-				
-				this.boardObjective = board.registerNewObjective("Score", "dummy");
-				this.boardObjective.setDisplayName(ChatColor.GOLD + "Score");
-				this.boardObjective.setDisplaySlot(DisplaySlot.SIDEBAR);
-				
-				for(MapTeam team : getTeams()) {
-					OfflinePlayer player = Scrimmage.getInstance().getServer().getOfflinePlayer(team.getColor() + team.getDisplayName());
-					this.boardObjective.getScore(player).setScore(1);
-				}
-				
-			}
-			
-			for(MapTeam team : getTeams()) {
-				OfflinePlayer player = Scrimmage.getInstance().getServer().getOfflinePlayer(team.getColor() + team.getDisplayName());
-				this.boardObjective.getScore(player).setScore(team.getScore());
-				
-			}
-			
-		}
-		
-	}
- */
