@@ -1,6 +1,7 @@
 name: Rixor
 main: com.projectrixor.rixor.scrimmage.Scrimmage
 version: 0.2.7
+depend: [WorldEdit]
 author: [ParaPenguin, MasterEjzz, ShinyDialga45]
 load: STARTUP
 commands:
