@@ -21,6 +21,8 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.BlockBreakEvent;
+import org.bukkit.event.block.BlockPistonExtendEvent;
+import org.bukkit.event.block.BlockPistonRetractEvent;
 import org.bukkit.event.block.BlockPlaceEvent;
 
 public class ObjectiveEvents implements Listener {
@@ -46,7 +48,12 @@ public class ObjectiveEvents implements Listener {
 	//	Scrimmage.debug("First message", "core");
 		if(event.getNewState().getWorld() != event.getMap().getWorld())
 			return;
-		
+
+		else if (event.getCause() instanceof BlockPistonExtendEvent || event.getCause() instanceof BlockPistonRetractEvent){
+			event.setCancelled(true);
+			return;
+		}
+
 		if(event.getClient() != null) {
 			Client client = event.getClient();
 			List<CoreObjective> cores = event.getMap().getCores();
@@ -149,6 +156,7 @@ public class ObjectiveEvents implements Listener {
 			event.setCancelled(true);
 			return;
 		}
+
 	}
 	
 	@EventHandler(priority = EventPriority.HIGH)
@@ -165,6 +173,10 @@ public class ObjectiveEvents implements Listener {
 				}
 			}
 		}
+		else if (event.getCause() instanceof BlockPistonExtendEvent || event.getCause() instanceof BlockPistonRetractEvent){
+			event.setCancelled(true);
+			return;
+		}
 	}
 	
 	@EventHandler(priority = EventPriority.HIGH)
@@ -180,6 +192,10 @@ public class ObjectiveEvents implements Listener {
 				}
 
 			}
+		}
+		else if (event.getCause() instanceof BlockPistonExtendEvent || event.getCause() instanceof BlockPistonRetractEvent){
+			event.setCancelled(true);
+			return;
 		}
 		//Scrimmage.debug("monu2", "monu");
 		Map map = event.getMap();
