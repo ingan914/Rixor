@@ -58,7 +58,7 @@ public class TeamObjective {
 	public ObjectiveType getType() {
 		if(this instanceof WoolObjective)
 			return ObjectiveType.CTW;
-		else if(this instanceof WoolObjective)
+		else if(this instanceof MonumentObjective)
 			return ObjectiveType.DTM;
 		return ObjectiveType.NONE;
 	}
@@ -70,12 +70,29 @@ public class TeamObjective {
 	public void addTouch(int amount) {
 		setTouched(getTouched() + amount);
 	}
+
+	private void checkForWinner(MapTeam whoCompleted){
+		if(whoCompleted.getCompleted() == getTeam().getObjectives().size())  {
+			Scrimmage.getRotation().getSlot().getMatch().end(whoCompleted);
+		}
+	}
+
+	public void complete(){
+		this.complete = true;
+	}
 	
-	public void setComplete(boolean complete) {
-		this.complete = complete;
-		getTeam().getMap().reloadSidebar(true, SidebarType.OBJECTIVES);
-		if(getTeam().getCompleted() == getTeam().getObjectives().size())
-			Scrimmage.getRotation().getSlot().getMatch().end(getTeam());
+	public void setComplete(boolean complete, MapTeam whoCompleted) {
+		Scrimmage.getInstance().getLogger().info(getName() + " and " + getType().toString() + " and " + getTeam().getDisplayName() + " and " + getTouched());
+		if (complete){
+			for (TeamObjective t : whoCompleted.getObjectives()){
+				if (t.getName().equals(getName())){
+					t.complete();
+				}
+			}
+		}
+
+		whoCompleted.getMap().reloadSidebar(true, SidebarType.OBJECTIVES);
+		checkForWinner(whoCompleted);
 	}
 	
 }

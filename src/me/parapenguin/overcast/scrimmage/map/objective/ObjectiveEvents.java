@@ -76,7 +76,7 @@ public class ObjectiveEvents implements Listener {
 			if(event.getNewState().getType() == Material.LAVA && event.getMap().getCoreLeak(event.getNewState().getLocation()) != null) {
 		//		Scrimmage.debug("First2 message", "core");
 				CoreObjective core = event.getMap().getCoreLeak(event.getNewState().getLocation());
-				core.setComplete(true);
+				core.setComplete(true, client.getTeam());
 				
 				event.getMap().reloadSidebar(true, SidebarType.OBJECTIVES);
 				
@@ -139,7 +139,7 @@ public class ObjectiveEvents implements Listener {
 		String team = ChatColor.GRAY + " WOOL for " + client.getTeam().getColor() + client.getTeam().getDisplayName();
 		String message = who + placed + team;
 		Scrimmage.broadcast(message);
-		wool.setComplete(true);
+		wool.setComplete(true, client.getTeam());
 		client.getTeam().getMap().reloadSidebar(true, SidebarType.OBJECTIVES);
 	}
 	
@@ -184,47 +184,10 @@ public class ObjectiveEvents implements Listener {
 		//Scrimmage.debug("monu2", "monu");
 		Map map = event.getMap();
 		
-		//if(event.getNewState().getType() != Material.AIR)
-			
-		//	return;
-		
-		/*
-		for(MonumentObjective monument : map.getMonuments()) {
-			try {
-				int x = monument.getBlocks().get(0).getLocation().getBlockX();
-				int y = monument.getBlocks().get(0).getLocation().getBlockY();
-				int z = monument.getBlocks().get(0).getLocation().getBlockZ();
-				ServerLog.info("Monument (" + monument.getBlocks().size() + " blocks starting at X:" + x + ", Y:" + y + ", Z:" + z + ")");
-			} catch(IndexOutOfBoundsException e) {
-				ServerLog.info("No Blocks found for Mounument ('" + monument.getName() + "')");
-			}
-		}
-		
-		if(map.getMonuments().size() == 0)
-			ServerLog.info("No monuments found...");
-		
-		int x = event.getBlock().getLocation().getBlockX();
-		int y = event.getBlock().getLocation().getBlockY();
-		int z = event.getBlock().getLocation().getBlockZ();
-		ServerLog.info("Player (X:" + x + ", Y:" + y + ", Z:" + z + ")");
-		*/
-		//Scrimmage.debug("monu3", "monu");
+
 		MonumentObjective monument = map.getMonument(event.getNewState().getLocation());
 		//ServerLog.info("Monument == null (" + (monument == null) + ")");
 		if(monument == null) return;
-		
-		/*try {
-			if(monument.getTeam() != client.getTeam()) {
-				Scrimmage.debug("monu4", "monu");
-				//ServerLog.info("Team == Client Team = " + (monument.getTeam() == client.getTeam()));
-				event.setCancelled(true);
-				return;
-			}
-		} catch(NullPointerException e) {
-			Scrimmage.debug("monu5", "monu");
-			// probably another cause for the TNT being destroyed, and the client is null...
-		}*/
-	//	Scrimmage.debug("monu6", "monu");
 		monument.addBreak(event.getNewState().getLocation(), client);
 	}
 

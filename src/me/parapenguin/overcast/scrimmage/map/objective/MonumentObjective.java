@@ -68,7 +68,7 @@ public class MonumentObjective extends TeamObjective {
 			Collections.sort(calculations, new Comparator<MonumentCalculation>() {
 			    @Override
 			    public int compare(MonumentCalculation c1, MonumentCalculation c2) {
-			        return new Double(c1.getPercentage()).compareTo(new Double(c2.getPercentage()));
+			        return new Double(c1.getPercentage()).compareTo(c2.getPercentage());
 			    }
 			});
 			
@@ -102,7 +102,7 @@ public class MonumentObjective extends TeamObjective {
 			Scrimmage.broadcast(message);
 		}
 		
-		setComplete(isDestroyed());
+		setComplete(isDestroyed(), breaker.getTeam());
 		return true;
 	}
 	
