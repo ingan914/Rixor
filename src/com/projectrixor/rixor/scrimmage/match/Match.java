@@ -465,18 +465,19 @@ public class Match {
 
 			for (Map m : Scrimmage.getMapsPlayed()){
 				Scrimmage.getInstance().getServer().unloadWorld(m.getWorld(), false);
-				Scrimmage.getInstance().getLogger().info(m.getName() + " " + m.getFolder().getAbsolutePath());
-				for (File file : m.getFolder().listFiles()) {
-					try{
-						FileDeleteStrategy.FORCE.delete(file);
-					}catch(IOException e){
-						Scrimmage.getInstance().getLogger().info(e.getMessage());
-					}
-				}
-			}
+				//Scrimmage.getInstance().getLogger().info(m.getName() + " " + m.getFolder().getAbsolutePath());
+				//for (File file : m.getFolder().listFiles()) {
+				//	try{
+				//		FileDeleteStrategy.FORCE.delete(file);
+				//	}catch(IOException e){
+			//			Scrimmage.getInstance().getLogger().info(e.getMessage());
+			//		}
+			//	}
+		//	}
 			Scrimmage.getInstance().getServer().shutdown();
 		}
 		restarting--;
+		}
 	}
 
 	public static boolean delete(File path) {
