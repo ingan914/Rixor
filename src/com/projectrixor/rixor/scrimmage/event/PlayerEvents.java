@@ -32,6 +32,7 @@ import org.bukkit.event.player.PlayerRespawnEvent;
 import org.bukkit.event.server.ServerListPingEvent;
 import org.bukkit.inventory.ItemStack;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /*import sun.management.counter.Variability;
@@ -76,17 +77,21 @@ public class PlayerEvents implements Listener {
 	@EventHandler
 	public void onPlayerDeath(PlayerDeathEvent event) {
 		List<ItemStack> itemStackL = event.getDrops();
+		List<ItemStack> itemsToDelete = new ArrayList<>();
 		for (ItemStack i : itemStackL){
 			if (i != null){
 				for (ItemStack i2 : Scrimmage.getRotation().getSlot().getMap().getItemRemove()){
 					if (i2 != null){
-						if (i.isSimilar(i2)){
-							event.getDrops().remove(i);
+						if (i.getType().toString().equals(i2.getType().toString())){
+							itemsToDelete.add(i);
 						}
 					}
 
 				}
 			}
+		}
+		for (ItemStack i : itemsToDelete){
+			itemStackL.remove(i);
 		}
 	}
 	@EventHandler

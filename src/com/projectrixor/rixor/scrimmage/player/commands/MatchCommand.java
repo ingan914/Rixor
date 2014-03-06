@@ -55,8 +55,13 @@ public class MatchCommand implements CommandExecutor {
 			}
 
 		}
+		if (Var.nextMap == null){
+			pendingSend.add(ChatColor.DARK_PURPLE + "" + ChatColor.BOLD + "Next Map: " + ChatColor.RESET + "" + ChatColor.GOLD + "None");
 
-		pendingSend.add(ChatColor.DARK_PURPLE + "" + ChatColor.BOLD + "Next Map: " + ChatColor.RESET + "" + ChatColor.GOLD + Var.nextMap);
+		}
+		else {
+			pendingSend.add(ChatColor.DARK_PURPLE + "" + ChatColor.BOLD + "Next Map: " + ChatColor.RESET + "" + ChatColor.GOLD + Var.nextMap);
+		}
 
 		for (String s : pendingSend){
 			sender.sendMessage(s);

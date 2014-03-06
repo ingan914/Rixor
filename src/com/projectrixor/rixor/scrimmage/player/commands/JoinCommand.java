@@ -13,7 +13,7 @@ import org.bukkit.entity.Player;
 
 public class JoinCommand{
 
-	@com.sk89q.minecraft.util.commands.Command(aliases = { "join", "p"}, desc = "Joins the game", usage = "[team]", min = 0, max = 1)
+	@com.sk89q.minecraft.util.commands.Command(aliases = { "join", "p", "play", "playgame", "joingame"}, desc = "Joins the game", usage = "[team]", min = 0, max = 1)
 	public static void join(final CommandContext args, CommandSender sender) throws Exception {
 		if(sender instanceof Player == false) {
 			throw new CommandException("This command is for players only!");
