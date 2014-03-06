@@ -10,6 +10,7 @@ import com.projectrixor.rixor.scrimmage.match.Match;
 import com.projectrixor.rixor.scrimmage.player.PlayerChatEvent;
 import com.projectrixor.rixor.scrimmage.utils.Characters;
 
+import com.projectrixor.rixor.scrimmage.utils.UpdateUtil;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Location;
@@ -48,7 +49,16 @@ public class PlayerEvents implements Listener {
 	@EventHandler
 	public void onPlayerJoin(PlayerJoinEvent event) {
 		Player player = event.getPlayer();
-		//player.sendMessage(ChatColor.DARK_AQUA + "ParaPGM v1.0 made by " + ChatColor.GOLD + "ParaPenguin" + ChatColor.DARK_AQUA + ".");
+		if (event.getPlayer().isOp()){
+			boolean isUpdateAvail = UpdateUtil.isUpdateAvailable("http://192.241.139.19/Version.txt","http://192.241.139.19/Rixor.jar",
+					Scrimmage.getInstance().getDescription(),  event.getPlayer());
+			if (isUpdateAvail){
+				event.getPlayer().sendMessage(ChatColor.BOLD + "" + ChatColor.GREEN + "A new update of Rixor is available! Use /update to update your version!");
+			}
+			else {
+				event.getPlayer().sendMessage(ChatColor.RED + "No update available.....");
+			}
+		}
 		Client client = new Client(player);
 		
 		Client.getClients().add(client);

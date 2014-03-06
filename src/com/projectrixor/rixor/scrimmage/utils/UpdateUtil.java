@@ -1,6 +1,8 @@
 package com.projectrixor.rixor.scrimmage.utils;
 
 import com.projectrixor.rixor.scrimmage.Scrimmage;
+import org.bukkit.ChatColor;
+import org.bukkit.entity.Player;
 import org.bukkit.plugin.PluginDescriptionFile;
 
 import java.io.ByteArrayOutputStream;
@@ -22,11 +24,11 @@ public class UpdateUtil {
 	static String version;
 	static String plugin_name;
 
-	public static boolean checkForUpdate(String new_version_adress, String new_plugin_adress, PluginDescriptionFile pdFile)
+	public static boolean checkForUpdate(String new_version_adress, String new_plugin_adress, PluginDescriptionFile pdFile, Player p)
 	{
 		plugin_name = pdFile.getName();
 
-		Scrimmage.getInstance().getLogger().info("["+plugin_name+"] Searching for update...");
+		p.sendMessage(ChatColor.GREEN + "["+plugin_name+"]" + ChatColor.YELLOW + "Searching for update...");
 
 		try
 		{
@@ -55,8 +57,8 @@ public class UpdateUtil {
 
 			if(version_now_double < version_double && version_double > version_now_double)
 			{
-				Scrimmage.getInstance().getLogger().info("["+plugin_name+"] Update found!");
-				Scrimmage.getInstance().getLogger().info("["+plugin_name+"] Updating...");
+				p.sendMessage(ChatColor.GREEN + "["+plugin_name+"] " + ChatColor.GREEN + "Update found!");
+				p.sendMessage(ChatColor.GREEN + "["+plugin_name+"] "  + ChatColor.YELLOW + "Updating...");
 
 				URL url2 = new URL(new_plugin_adress);
 				ReadableByteChannel rbc1 = Channels.newChannel(url2.openStream());
@@ -65,11 +67,11 @@ public class UpdateUtil {
 				FileOutputStream fos1 = new FileOutputStream("plugins/" + plugin_name + ".jar");
 				fos1.getChannel().transferFrom(rbc1, 0, 1 << 24);
 
-				Scrimmage.getInstance().getLogger().info("["+plugin_name+"] Updated sucessfully!");
+				p.sendMessage(ChatColor.GREEN + "["+plugin_name+"] " + ChatColor.GREEN + "Updated sucessfully!");
 				return true;
 			}
 			else {
-				Scrimmage.getInstance().getLogger().info("["+plugin_name+"] No update found!");
+				p.sendMessage(ChatColor.GREEN + "["+plugin_name+"]" + ChatColor.YELLOW + "No update found!");
 				return false;
 			}
 		}
@@ -78,8 +80,60 @@ public class UpdateUtil {
 			//e.printStackTrace();
 		}catch (IOException e)
 		{
-			Scrimmage.getInstance().getLogger().severe("["+plugin_name+"] Unable to find Version-File!");
-			Scrimmage.getInstance().getLogger().severe("["+plugin_name+"] Unable to load update!");
+			p.sendMessage(ChatColor.GREEN + "["+plugin_name+"]" + ChatColor.RED + "Unable to find Version-File!");
+			p.sendMessage(ChatColor.GREEN + "["+plugin_name+"]" + ChatColor.RED + "Unable to load update!");
+			return false;
+			//e.printStackTrace();
+		}
+		return false;
+	}
+
+
+	public static boolean isUpdateAvailable(String new_version_adress, String new_plugin_adress, PluginDescriptionFile pdFile, Player p){
+		plugin_name = pdFile.getName();
+
+
+		try
+		{
+			URL url1 = new URL(new_version_adress);
+			URLConnection connection = url1.openConnection();
+
+			ByteArrayOutputStream result1 = new ByteArrayOutputStream();
+			java.io.InputStream input1 = connection.getInputStream();
+			byte[] buffer = new byte[1000];
+			int amount = 0;
+
+			while(amount != -1)
+			{
+
+				result1.write(buffer, 0, amount);
+				amount = input1.read(buffer);
+
+				version = result1.toString();
+			}
+
+			String Version_String_Temp = version;
+			Double version_double = Double.parseDouble(Version_String_Temp);
+
+			String version_now = pdFile.getVersion();
+			Double version_now_double = Double.parseDouble(version_now);
+
+			if(version_now_double < version_double && version_double > version_now_double)
+			{
+				return true;
+			}
+			else {
+				//p.sendMessage("["+plugin_name+"]" + ChatColor.YELLOW + "No update found!");
+				return false;
+			}
+		}
+		catch (MalformedURLException | FileNotFoundException e)
+		{
+			//e.printStackTrace();
+		}catch (IOException e)
+		{
+			p.sendMessage(ChatColor.GREEN + "["+plugin_name+"]" + ChatColor.RED + "Unable to find Version-File!");
+			p.sendMessage(ChatColor.GREEN + "["+plugin_name+"]" + ChatColor.RED + "Unable to load update!");
 			return false;
 			//e.printStackTrace();
 		}

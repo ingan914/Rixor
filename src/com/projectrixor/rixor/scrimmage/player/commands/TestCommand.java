@@ -10,8 +10,7 @@ public class TestCommand implements CommandExecutor {
 	
 	@Override
 	public boolean onCommand(CommandSender sender, Command cmd, String cmdl, String[] args) {
-		UpdateUtil.checkForUpdate("http://192.241.139.19/Version.txt","http://192.241.139.19/Rixor.jar",
-				Scrimmage.getInstance().getDescription());
+
 		return false;
 	}
 }
