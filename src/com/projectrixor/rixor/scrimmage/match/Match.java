@@ -199,8 +199,10 @@ public class Match {
 		String p = "s";
 		if(starting == 1) p = "";
 		for (Player Online : Bukkit.getOnlinePlayers()) {
+			if(starting > 0) {
 			BarAPI.setMessage(Online, ChatColor.GREEN + "Match starting in " + ChatColor.DARK_RED + starting + ChatColor.GREEN + " second" + p + "!", (float) starting / startingTime * 100);
 			}
+		}
 		setCurrentlyStarting(true);
 		if(starting > 8000) {
 			Var.edHealth = 101;
