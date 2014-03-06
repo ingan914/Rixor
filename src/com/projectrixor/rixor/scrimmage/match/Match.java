@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 
+
 import com.projectrixor.rixor.scrimmage.Scrimmage;
 import com.projectrixor.rixor.scrimmage.Var;
 import com.projectrixor.rixor.scrimmage.map.MapTeam;
@@ -15,7 +16,9 @@ import com.projectrixor.rixor.scrimmage.player.Client;
 import com.projectrixor.rixor.scrimmage.rotation.RotationSlot;
 import com.projectrixor.rixor.scrimmage.utils.ConversionUtil;
 import com.projectrixor.rixor.scrimmage.utils.SchedulerUtil;
+
 import net.minecraft.util.org.apache.commons.io.FileDeleteStrategy;
+
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Sound;
@@ -24,6 +27,7 @@ import org.bukkit.entity.Player;
 import lombok.Getter;
 import lombok.Setter;
 import me.confuser.barapi.BarAPI;
+
 import com.projectrixor.rixor.scrimmage.map.Map;
 
 public class Match {
@@ -207,9 +211,29 @@ public class Match {
 			}
 		}
 		if(starting == 0) {
-			Scrimmage.broadcast(ChatColor.DARK_PURPLE + "# # # # # # # # # # # # # # # # ");
-			Scrimmage.broadcast(ChatColor.DARK_PURPLE + "# # " + ChatColor.GOLD + "The match has started!" + ChatColor.DARK_PURPLE + " # #");
-			Scrimmage.broadcast(ChatColor.DARK_PURPLE + "# # # # # # # # # # # # # # # #");
+			Scrimmage.broadcast(ChatColor.DARK_PURPLE + "" + ChatColor.STRIKETHROUGH + "-------------------------");
+			Scrimmage.broadcast(ChatColor.GOLD + "The match has started!");
+			List<String> allteams = new ArrayList<String>();
+			String todo = "";
+			String finalteam = "";
+			for(MapTeam team : getMap().getTeams()) {
+				allteams.add("" + getMap().getTeams());
+				if(allteams.size() == 1) {
+					todo = todo + team.getColor() + "" + team.getDisplayName() + ChatColor.RED + ChatColor.BOLD + " VS ";
+					allteams.remove(team.getName());
+				} else {
+					todo = todo + team.getColor() + "" + team.getDisplayName();
+					allteams.remove(team.getName());
+					finalteam = team.getColor() + "" + team.getName();
+					
+				}
+			}
+			if (getMap().getTeams().size() == 1) {
+			Scrimmage.broadcast(finalteam + "" + ChatColor.RED + "" + ChatColor.BOLD + " VS " + ChatColor.GRAY + "themselves...?");
+			} else {
+			Scrimmage.broadcast(todo);
+			}
+			Scrimmage.broadcast(ChatColor.DARK_PURPLE + "" + ChatColor.STRIKETHROUGH + "-------------------------");
 			for(MapTeam team : getMap().getTeams()) {
 				team.setScore(0);
 			}
