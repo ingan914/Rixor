@@ -37,6 +37,7 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.scoreboard.DisplaySlot;
 import org.bukkit.scoreboard.Objective;
 import org.bukkit.scoreboard.Scoreboard;
+import org.dom4j.Attribute;
 import org.dom4j.Element;
 
 import lombok.Getter;
@@ -65,6 +66,7 @@ public class Map {
 	@Getter List<Contributor> contributors;
 	@Getter List<ItemKit> kits;
 	@Getter List<ItemStack> itemRemove = new ArrayList<ItemStack>();
+	@Getter ItemStack killReward;
 	@Getter List<MapTeam> teams = new ArrayList<MapTeam>();
 	@Getter MapTeam observers;
 	
@@ -313,6 +315,17 @@ public class Map {
 					ItemStack itemstack = new ItemStack(ConversionUtil.convertStringToMaterial(item.getText()));
 					itemRemove.add(itemstack);
 					Scrimmage.getInstance().getLogger().info("Loaded ItemRemove - " + item.getText());
+				}
+			}
+
+			for (Element m : MapLoader.getElements(root, "killreward")){
+				for (Element item : MapLoader.getElements(m, "item")){
+					Attribute amount = item.attribute("amount");
+					String itemstackS = item.getText();
+					ItemStack itemStack = new ItemStack(ConversionUtil.convertStringToMaterial(itemstackS));
+					itemStack.setAmount(Integer.parseInt(amount.getText()));
+					killReward = itemStack;
+					Scrimmage.getInstance().getLogger().info("KillReward is - " + itemStack.getType().toString());
 				}
 			}
 			for(MapTeam team : teams)

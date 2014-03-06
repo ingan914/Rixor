@@ -21,6 +21,7 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.BlockCanBuildEvent;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
+import org.bukkit.event.entity.EntityDeathEvent;
 import org.bukkit.event.entity.PlayerDeathEvent;
 import org.bukkit.event.player.AsyncPlayerChatEvent;
 import org.bukkit.event.player.PlayerCommandPreprocessEvent;
@@ -32,6 +33,7 @@ import org.bukkit.event.player.PlayerRespawnEvent;
 import org.bukkit.event.server.ServerListPingEvent;
 import org.bukkit.inventory.ItemStack;
 
+import javax.persistence.Entity;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -75,24 +77,30 @@ public class PlayerEvents implements Listener {
 	
 
 	@EventHandler
-	public void onPlayerDeath(PlayerDeathEvent event) {
-		List<ItemStack> itemStackL = event.getDrops();
-		List<ItemStack> itemsToDelete = new ArrayList<>();
-		for (ItemStack i : itemStackL){
-			if (i != null){
-				for (ItemStack i2 : Scrimmage.getRotation().getSlot().getMap().getItemRemove()){
-					if (i2 != null){
-						if (i.getType().toString().equals(i2.getType().toString())){
-							itemsToDelete.add(i);
+	public void onPlayerDeath(EntityDeathEvent event) {
+		if (event instanceof PlayerDeathEvent){
+			if (Scrimmage.getRotation().getSlot().getMap().getKillReward() != null && event.getEntity().getKiller() != null){
+				event.getEntity().getKiller().getInventory().addItem(Scrimmage.getRotation().getSlot().getMap().getKillReward());
+			}
+			List<ItemStack> itemStackL = event.getDrops();
+			List<ItemStack> itemsToDelete = new ArrayList<>();
+			for (ItemStack i : itemStackL){
+				if (i != null){
+					for (ItemStack i2 : Scrimmage.getRotation().getSlot().getMap().getItemRemove()){
+						if (i2 != null){
+							if (i.getType().toString().equals(i2.getType().toString())){
+								itemsToDelete.add(i);
+							}
 						}
-					}
 
+					}
 				}
 			}
+			for (ItemStack i : itemsToDelete){
+				itemStackL.remove(i);
+			}
 		}
-		for (ItemStack i : itemsToDelete){
-			itemStackL.remove(i);
-		}
+
 	}
 	@EventHandler
 	public void onPlayerQuit(PlayerQuitEvent event) {
