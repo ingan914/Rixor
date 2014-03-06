@@ -32,6 +32,8 @@ import org.bukkit.event.player.PlayerRespawnEvent;
 import org.bukkit.event.server.ServerListPingEvent;
 import org.bukkit.inventory.ItemStack;
 
+import java.util.List;
+
 /*import sun.management.counter.Variability;
 */
 public class PlayerEvents implements Listener {
@@ -73,6 +75,19 @@ public class PlayerEvents implements Listener {
 
 	@EventHandler
 	public void onPlayerDeath(PlayerDeathEvent event) {
+		List<ItemStack> itemStackL = event.getDrops();
+		for (ItemStack i : itemStackL){
+			if (i != null){
+				for (ItemStack i2 : Scrimmage.getRotation().getSlot().getMap().getItemRemove()){
+					if (i2 != null){
+						if (i.isSimilar(i2)){
+							event.getDrops().remove(i);
+						}
+					}
+
+				}
+			}
+		}
 	}
 	@EventHandler
 	public void onPlayerQuit(PlayerQuitEvent event) {

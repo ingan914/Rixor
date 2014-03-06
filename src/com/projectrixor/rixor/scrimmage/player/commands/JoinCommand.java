@@ -13,14 +13,18 @@ import org.bukkit.entity.Player;
 
 public class JoinCommand{
 
-	@com.sk89q.minecraft.util.commands.Command(aliases = { "join", "j", "p"}, desc = "Joins the game", usage = "[team]", min = 0, max = 1)
+	@com.sk89q.minecraft.util.commands.Command(aliases = { "join", "p"}, desc = "Joins the game", usage = "[team]", min = 0, max = 1)
 	public static void join(final CommandContext args, CommandSender sender) throws Exception {
 		if(sender instanceof Player == false) {
 			throw new CommandException("This command is for players only!");
 		}
 		Map map = Scrimmage.getRotation().getSlot().getMap();
 		Client client = Client.getClient((Player) sender);
-		
+
+		if (Scrimmage.getRotation().getSlot().getMatch().isHasEnded()){
+			throw new CommandException("The match has ended! Please wait for the server to cycle.");
+		}
+
 		MapTeam team = map.getObservers();
 		if(args.argsLength() == 0) {
 			team = map.getLowest();

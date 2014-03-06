@@ -45,7 +45,7 @@ public class ObjectiveEvents implements Listener {
 	@EventHandler(priority = EventPriority.HIGH)
 	public void onCoreBlockChange(BlockChangeEvent event) {
 
-		Scrimmage.debug("First message  " + event.getCause().getEventName(), "core");
+		//Scrimmage.debug("First message  " + event.getCause().getEventName(), "core");
 		if(event.getNewState().getWorld() != event.getMap().getWorld())
 			return;
 
@@ -76,7 +76,7 @@ public class ObjectiveEvents implements Listener {
 			}
 			
 			if(event.getNewState().getType() == Material.LAVA) {
-				Scrimmage.debug("First message3", "core");
+				//Scrimmage.debug("First message3", "core");
 				event.setCancelled(true);
 			}
 		} if (event.getCause() instanceof BlockFromToEvent || !(event.getCause() instanceof BlockBreakEvent) || event.getCause().getEventName().equalsIgnoreCase("BlockFromToEvent")) {

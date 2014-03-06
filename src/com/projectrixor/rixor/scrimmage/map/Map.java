@@ -26,10 +26,12 @@ import com.projectrixor.rixor.scrimmage.utils.ConversionUtil;
 import com.projectrixor.rixor.scrimmage.utils.FileUtil;
 import org.bukkit.ChatColor;
 import org.bukkit.Location;
+import org.bukkit.Material;
 import org.bukkit.OfflinePlayer;
 import org.bukkit.World;
 import org.bukkit.WorldCreator;
 import org.bukkit.generator.ChunkGenerator;
+import org.bukkit.inventory.ItemStack;
 import org.bukkit.scoreboard.DisplaySlot;
 import org.bukkit.scoreboard.Objective;
 import org.bukkit.scoreboard.Scoreboard;
@@ -60,6 +62,7 @@ public class Map {
 	@Getter List<Contributor> authors;
 	@Getter List<Contributor> contributors;
 	@Getter List<ItemKit> kits;
+	@Getter List<ItemStack> itemRemove = new ArrayList<ItemStack>();
 	@Getter List<MapTeam> teams = new ArrayList<MapTeam>();
 	@Getter MapTeam observers;
 	
@@ -301,7 +304,15 @@ public class Map {
 			step = System.currentTimeMillis();
 			Scrimmage.getInstance().getLogger().info("Total load time for '" + this.name + "' is currently "
 					+ (System.currentTimeMillis() - start) + "ms!");
-			
+
+
+			for (Element e : MapLoader.getElements(root, "itemremove")){
+				for (Element item : MapLoader.getElements(e, "item")) {
+					ItemStack itemstack = new ItemStack(ConversionUtil.convertStringToMaterial(item.getText()));
+					itemRemove.add(itemstack);
+					Scrimmage.getInstance().getLogger().info("Loaded ItemRemove - " + item.getText());
+				}
+			}
 			for(MapTeam team : teams)
 				team.load(root.element("spawns"), -1);
 			
