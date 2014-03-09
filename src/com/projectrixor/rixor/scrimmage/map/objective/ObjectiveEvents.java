@@ -80,9 +80,9 @@ public class ObjectiveEvents implements Listener {
 				event.setCancelled(true);
 			}
 		} if (event.getCause() instanceof BlockFromToEvent || !(event.getCause() instanceof BlockBreakEvent) || event.getCause().getEventName().equalsIgnoreCase("BlockFromToEvent")) {
-				//Scrimmage.debug("NOT BLOCK", "core");
+			//	Scrimmage.debug("NOT BLOCK", "core");
 		    if (event.getNewState().getType() == Material.LAVA){
-			    Scrimmage.debug("LAVA", "core");
+			 //   Scrimmage.debug("LAVA", "core");
 		    }
 			if(event.getNewState().getType() == Material.LAVA && event.getMap().getCoreLeak(event.getNewState().getLocation()) != null) {
 

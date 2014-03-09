@@ -204,14 +204,6 @@ public class Match {
 			}
 		}
 		setCurrentlyStarting(true);
-		if(starting > 8000) {
-			Var.edHealth = 101;
-			Scrimmage.getRotation().getSlot().getMatch().stop();
-			Var.nextMap = "Sticky Situation";
-			for (Player Online : Bukkit.getOnlinePlayers()) {
-			BarAPI.removeBar(Online);
-			}
-		}
 		if(starting == 0) {
 			Scrimmage.broadcast(ChatColor.DARK_PURPLE + "" + ChatColor.STRIKETHROUGH + "-------------------------");
 			Scrimmage.broadcast(ChatColor.GOLD + "The match has started!");
