@@ -49,6 +49,14 @@ public class PlayerEvents implements Listener {
 	@EventHandler
 	public void onPlayerJoin(PlayerJoinEvent event) {
 		Player player = event.getPlayer();
+
+		Client client = new Client(player);
+		
+		Client.getClients().add(client);
+		client.setTeam(Scrimmage.getRotation().getSlot().getMap().getObservers(), true, true, true);
+		
+		event.setJoinMessage(client.getStars() + client.getTeam().getColor() + event.getPlayer().getName() + ChatColor.YELLOW + " joined the game");
+		Client clients = Client.getClient(event.getPlayer());
 		if (event.getPlayer().isOp()){
 			boolean isUpdateAvail = UpdateUtil.isUpdateAvailable("http://192.241.139.19/Version.txt","http://192.241.139.19/Rixor.jar",
 					Scrimmage.getInstance().getDescription(),  event.getPlayer());
@@ -59,13 +67,6 @@ public class PlayerEvents implements Listener {
 				event.getPlayer().sendMessage(ChatColor.RED + "No update available.....");
 			}
 		}
-		Client client = new Client(player);
-		
-		Client.getClients().add(client);
-		client.setTeam(Scrimmage.getRotation().getSlot().getMap().getObservers(), true, true, true);
-		
-		event.setJoinMessage(client.getStars() + client.getTeam().getColor() + event.getPlayer().getName() + ChatColor.YELLOW + " joined the game");
-		Client clients = Client.getClient(event.getPlayer());
 	}
 	
 	@EventHandler
