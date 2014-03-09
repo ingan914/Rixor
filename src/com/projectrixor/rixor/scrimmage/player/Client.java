@@ -50,7 +50,7 @@ public class Client {
 	
 	public String getStars() {
 	
-		String[] devs = new String[]{"ParaPenguin", "Haribo98", "MasterEjzz", "ShinyDialga45"};
+		//String[] devs = new String[]{"ParaPenguin", "Haribo98", "MasterEjzz", "ShinyDialga45"};
 		List<String> authors = new ArrayList<String>();
 		for(Contributor author1 : Scrimmage.getMap().getAuthors()) {
 			authors.add(author1.getName());
