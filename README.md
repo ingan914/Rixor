@@ -5,13 +5,14 @@ Overcast Scrimmage plugin utilising the OCN XML system!
 
 Todo List
 ---------
+- [ ] CORES!
 - [ ] XML Parsing of Filters
 - [ ] Filters that actually have connected events
 - [ ] Add Blitz support
 - [ ] Add the Rage module
 - [X] Add support for Gear maps (not tested)
 
-[PRE] Compiling your own version of ParaPGM
+[PRE] Compiling your own version of ParaPGM (for developers only)
 -------------------------------------------
 First things first, you're going to need to download and **install** [Lombok] [6] onto Eclipse or IntelliJ, this is so that the methods work. Make sure you restart Eclipse or IntelliJ after install *cough* *cough*
 
@@ -35,6 +36,10 @@ You can see the format of the repository [here] [4] or [here] [3]. Those steps a
 
 The maps repository should be a folder named 'maps' in the root of the server folder. (This is the same location as the server jar.)
 
+
+4. To recap
+-----------
+Make sure to have a folder in your server root called **libs**. This is where you will put the dom4j library that you can download from the website or from any one of the release tags. Next, make sure to have a **maps** folder where you will put the map and the xml. Make sure the xml file is inside of the map folder, where you see the region folder and the level.dat. 
 
 [2]: http://scrimmage1.teamloading.com/dom4j.jar "dom4j"
 [3]: https://maps.oc.tc/ "Overcast Maps"
