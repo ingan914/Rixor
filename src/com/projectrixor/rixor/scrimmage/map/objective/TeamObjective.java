@@ -16,9 +16,9 @@ public class TeamObjective {
 	Map map;
 	
 	@Getter String name;
-	@Getter
-	MapTeam team;
+	@Getter MapTeam team;
 	@Getter boolean complete;
+	@Getter boolean destroyed;
 	@Getter int used;
 	
 	@Getter @Setter int touched;
@@ -27,6 +27,7 @@ public class TeamObjective {
 		this.name = name;
 		this.team = owner;
 		this.complete = false;
+		this.destroyed = false;
 		
 		this.used = 0;
 		try {
@@ -84,6 +85,7 @@ public class TeamObjective {
 	}
 	
 	public void setComplete(boolean complete, MapTeam whoCompleted) {
+		destroyed = true;
 		//Scrimmage.getInstance().getLogger().info(getName() + " and " + getType().toString() + " and " + getTeam().getDisplayName() + " and " + getTouched());
 		if (complete){
 			for (TeamObjective t : whoCompleted.getObjectives()){

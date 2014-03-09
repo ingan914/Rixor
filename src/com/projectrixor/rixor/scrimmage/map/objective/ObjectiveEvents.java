@@ -98,14 +98,11 @@ public class ObjectiveEvents implements Listener {
 			}
 		} if (event.getCause() instanceof BlockFromToEvent ) {
 			//	Scrimmage.debug("NOT BLOCK", "core");
-		    if (event.getNewState().getType() == Material.LAVA){
-			 //   Scrimmage.debug("LAVA", "core");
-		    }
 			if(event.getNewState().getType() == Material.LAVA && event.getMap().getCoreLeak(event.getNewState().getLocation()) != null) {
 
 				CoreObjective core = event.getMap().getCoreLeak(event.getNewState().getLocation());
 				//Scrimmage.debug(team1.getName(), "d");
-				if (!team1.getCore(loc1).isComplete()){
+				if (!core.isDestroyed()){
 					core.setComplete(true, team1);
 
 					event.getMap().reloadSidebar(true, SidebarType.OBJECTIVES);
