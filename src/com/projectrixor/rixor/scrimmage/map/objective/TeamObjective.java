@@ -87,7 +87,7 @@ public class TeamObjective {
 		//Scrimmage.getInstance().getLogger().info(getName() + " and " + getType().toString() + " and " + getTeam().getDisplayName() + " and " + getTouched());
 		if (complete){
 			for (TeamObjective t : whoCompleted.getObjectives()){
-				if (t.getName().equals(getName())){
+				if (t.getName().equals(getName()) && t.getType() == getType()){
 					t.complete();
 				}
 			}

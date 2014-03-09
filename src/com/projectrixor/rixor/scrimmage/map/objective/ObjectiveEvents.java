@@ -54,7 +54,9 @@ public class ObjectiveEvents implements Listener {
 			return;
 		}
 
-		if(event.getClient() != null) {
+		if(event.getClient() != null || event.getCause() instanceof BlockFromToEvent) {
+			MapTeam team;
+			MapTeam team1;
 			Client client = event.getClient();
 			List<CoreObjective> cores = event.getMap().getCores();
 
@@ -66,9 +68,12 @@ public class ObjectiveEvents implements Listener {
 						client.getPlayer().sendMessage(ChatColor.RED + "You can't break your own core!");
 						return;
 					}
+
+
 				for(CoreObjective core : cores)
 					if(core.isLocation(event.getNewState().getLocation()) && !(core.getTeam() == client.getTeam())){
-						MapTeam team = client.getTeam();
+						team = client.getTeam();
+						team1 = team;
 						MapTeam obs = Scrimmage.getRotation().getSlot().getMap().getObservers();
 						String format = team.getColor() + "[Team] " + client.getStars() + team.getColor() + client.getPlayer().getName() + ChatColor.GRAY + " broke a piece of " + core.getName();
 						Scrimmage.broadcast(format, team);
@@ -87,7 +92,8 @@ public class ObjectiveEvents implements Listener {
 			if(event.getNewState().getType() == Material.LAVA && event.getMap().getCoreLeak(event.getNewState().getLocation()) != null) {
 
 				CoreObjective core = event.getMap().getCoreLeak(event.getNewState().getLocation());
-				core.setComplete(true, client.getTeam());
+				//Scrimmage.debug(team1.getName(), "d");
+				core.setComplete(true, team1);
 				
 				event.getMap().reloadSidebar(true, SidebarType.OBJECTIVES);
 				

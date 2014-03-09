@@ -2,6 +2,7 @@ package com.projectrixor.rixor.scrimmage.map.objective;
 
 import java.util.List;
 
+import com.projectrixor.rixor.scrimmage.utils.RegionUtil;
 import lombok.Getter;
 import com.projectrixor.rixor.scrimmage.map.Map;
 import com.projectrixor.rixor.scrimmage.map.MapTeam;
@@ -24,12 +25,8 @@ public class CoreObjective extends TeamObjective {
 	}
 	
 	public boolean isLeak(Location location) {
-		if (location.add(0, leak, 0).getBlock().getType() == Material.LAVA && blocks.contains(location)){
-			return true;
-		}
-		else {
-			return false;
-		}
+		double closest = RegionUtil.closest(location,blocks);
+		return closest >= leak && closest <= leak + 4;
 	}
 	
 	public boolean isLocation(Location location) {
