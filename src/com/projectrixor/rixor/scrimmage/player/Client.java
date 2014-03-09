@@ -62,13 +62,13 @@ public class Client {
 		String lg = ChatColor.DARK_PURPLE + "❖";
 		
 		String stars = "";
-		for(String string : devs)
+		/*for(String string : devs)
 			if(string.equalsIgnoreCase(getPlayer().getName())) {
 				stars += dev;
 				break;
 			}
 		
-		/*for(String string : lgs)
+		for(String string : lgs)
 			if(string.equalsIgnoreCase(getPlayer().getName())) {
 				stars += lg;
 				break;
