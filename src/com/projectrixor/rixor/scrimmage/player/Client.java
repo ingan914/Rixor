@@ -52,37 +52,20 @@ public class Client {
 	
 		//String[] devs = new String[]{"ParaPenguin", "Haribo98", "MasterEjzz", "ShinyDialga45"};
 		List<String> authors = new ArrayList<String>();
-		for(Contributor author1 : Scrimmage.getMap().getAuthors()) {
-			authors.add(author1.getName());
+		for(Contributor author : Scrimmage.getMap().getAuthors()) {
+			authors.add(author.getName());
 		}
 		
 		String op = ChatColor.RED + "❖";
-		String dev = ChatColor.DARK_PURPLE + "❖";
 		String author = ChatColor.BLUE + "❖";
-		String lg = ChatColor.DARK_PURPLE + "❖";
 		
 		String stars = "";
-		/*for(String string : devs)
-			if(string.equalsIgnoreCase(getPlayer().getName())) {
-				stars += dev;
-				break;
-			}
-		
-		for(String string : lgs)
-			if(string.equalsIgnoreCase(getPlayer().getName())) {
-				stars += lg;
-				break;
-			}
-		*/
 		for(String string : authors) {
 			if(string.contains(getPlayer().getName())) {
 				stars += author;
 				break;
 			}
-			}
-		
-		
-		
+		}
 		
 		if(getPlayer().isOp())
 			stars += op;
