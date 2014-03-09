@@ -61,7 +61,8 @@ public class PlayerEvents implements Listener {
 			boolean isUpdateAvail = UpdateUtil.isUpdateAvailable("http://192.241.139.19/Version.txt","http://192.241.139.19/Rixor.jar",
 					Scrimmage.getInstance().getDescription(),  event.getPlayer());
 			if (isUpdateAvail){
-				event.getPlayer().sendMessage(ChatColor.BOLD + "" + ChatColor.GREEN + "A new update of Rixor is available! Use /update to update your version!");
+				event.getPlayer().sendMessage(ChatColor.BOLD + "" + ChatColor.GREEN + "A new update of Rixor is available! Use /update to update your version! ");
+				event.getPlayer().sendMessage(ChatColor.GREEN + "To see the changelog, click this link - " + ChatColor.GOLD + "http://bit.ly/1cndJKo");
 			}
 			else {
 				event.getPlayer().sendMessage(ChatColor.RED + "No update available.....");
