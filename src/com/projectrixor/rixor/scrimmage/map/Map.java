@@ -452,7 +452,7 @@ public class Map {
 	public CoreObjective getCoreLeak(Location location) {
 		for(MapTeam team : getTeams())
 			if(team.getCoreLeak(location) != null) {
-				Scrimmage.debug(team.getCoreLeak(location).getName(), "d");
+				//Scrimmage.debug(team.getCoreLeak(location).getName(), "d");
 				return team.getCoreLeak(location);
 			}
 

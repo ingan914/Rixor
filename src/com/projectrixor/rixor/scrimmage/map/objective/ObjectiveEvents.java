@@ -15,6 +15,7 @@ import org.bukkit.ChatColor;
 import org.bukkit.FireworkEffect;
 import org.bukkit.FireworkEffect.Builder;
 import org.bukkit.FireworkEffect.Type;
+import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
@@ -26,7 +27,11 @@ import org.bukkit.event.block.BlockPistonRetractEvent;
 import org.bukkit.event.block.BlockPlaceEvent;
 
 public class ObjectiveEvents implements Listener {
-	
+
+	MapTeam team1;
+	Location loc1;
+	boolean hassaved;
+
 	@EventHandler(priority = EventPriority.HIGH)
 	public void onPlayerDiedEvent(PlayerDiedEvent event) {
 		Client killer = Client.getClient(event.getKiller());
@@ -56,14 +61,17 @@ public class ObjectiveEvents implements Listener {
 
 		if(event.getClient() != null || event.getCause() instanceof BlockFromToEvent) {
 			MapTeam team;
-			MapTeam team1;
+
 			Client client = event.getClient();
 			List<CoreObjective> cores = event.getMap().getCores();
 
 			if(event.getCause() instanceof BlockBreakEvent) {
+
+
 				//Scrimmage.debug(event.getNewState().getLocation().toString(), "core");
 				for(CoreObjective core : cores)
 					if(core.isLocation(event.getNewState().getLocation()) && core.getTeam() == client.getTeam()) {
+
 						event.setCancelled(true);
 						client.getPlayer().sendMessage(ChatColor.RED + "You can't break your own core!");
 						return;
@@ -72,6 +80,10 @@ public class ObjectiveEvents implements Listener {
 
 				for(CoreObjective core : cores)
 					if(core.isLocation(event.getNewState().getLocation()) && !(core.getTeam() == client.getTeam())){
+						if (!hassaved){
+							loc1 = event.getNewState().getLocation();
+							hassaved = true;
+						}
 						team = client.getTeam();
 						team1 = team;
 						MapTeam obs = Scrimmage.getRotation().getSlot().getMap().getObservers();
@@ -84,7 +96,7 @@ public class ObjectiveEvents implements Listener {
 				//Scrimmage.debug("First message3", "core");
 				event.setCancelled(true);
 			}
-		} if (event.getCause() instanceof BlockFromToEvent || !(event.getCause() instanceof BlockBreakEvent) || event.getCause().getEventName().equalsIgnoreCase("BlockFromToEvent")) {
+		} if (event.getCause() instanceof BlockFromToEvent ) {
 			//	Scrimmage.debug("NOT BLOCK", "core");
 		    if (event.getNewState().getType() == Material.LAVA){
 			 //   Scrimmage.debug("LAVA", "core");
@@ -93,15 +105,18 @@ public class ObjectiveEvents implements Listener {
 
 				CoreObjective core = event.getMap().getCoreLeak(event.getNewState().getLocation());
 				//Scrimmage.debug(team1.getName(), "d");
-				core.setComplete(true, team1);
-				
-				event.getMap().reloadSidebar(true, SidebarType.OBJECTIVES);
-				
-				String who = core.getTeam().getColor() + core.getTeam().getDisplayName() + "'s";
-				String leaked = ChatColor.DARK_AQUA + " " + core.getName();
-				String has = ChatColor.RED + " has leaked!";
-				String message = who + leaked + has;
-				Scrimmage.broadcast(message);
+				if (!team1.getCore(loc1).isComplete()){
+					core.setComplete(true, team1);
+
+					event.getMap().reloadSidebar(true, SidebarType.OBJECTIVES);
+
+					String who = core.getTeam().getColor() + core.getTeam().getDisplayName() + "'s";
+					String leaked = ChatColor.DARK_AQUA + " " + core.getName();
+					String has = ChatColor.RED + " has leaked!";
+					String message = who + leaked + has;
+					Scrimmage.broadcast(message);
+				}
+
 				}
 			}
 		}
