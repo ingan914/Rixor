@@ -21,8 +21,8 @@ import java.nio.channels.ReadableByteChannel;
  */
 public class UpdateUtil {
 
-	static String version;
-	static String plugin_name;
+	private static String version;
+	private static String plugin_name;
 
 	public static boolean checkForUpdate(String new_version_adress, String new_plugin_adress, PluginDescriptionFile pdFile, Player p)
 	{
@@ -71,7 +71,7 @@ public class UpdateUtil {
 				return true;
 			}
 			else {
-				p.sendMessage(ChatColor.GREEN + "["+plugin_name+"]" + ChatColor.YELLOW + "No update found!");
+				p.sendMessage(ChatColor.GREEN + "["+plugin_name+"] " + ChatColor.YELLOW + "No update found!");
 				return false;
 			}
 		}
@@ -80,8 +80,8 @@ public class UpdateUtil {
 			//e.printStackTrace();
 		}catch (IOException e)
 		{
-			p.sendMessage(ChatColor.GREEN + "["+plugin_name+"]" + ChatColor.RED + "Unable to find Version-File!");
-			p.sendMessage(ChatColor.GREEN + "["+plugin_name+"]" + ChatColor.RED + "Unable to load update!");
+			p.sendMessage(ChatColor.GREEN + "["+plugin_name+"] " + ChatColor.RED + "Unable to find Version-File!");
+			p.sendMessage(ChatColor.GREEN + "["+plugin_name+"] " + ChatColor.RED + "Unable to load update!");
 			return false;
 			//e.printStackTrace();
 		}
@@ -113,10 +113,10 @@ public class UpdateUtil {
 			}
 
 			String Version_String_Temp = version;
-			Double version_double = Double.parseDouble(Version_String_Temp);
+			Float version_double = Float.parseFloat(Version_String_Temp);
 
 			String version_now = pdFile.getVersion();
-			Double version_now_double = Double.parseDouble(version_now);
+			Float version_now_double = Float.parseFloat(version_now);
 
 			if(version_now_double < version_double && version_double > version_now_double)
 			{
@@ -132,8 +132,8 @@ public class UpdateUtil {
 			//e.printStackTrace();
 		}catch (IOException e)
 		{
-			p.sendMessage(ChatColor.GREEN + "["+plugin_name+"]" + ChatColor.RED + "Unable to find Version-File!");
-			p.sendMessage(ChatColor.GREEN + "["+plugin_name+"]" + ChatColor.RED + "Unable to load update!");
+			p.sendMessage(ChatColor.GREEN + "["+plugin_name+"] " + ChatColor.RED + "Unable to find Version-File!");
+			p.sendMessage(ChatColor.GREEN + "["+plugin_name+"] " + ChatColor.RED + "Unable to load update!");
 			return false;
 			//e.printStackTrace();
 		}
