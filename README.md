@@ -27,6 +27,7 @@ After that, export the plugin and you're ready to roll! Just add it to your plug
 ---------------------------------
 Rixor requires a few libraries, these are pretty easy to setup.
 Where your craftbukkit.jar is located, make a folder called "**libs**", and add [dom4j] [2] to it.
+Also, make sure to download BarAPI and place it as a plugin inside of your plugins folder. You can download BarAPI from the release section, located next to braches and commits at the top of the repo. 
 
 3. Creating and adding to the maps repository
 ---------------------------------------------
@@ -39,7 +40,7 @@ The maps repository should be a folder named 'maps' in the root of the server fo
 
 4. To recap
 -----------
-Make sure to have a folder in your server root called **libs**. This is where you will put the dom4j library that you can download from the website or from any one of the release tags. Next, make sure to have a **maps** folder where you will put the map and the xml. Make sure the xml file is inside of the map folder, where you see the region folder and the level.dat. 
+Make sure to have a folder in your server root called **libs**. This is where you will put the dom4j library that you can download from the website or from any one of the release tags. After this, download BarAPI from the release tag and include it in your plugins folder as a plugin. Next, make sure to have a **maps** folder where you will put the map and the xml. Make sure the xml file is inside of the map folder, where you see the region folder and the level.dat. 
 
 [2]: http://scrimmage1.teamloading.com/dom4j.jar "dom4j"
 [3]: https://maps.oc.tc/ "Overcast Maps"
