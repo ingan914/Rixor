@@ -57,6 +57,7 @@ public class Client {
 		}
 		
 		String op = ChatColor.RED + "❖";
+		
 		String author = ChatColor.BLUE + "*";
 		
 		String stars = "";
