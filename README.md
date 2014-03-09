@@ -9,7 +9,7 @@ Todo List
 - [ ] Filters that actually have connected events
 - [ ] Add Blitz support
 - [ ] Add the Rage module
-- [ ] Add support for Gear maps
+- [X] Add support for Gear maps (not tested)
 
 [PRE] Compiling your own version of ParaPGM
 -------------------------------------------
