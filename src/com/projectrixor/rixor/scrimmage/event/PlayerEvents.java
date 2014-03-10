@@ -2,6 +2,7 @@ package com.projectrixor.rixor.scrimmage.event;
 
 import com.projectrixor.rixor.scrimmage.ServerLog;
 import com.projectrixor.rixor.scrimmage.player.Client;
+import com.projectrixor.rixor.scrimmage.player.StatTracker;
 import com.projectrixor.rixor.scrimmage.Scrimmage;
 import com.projectrixor.rixor.scrimmage.map.Map;
 import com.projectrixor.rixor.scrimmage.map.MapTeam;
@@ -107,10 +108,13 @@ public class PlayerEvents implements Listener {
 				killer.getInventory().addItem(Scrimmage.getRotation().getSlot().getMap().getKillReward());
 				killer.playSound(killer.getLocation(), Sound.ORB_PICKUP, 10, 1);
 				killer.sendMessage(ChatColor.YELLOW + "" + ChatColor.ITALIC + "+1" + ChatColor.RESET + ChatColor.RED + " | " + ChatColor.GOLD + "Kill");
+				StatTracker.gainKill(killer.getDisplayName());
 			}
 			Player dead = (Player)event.getEntity();
+			StatTracker.gainDeath(dead.getDisplayName());
 			dead.playSound(dead.getLocation(), Sound.ENDERMAN_SCREAM, 10, 1);
 			dead.sendMessage(ChatColor.RED + "" + ChatColor.ITALIC + "+1" + ChatColor.RESET + ChatColor.GOLD + " | " + ChatColor.DARK_RED + "Death");
+			
 			List<ItemStack> itemStackL = event.getDrops();
 			List<ItemStack> itemsToDelete = new ArrayList<>();
 			for (ItemStack i : itemStackL){
