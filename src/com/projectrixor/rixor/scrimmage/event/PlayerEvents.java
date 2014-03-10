@@ -103,8 +103,14 @@ public class PlayerEvents implements Listener {
 	public void onPlayerDeath(EntityDeathEvent event) {
 		if (event instanceof PlayerDeathEvent){
 			if (Scrimmage.getRotation().getSlot().getMap().getKillReward() != null && event.getEntity().getKiller() != null){
-				event.getEntity().getKiller().getInventory().addItem(Scrimmage.getRotation().getSlot().getMap().getKillReward());
+				Player killer = event.getEntity().getKiller();
+				killer.getInventory().addItem(Scrimmage.getRotation().getSlot().getMap().getKillReward());
+				killer.playSound(killer.getLocation(), Sound.ORB_PICKUP, 10, 1);
+				killer.sendMessage(ChatColor.YELLOW + "" + ChatColor.ITALIC + "+1" + ChatColor.RESET + ChatColor.RED + " | " + ChatColor.GOLD + "Kill");
 			}
+			Player dead = (Player)event.getEntity();
+			dead.playSound(dead.getLocation(), Sound.ENDERMAN_SCREAM, 10, 1);
+			dead.sendMessage(ChatColor.RED + "" + ChatColor.ITALIC + "+1" + ChatColor.RESET + ChatColor.GOLD + " | " + ChatColor.DARK_RED + "Death");
 			List<ItemStack> itemStackL = event.getDrops();
 			List<ItemStack> itemsToDelete = new ArrayList<>();
 			for (ItemStack i : itemStackL){
