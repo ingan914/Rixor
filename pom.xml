@@ -20,18 +20,6 @@
 
     <dependencies>
         <dependency>
-               <groupId>com.sk89q</groupId>
-           <artifactId>command-framework-core</artifactId>
-               <version>0.5-SNAPSHOT</version>
-     <type>jar</type>
-                  </dependency>
-          <dependency>
-           <groupId>com.sk89q</groupId>
-                   <artifactId>command-framework-bukkit</artifactId>
-         <version>0.5-SNAPSHOT</version>
-         <type>jar</type>
-          </dependency>
-        <dependency>
             <groupId>dom4j</groupId>
             <artifactId>dom4j</artifactId>
             <version>1.6.1</version>

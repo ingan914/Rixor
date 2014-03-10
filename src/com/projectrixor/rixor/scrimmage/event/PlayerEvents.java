@@ -9,13 +9,15 @@ import com.projectrixor.rixor.scrimmage.map.MapTeamSpawn;
 import com.projectrixor.rixor.scrimmage.match.Match;
 import com.projectrixor.rixor.scrimmage.player.PlayerChatEvent;
 import com.projectrixor.rixor.scrimmage.utils.Characters;
-
+import com.projectrixor.rixor.scrimmage.utils.InvUtil;
 import com.projectrixor.rixor.scrimmage.utils.UpdateUtil;
+
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.Sound;
+import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Item;
 import org.bukkit.entity.Player;
 import org.bukkit.entity.Projectile;
@@ -25,19 +27,24 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.block.BlockCanBuildEvent;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.event.entity.EntityDeathEvent;
+import org.bukkit.event.entity.EntityInteractEvent;
 import org.bukkit.event.entity.ExplosionPrimeEvent;
 import org.bukkit.event.entity.PlayerDeathEvent;
 import org.bukkit.event.player.AsyncPlayerChatEvent;
 import org.bukkit.event.player.PlayerCommandPreprocessEvent;
+import org.bukkit.event.player.PlayerInteractEntityEvent;
+import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.event.player.PlayerMoveEvent;
 import org.bukkit.event.player.PlayerPickupItemEvent;
 import org.bukkit.event.player.PlayerQuitEvent;
 import org.bukkit.event.player.PlayerRespawnEvent;
 import org.bukkit.event.server.ServerListPingEvent;
+import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 
 import javax.persistence.Entity;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -72,6 +79,7 @@ public class PlayerEvents implements Listener {
 			}
 		}
 	}
+
 	
 	@EventHandler
 	public void onItemPickup(PlayerPickupItemEvent event) {
@@ -164,6 +172,17 @@ public class PlayerEvents implements Listener {
 		
 		PlayerChatEvent chat = new PlayerChatEvent(client, event.getMessage(), true);
 		Scrimmage.callEvent(chat);
+	}
+	
+	@EventHandler
+	public void onInvOpen(final PlayerInteractEntityEvent event) {
+		if (!(event.getRightClicked() instanceof Player)) {
+			return;
+		}
+		Player clicker = event.getPlayer();
+		Player clicked = (Player) event.getRightClicked();
+		Inventory clickedinv = InvUtil.obsInvPreview(clicked, clicked.getInventory());
+		clicker.openInventory(clickedinv);
 	}
 	
 	@EventHandler
