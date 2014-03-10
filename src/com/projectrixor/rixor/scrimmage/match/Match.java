@@ -108,7 +108,7 @@ public class Match {
 	}
 	
 	public void start() {
-		start(9001);
+		//start(9001);
 	}
 
 	int startingTime;

@@ -61,7 +61,7 @@ public class PlayerEvents implements Listener {
 		event.setJoinMessage(client.getStars() + client.getTeam().getColor() + event.getPlayer().getName() + ChatColor.YELLOW + " joined the game");
 		Client clients = Client.getClient(event.getPlayer());
 		if (event.getPlayer().isOp()){
-			boolean isUpdateAvail = UpdateUtil.isUpdateAvailable("http://192.241.139.19/Version.txt","http://192.241.139.19/Rixor.jar",
+			boolean isUpdateAvail = UpdateUtil.isUpdateAvailable("http://update.masterejay.us/Version.txt","http://update.masterejay.us/Rixor.jar",
 					Scrimmage.getInstance().getDescription(),  event.getPlayer());
 			if (isUpdateAvail){
 				event.getPlayer().sendMessage(ChatColor.BOLD + "" + ChatColor.GREEN + "A new update of Rixor is available! Use /update to update your version! ");

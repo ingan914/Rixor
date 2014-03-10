@@ -23,7 +23,7 @@ public class UpdateCommand {
 			}
 		}
 
-		UpdateUtil.checkForUpdate("http://192.241.139.19/Version.txt","http://192.241.139.19/Rixor.jar",
+		UpdateUtil.checkForUpdate("http://update.masterejay.us/Version.txt","http://update.masterejay.us/Rixor.jar",
 				Scrimmage.getInstance().getDescription(),(Player)sender);
 	}
 }
