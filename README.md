@@ -7,7 +7,7 @@ Overcast Scrimmage plugin utilising the OCN XML system!
 
 Todo List
 ---------
-- [ ] CORES!
+- [X] CORES!
 - [ ] XML Parsing of Filters
 - [ ] Filters that actually have connected events
 - [ ] Add Blitz support
