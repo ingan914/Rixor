@@ -21,6 +21,8 @@ import net.minecraft.util.org.apache.commons.io.FileDeleteStrategy;
 
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
+import org.bukkit.GameMode;
+import org.bukkit.Material;
 import org.bukkit.Sound;
 import org.bukkit.entity.Player;
 
@@ -29,6 +31,7 @@ import lombok.Setter;
 import me.confuser.barapi.BarAPI;
 
 import com.projectrixor.rixor.scrimmage.map.Map;
+import org.bukkit.inventory.ItemStack;
 
 public class Match {
 
@@ -431,8 +434,13 @@ public class Match {
 		/* cyclingTask.repeatAsync(20, 20);
 		Auto Cycle*/
 		for(MapTeam team : getMap().getTeams())
-			for(Client client : team.getPlayers())
-				client.setTeam(getMap().getObservers(), true, false, false);
+			for(Client client : team.getPlayers()) {
+				//client.setTeam(getMap().getObservers(), true, false, false);
+				client.getPlayer().setGameMode(GameMode.CREATIVE);
+				client.getPlayer().getInventory().setItem(0, new ItemStack(Material.COMPASS));
+			}
+
+
 		
 		setCurrentlyRunning(false);
 		setCurrentlyCycling(true);
