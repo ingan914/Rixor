@@ -3,6 +3,8 @@ Rixor
 
 Overcast Scrimmage plugin utilising the OCN XML system!
 
+*This plugin is a fork of ParaPGM by ParaPenguin. Thanks to him, we have the base for this plugin*
+
 Todo List
 ---------
 - [ ] CORES!
