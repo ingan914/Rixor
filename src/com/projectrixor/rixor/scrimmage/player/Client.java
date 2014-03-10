@@ -56,7 +56,7 @@ public class Client {
 			authors.add(author.getName());
 		}
 		
-		String op = ChatColor.RED + "❖";
+		String op = ChatColor.GOLD + "❖";
 		
 		String author = ChatColor.BLUE + "*";
 		
