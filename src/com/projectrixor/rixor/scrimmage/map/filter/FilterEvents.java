@@ -161,6 +161,9 @@ public class FilterEvents implements Listener {
 	@EventHandler(priority = EventPriority.LOW)
 	public void onBlockFromTo(BlockFromToEvent event) {
 		Map map = Scrimmage.getRotation().getSlot().getMap();
+		if (event.getToBlock().getType() ==Material.WATER){
+			return;
+		}
 		if (event.getToBlock().getType() != event.getBlock().getType()) {
 			BlockChangeEvent change = new BlockChangeEvent(event, map, null, event.getBlock().getState(), event.getToBlock().getState());
 			Scrimmage.callEvent(change);
