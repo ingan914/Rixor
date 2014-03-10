@@ -10,6 +10,7 @@ import com.projectrixor.rixor.scrimmage.Scrimmage;
 import com.projectrixor.rixor.scrimmage.ServerLog;
 import com.projectrixor.rixor.scrimmage.map.extras.Contributor;
 import com.projectrixor.rixor.scrimmage.map.extras.SidebarType;
+import com.projectrixor.rixor.scrimmage.map.extras.TNTSettings;
 import com.projectrixor.rixor.scrimmage.map.filter.Filter;
 import com.projectrixor.rixor.scrimmage.map.kit.ItemKit;
 import com.projectrixor.rixor.scrimmage.map.kit.ItemSlot;
@@ -67,6 +68,7 @@ public class Map {
 	@Getter List<ItemKit> kits;
 	@Getter List<ItemStack> itemRemove = new ArrayList<ItemStack>();
 	@Getter ItemStack killReward;
+	@Getter TNTSettings tntsettings = new TNTSettings();
 	@Getter List<MapTeam> teams = new ArrayList<MapTeam>();
 	@Getter MapTeam observers;
 	
@@ -315,6 +317,27 @@ public class Map {
 					ItemStack itemstack = new ItemStack(ConversionUtil.convertStringToMaterial(item.getText()));
 					itemRemove.add(itemstack);
 					Scrimmage.getInstance().getLogger().info("Loaded ItemRemove - " + item.getText());
+				}
+			}
+
+			for (Element e : MapLoader.getElements(root, "tnt")){
+				for (Element i : MapLoader.getElements(e, "instantignite")) {
+					if (i.getText().equalsIgnoreCase("on")){
+						tntsettings.setInstantIgnite(true);
+						Scrimmage.getInstance().getLogger().info("Instant Ignite is ON");
+					}
+					else {
+						tntsettings.setInstantIgnite(false);
+					}
+				}
+				for (Element i : MapLoader.getElements(e, "blockdamage")){
+					if (i.getText().equalsIgnoreCase("off")){
+						tntsettings.setBlockDamage(false);
+						Scrimmage.getInstance().getLogger().info("Block Damage is OFF");
+					}
+					else {
+						tntsettings.setBlockDamage(true);
+					}
 				}
 			}
 

@@ -67,7 +67,7 @@ public class UpdateUtil {
 				FileOutputStream fos1 = new FileOutputStream("plugins/" + plugin_name + ".jar");
 				fos1.getChannel().transferFrom(rbc1, 0, 1 << 24);
 
-				p.sendMessage(ChatColor.GREEN + "["+plugin_name+"] " + ChatColor.GREEN + "Updated sucessfully!");
+				p.sendMessage(ChatColor.GREEN + "["+plugin_name+"] " + ChatColor.GREEN + "Updated successfully! Restart the server for changes to take affect");
 				return true;
 			}
 			else {

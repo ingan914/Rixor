@@ -15,14 +15,17 @@ import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Location;
 import org.bukkit.Material;
+import org.bukkit.Sound;
 import org.bukkit.entity.Item;
 import org.bukkit.entity.Player;
 import org.bukkit.entity.Projectile;
+import org.bukkit.entity.TNTPrimed;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.BlockCanBuildEvent;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.event.entity.EntityDeathEvent;
+import org.bukkit.event.entity.ExplosionPrimeEvent;
 import org.bukkit.event.entity.PlayerDeathEvent;
 import org.bukkit.event.player.AsyncPlayerChatEvent;
 import org.bukkit.event.player.PlayerCommandPreprocessEvent;
@@ -113,6 +116,17 @@ public class PlayerEvents implements Listener {
 			}
 		}
 
+	}
+
+	@EventHandler
+	public void onTNTExpload(ExplosionPrimeEvent event){
+		org.bukkit.entity.Entity entity = event.getEntity();
+		if (entity instanceof TNTPrimed && !Scrimmage.getRotation().getSlot().getMap().getTntsettings().isBlockDamage()) {
+			event.setCancelled(true);
+			Location explosion = event.getEntity().getLocation();
+			Scrimmage.getMap().getWorld().createExplosion(explosion.getX(), explosion.getY(), explosion.getZ(), 2F, false, false);
+			Scrimmage.getMap().getWorld().playSound(event.getEntity().getLocation(),Sound.EXPLODE,-4,12);
+		}
 	}
 	@EventHandler
 	public void onPlayerQuit(PlayerQuitEvent event) {

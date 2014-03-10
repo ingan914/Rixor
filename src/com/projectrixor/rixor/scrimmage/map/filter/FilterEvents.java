@@ -80,6 +80,11 @@ public class FilterEvents implements Listener {
 			event.setCancelled(true);
 			return;
 		}
+
+		if (event.getBlockPlaced().getType() == Material.TNT && Scrimmage.getRotation().getSlot().getMap().getTntsettings().isInstantIgnite()){
+			event.getBlockPlaced().setType(Material.AIR);
+			TNTPrimed tnt = event.getBlockPlaced().getWorld().spawn(event.getBlockPlaced().getLocation(), TNTPrimed.class);
+		}
 		
 		if(!client.isObserver()) {
 			Map map = Scrimmage.getRotation().getSlot().getMap();
