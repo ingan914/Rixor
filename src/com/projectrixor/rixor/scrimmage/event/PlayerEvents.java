@@ -171,28 +171,33 @@ public class PlayerEvents implements Listener {
 		Player player = (Player) event.getWhoClicked();
 		Client client = Client.getClient(player);
 			if ((client.isObserver() || !Scrimmage.getRotation().getSlot().getMatch().isCurrentlyRunning()) && (event.getInventory().getName().contains("Picker"))) {
-				if (event.getCurrentItem().getType().equals(Material.WOOL)) {
-					Map map = Scrimmage.getRotation().getSlot().getMap();
-					
-					//MapTeam team = map.getObservers();
-					event.setCancelled(true);
-					String name = event.getCurrentItem().getItemMeta().getDisplayName() + "";
-					name = ChatColor.stripColor(name);
-					MapTeam team = map.getTeam(name);
-					
-					if (client.getTeam().equals(team)) {
-						player.sendMessage(ChatColor.RED + "You are already on that team!");
+				if (!(event.getRawSlot() > event.getInventory().getSize() - 1)) {
+					if (event.getCurrentItem().getType().equals(Material.WOOL)) {
+						Map map = Scrimmage.getRotation().getSlot().getMap();
+						
+						//MapTeam team = map.getObservers();
+						event.setCancelled(true);
+						String name = event.getCurrentItem().getItemMeta().getDisplayName() + "";
+						name = ChatColor.stripColor(name);
+						MapTeam team = map.getTeam(name);
+						
+						if (client.getTeam().equals(team)) {
+							player.sendMessage(ChatColor.RED + "You are already on that team!");
+						} else {
+							client.setTeam(team);
+							Scrimmage.broadcast(team.getColor() + player.getName() + ChatColor.GRAY + " has joined the " + team.getColor() + team.getDisplayName() + ChatColor.GRAY + ".");
+						}
+						player.closeInventory();
+						return;
+					} else if (event.getCurrentItem().getType().equals(Material.EYE_OF_ENDER)) {
+						player.closeInventory();
+						return;
 					} else {
-						client.setTeam(team);
-						Scrimmage.broadcast(team.getColor() + player.getName() + ChatColor.GRAY + " has joined the " + team.getColor() + team.getDisplayName() + ChatColor.GRAY + ".");
+						player.openInventory(event.getInventory());
 					}
-					player.closeInventory();
-					return;
-				} else if (event.getCurrentItem().getType().equals(Material.EYE_OF_ENDER)) {
-					player.closeInventory();
-					return;
 				} else {
 					player.openInventory(event.getInventory());
+					Scrimmage.broadcast("haha");
 				}
 			}
 	}
