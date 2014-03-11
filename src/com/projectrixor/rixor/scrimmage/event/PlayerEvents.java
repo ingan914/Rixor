@@ -196,7 +196,6 @@ public class PlayerEvents implements Listener {
 					}
 				} else {
 					player.openInventory(event.getInventory());
-					Scrimmage.broadcast("haha");
 				}
 			}
 	}
@@ -307,22 +306,27 @@ public class PlayerEvents implements Listener {
 	@EventHandler
 	public void onEntityDamageEvent(EntityDamageByEntityEvent event) {
 		if(event.getDamager() instanceof Player == false && event.getDamager() instanceof Projectile == false)
-			return;
+			//return;
+			Scrimmage.broadcast("");
 		
 		if(event.getEntity() instanceof Player == false)
-			return;
+			//return;
+			Scrimmage.broadcast("");
 		
 		Client damaged = Client.getClient((Player) event.getEntity());
 		Player attackerPlayer = null;
 		if(event.getDamager() instanceof Projectile) {
 			Projectile proj = (Projectile) event.getDamager();
 			if(proj.getShooter() instanceof Player == false)
-				return;
+				//return;
 			
 			attackerPlayer = (Player) proj.getShooter();
-		} else attackerPlayer = (Player) event.getDamager();
+		} else { 
+			attackerPlayer = (Player) event.getDamager();
+		}
 		Client attacker = Client.getClient(attackerPlayer);
 		
+		Scrimmage.debug(damaged.getTeam() + " " + attacker.getTeam(), "damage");
 		if(attacker.getTeam() == damaged.getTeam() || attacker.getTeam().isObserver() || damaged.getTeam().isObserver())
 			event.setCancelled(true);
 	}
