@@ -1,13 +1,13 @@
 package com.projectrixor.rixor.scrimmage.player.commands;
 
+import com.projectrixor.rixor.scrimmage.player.Client;
+import com.projectrixor.rixor.scrimmage.utils.ConversionUtil;
 import com.sk89q.minecraft.util.commands.Command;
 import com.sk89q.minecraft.util.commands.CommandContext;
 import com.sk89q.minecraft.util.commands.CommandException;
 import com.sk89q.minecraft.util.commands.CommandPermissionsException;
 import com.projectrixor.rixor.scrimmage.Scrimmage;
 import com.projectrixor.rixor.scrimmage.match.Match;
-import com.projectrixor.rixor.scrimmage.player.Client;
-import com.projectrixor.rixor.scrimmage.utils.ConversionUtil;
 
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
@@ -20,7 +20,7 @@ public class StartCommand {
 	public static void start(final CommandContext args, CommandSender sender) throws Exception {
 
 		if(sender instanceof Player) {
-			if(!Client.getClient((Player) sender).isRanked()) {
+			if(!Client.getClient((Player)sender).isRanked()) {
 				sender.sendMessage(ChatColor.RED + "No permission!");
 				throw new CommandPermissionsException();
 			}
@@ -33,7 +33,7 @@ public class StartCommand {
 		
 		int time = 30;
 		if(args.argsLength() == 1)
-			if(ConversionUtil.convertStringToInteger(args.getString(0), -1) > -1)
+			if(ConversionUtil.convertStringToInteger(args.getString(0),-1) > -1)
 				time = ConversionUtil.convertStringToInteger(args.getString(0), -1);
 			else {
 				throw new CommandException("Please supply a valid time greater than -1");

@@ -1,7 +1,6 @@
 package com.projectrixor.rixor.scrimmage.player.commands;
 
 import com.projectrixor.rixor.scrimmage.player.Client;
-
 import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;

@@ -3,8 +3,8 @@ package com.projectrixor.rixor.scrimmage.player.commands;
 import com.projectrixor.rixor.scrimmage.Scrimmage;
 import com.projectrixor.rixor.scrimmage.map.Map;
 import com.projectrixor.rixor.scrimmage.map.MapTeam;
-import com.projectrixor.rixor.scrimmage.player.Client;
 
+import com.projectrixor.rixor.scrimmage.player.Client;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
@@ -17,7 +17,7 @@ public class SetTeamCommand implements CommandExecutor {
 	@Override
 	public boolean onCommand(CommandSender sender, Command cmd, String cmdl, String[] args) {
 		if(sender instanceof Player) {
-			if(!Client.getClient((Player) sender).isRanked()) {
+			if(!Client.getClient((Player)sender).isRanked()) {
 				sender.sendMessage(ChatColor.RED + "No permission!");
 				return false;
 			}

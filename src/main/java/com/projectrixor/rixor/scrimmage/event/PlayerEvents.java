@@ -13,7 +13,6 @@ import com.projectrixor.rixor.scrimmage.utils.Characters;
 import com.projectrixor.rixor.scrimmage.utils.InvUtil;
 import com.projectrixor.rixor.scrimmage.utils.PickerUtil;
 import com.projectrixor.rixor.scrimmage.utils.UpdateUtil;
-import com.sk89q.minecraft.util.commands.CommandException;
 
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
@@ -33,10 +32,10 @@ import org.bukkit.event.entity.EntityDeathEvent;
 import org.bukkit.event.entity.ExplosionPrimeEvent;
 import org.bukkit.event.entity.PlayerDeathEvent;
 import org.bukkit.event.inventory.InventoryClickEvent;
-import org.bukkit.event.inventory.InventoryType;
 import org.bukkit.event.player.AsyncPlayerChatEvent;
 import org.bukkit.event.player.PlayerCommandPreprocessEvent;
 import org.bukkit.event.player.PlayerInteractEntityEvent;
+import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.event.player.PlayerMoveEvent;
 import org.bukkit.event.player.PlayerPickupItemEvent;
@@ -45,7 +44,6 @@ import org.bukkit.event.player.PlayerRespawnEvent;
 import org.bukkit.event.server.ServerListPingEvent;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
-import org.bukkit.inventory.meta.ItemMeta;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -169,24 +167,35 @@ public class PlayerEvents implements Listener {
 
 		Player player = (Player) event.getWhoClicked();
 		Client client = Client.getClient(player);
-		if ((client.isObserver() || !Scrimmage.getRotation().getSlot().getMatch().isCurrentlyRunning()) && (event.getInventory().getName().contains("Picker"))) {
-			Map map = Scrimmage.getRotation().getSlot().getMap();
-
-			//MapTeam team = map.getObservers();
-			event.setCancelled(true);
-			String name = event.getCurrentItem().getItemMeta().getDisplayName() + "";
-			MapTeam team = map.getTeam(name);
-			
-			if (client.getTeam().equals(team)) {
-				player.sendMessage(ChatColor.RED + "You are already on that team!");
-			} else {
-				client.setTeam(team);
-				Scrimmage.broadcast(team.getColor() + player.getName() + ChatColor.GRAY + " has joined the " + team.getColor() + team.getDisplayName() + ChatColor.GRAY + ".");
+			if ((client.isObserver() || !Scrimmage.getRotation().getSlot().getMatch().isCurrentlyRunning()) && (event.getInventory().getName().contains("Picker"))) {
+				if (!(event.getRawSlot() > event.getInventory().getSize() - 1)) {
+					if (event.getCurrentItem().getType().equals(Material.WOOL)) {
+						Map map = Scrimmage.getRotation().getSlot().getMap();
+						
+						event.setCancelled(true);
+						String name = event.getCurrentItem().getItemMeta().getDisplayName() + "";
+						name = ChatColor.stripColor(name);
+						MapTeam team = map.getTeam(name);
+						
+						if (client.getTeam().equals(team)) {
+							player.sendMessage(ChatColor.RED + "You are already on that team!");
+						} else {
+							client.setTeam(team);
+							Scrimmage.broadcast(team.getColor() + player.getName() + ChatColor.GRAY + " has joined the " + team.getColor() + team.getDisplayName() + ChatColor.GRAY + ".");
+						}
+						player.closeInventory();
+						return;
+					} else if (event.getCurrentItem().getType().equals(Material.EYE_OF_ENDER)) {
+						player.closeInventory();
+						return;
+					} else {
+						player.openInventory(event.getInventory());
+					}
+				} else {
+					player.openInventory(event.getInventory());
+				}
 			}
-			player.closeInventory();
-			return;
-			}
-		}
+	}
 	
 	@EventHandler
     public void onPlayerInteract(PlayerInteractEvent event) {
@@ -232,8 +241,11 @@ public class PlayerEvents implements Listener {
 		}
 		Player clicker = event.getPlayer();
 		Player clicked = (Player) event.getRightClicked();
+		Client client = Client.getClient(clicker);
+		if ((client.isObserver() || !Scrimmage.getRotation().getSlot().getMatch().isCurrentlyRunning())) {
 		Inventory clickedinv = InvUtil.obsInvPreview(clicked, clicked.getInventory());
 		clicker.openInventory(clickedinv);
+		}
 	}
 	
 	@EventHandler
@@ -304,11 +316,12 @@ public class PlayerEvents implements Listener {
 				return;
 			
 			attackerPlayer = (Player) proj.getShooter();
-		} else attackerPlayer = (Player) event.getDamager();
+		} else {
+			attackerPlayer = (Player) event.getDamager();
 		Client attacker = Client.getClient(attackerPlayer);
 		
 		if(attacker.getTeam() == damaged.getTeam() || attacker.getTeam().isObserver() || damaged.getTeam().isObserver())
 			event.setCancelled(true);
+		}
 	}
-	
 }

@@ -61,6 +61,11 @@ public class Client {
 		String author = ChatColor.BLUE + "*";
 		
 		String stars = "";
+		
+		if(getPlayer().isOp())
+			stars += op;
+		
+		
 		for(String string : authors) {
 			if(string.contains(getPlayer().getName())) {
 				stars += author;
@@ -68,8 +73,7 @@ public class Client {
 			}
 		}
 		
-		if(getPlayer().isOp())
-			stars += op;
+
 		
 		return stars;
 	}

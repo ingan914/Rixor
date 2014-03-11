@@ -6,7 +6,6 @@ import java.util.List;
 
 import com.projectrixor.rixor.scrimmage.player.Client;
 import com.projectrixor.rixor.scrimmage.utils.ConversionUtil;
-
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
@@ -21,12 +20,12 @@ public class StaffCommand implements CommandExecutor {
 		
 		List<String> staffs = new ArrayList<String>();
 		for (Player Online : Bukkit.getOnlinePlayers()) {
-			if (Client.getClient((Player) Online).isRanked()) {	
+			if (Client.getClient((Player)Online).isRanked()) {
 				staffs.add(Online.getDisplayName());
 				}
 			}
 		int size = staffs.size();
-		String staff = ConversionUtil.staffList(staffs, ChatColor.WHITE);
+		String staff = ConversionUtil.staffList(staffs,ChatColor.WHITE);
 		String broadcast = "" + staff;
 		String lessSpam = ChatColor.GRAY + "Staff Online (" + size + "): ";
 		sender.sendMessage(ChatColor.WHITE + "[" + ChatColor.GOLD + "ParaPGM v1.0" + ChatColor.WHITE + "] " + lessSpam + broadcast);

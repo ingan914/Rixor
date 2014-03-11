@@ -9,6 +9,8 @@ import org.bukkit.Material;
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.potion.PotionEffectType;
 
+import com.projectrixor.rixor.scrimmage.map.MapTeam;
+
 public class ConversionUtil {
 	
 	public static int convertStringToInteger(String value) {
@@ -21,6 +23,42 @@ public class ConversionUtil {
 		} catch(NumberFormatException e) {
 			return fallback;
 		}
+	}
+	
+	public static DyeColor convertTeamColorToDyeColor(MapTeam team) {
+		DyeColor dye = DyeColor.WHITE;
+		if (team.getColor().equals(ChatColor.AQUA)) {
+			dye = DyeColor.LIGHT_BLUE;
+		} else if (team.getColor().equals(ChatColor.BLACK)) {
+			dye = DyeColor.BLACK;
+		} else if (team.getColor().equals(ChatColor.BLUE)) {
+			dye = DyeColor.BLUE;
+		} else if (team.getColor().equals(ChatColor.DARK_AQUA)) {
+			dye = DyeColor.CYAN;
+		} else if (team.getColor().equals(ChatColor.DARK_BLUE)) {
+			dye = DyeColor.BLUE;
+		} else if (team.getColor().equals(ChatColor.DARK_GRAY)) {
+			dye = DyeColor.GRAY;
+		} else if (team.getColor().equals(ChatColor.DARK_GREEN)) {
+			dye = DyeColor.GREEN;
+		} else if (team.getColor().equals(ChatColor.DARK_PURPLE)) {
+			dye = DyeColor.PURPLE;
+		} else if (team.getColor().equals(ChatColor.DARK_RED)) {
+			dye = DyeColor.RED;
+		} else if (team.getColor().equals(ChatColor.GOLD)) {
+			dye = DyeColor.ORANGE;
+		} else if (team.getColor().equals(ChatColor.GRAY)) {
+			dye = DyeColor.SILVER;
+		} else if (team.getColor().equals(ChatColor.GREEN)) {
+			dye = DyeColor.LIME;
+		} else if (team.getColor().equals(ChatColor.LIGHT_PURPLE)) {
+			dye = DyeColor.PINK;
+		} else if (team.getColor().equals(ChatColor.RED)) {
+			dye = DyeColor.RED;
+		} else if (team.getColor().equals(ChatColor.YELLOW)) {
+			dye = DyeColor.YELLOW;
+		}
+		return dye;	
 	}
 	
 	public static Material convertStringToMaterial(String convert) {

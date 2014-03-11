@@ -1,8 +1,8 @@
 package com.projectrixor.rixor.scrimmage.map.filter.events;
 
+import com.projectrixor.rixor.scrimmage.player.Client;
 import lombok.Getter;
 import com.projectrixor.rixor.scrimmage.map.Map;
-import com.projectrixor.rixor.scrimmage.player.Client;
 
 import org.bukkit.block.BlockState;
 import org.bukkit.event.Cancellable;
@@ -15,7 +15,8 @@ public class BlockChangeEvent extends Event {
     
     @Getter Event cause;
     @Getter Map map;
-    @Getter Client client;
+    @Getter
+    Client client;
     @Getter BlockState oldState;
     @Getter BlockState newState;
  

@@ -5,7 +5,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.projectrixor.rixor.scrimmage.player.Client;
-
 import org.bukkit.Location;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.Player;

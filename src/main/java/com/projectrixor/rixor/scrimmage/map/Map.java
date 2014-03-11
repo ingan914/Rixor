@@ -13,7 +13,6 @@ import com.projectrixor.rixor.scrimmage.map.extras.SidebarType;
 import com.projectrixor.rixor.scrimmage.map.extras.TNTSettings;
 import com.projectrixor.rixor.scrimmage.map.filter.Filter;
 import com.projectrixor.rixor.scrimmage.map.kit.ItemKit;
-import com.projectrixor.rixor.scrimmage.map.kit.ItemSlot;
 import com.projectrixor.rixor.scrimmage.map.kit.KitLoader;
 import com.projectrixor.rixor.scrimmage.map.objective.CoreObjective;
 import com.projectrixor.rixor.scrimmage.map.objective.MonumentObjective;
@@ -28,11 +27,9 @@ import com.projectrixor.rixor.scrimmage.utils.ConversionUtil;
 import com.projectrixor.rixor.scrimmage.utils.FileUtil;
 import org.bukkit.ChatColor;
 import org.bukkit.Location;
-import org.bukkit.Material;
 import org.bukkit.OfflinePlayer;
 import org.bukkit.World;
 import org.bukkit.WorldCreator;
-import org.bukkit.enchantments.Enchantment;
 import org.bukkit.generator.ChunkGenerator;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.scoreboard.DisplaySlot;
@@ -268,7 +265,7 @@ public class Map {
 				+ (System.currentTimeMillis() - start) + "ms!");
 		
 		this.world = world;
-		
+
 		if(world != null) {
 			Element root = loader.getDoc().getRootElement();
 			

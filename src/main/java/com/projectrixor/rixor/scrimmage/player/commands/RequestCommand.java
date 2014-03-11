@@ -1,7 +1,6 @@
 package com.projectrixor.rixor.scrimmage.player.commands;
 
 import com.projectrixor.rixor.scrimmage.player.Client;
-
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Sound;
@@ -28,7 +27,7 @@ public class RequestCommand implements CommandExecutor {
 		message = message.substring(1);
 		sender.sendMessage(ChatColor.RED + "Your request has been submitted.");
 		for (Player Online : Bukkit.getOnlinePlayers()) {
-			if (Client.getClient((Player) Online).isRanked()) {
+			if (Client.getClient((Player)Online).isRanked()) {
 				Online.sendMessage(ChatColor.WHITE + "[" + ChatColor.GOLD + "A" + ChatColor.WHITE + "] " + (Client.getClient((Player) sender).getStars()) + (Client.getClient((Player) sender).getTeam().getColor()) + sender.getName() + ChatColor.GRAY + " has requested " + ChatColor.WHITE + "'" + message + "'");
 				Online.playSound(Online.getLocation(), Sound.ORB_PICKUP, 10, 1);
 			}

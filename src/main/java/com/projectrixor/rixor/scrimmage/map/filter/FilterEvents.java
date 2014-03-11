@@ -5,8 +5,8 @@ import java.util.List;
 import com.projectrixor.rixor.scrimmage.map.filter.events.BlockChangeEvent;
 import com.projectrixor.rixor.scrimmage.Scrimmage;
 import com.projectrixor.rixor.scrimmage.map.Map;
-import com.projectrixor.rixor.scrimmage.player.Client;
 
+import com.projectrixor.rixor.scrimmage.player.Client;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.block.Block;
