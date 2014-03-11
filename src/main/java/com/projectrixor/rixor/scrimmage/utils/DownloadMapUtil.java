@@ -19,7 +19,6 @@ public class DownloadMapUtil {
 		try
 		{
 			URL url1 = new URL("http://update.masterejay.us/maps/" + parsedMapName + ".zip");
-			Scrimmage.debug(parsedMapName, ".");
 			URLConnection connection = url1.openConnection();
 
 			ByteArrayOutputStream result1 = new ByteArrayOutputStream();
@@ -34,7 +33,6 @@ public class DownloadMapUtil {
 				amount = input1.read(buffer);
 
 				returnValue = result1.toString();
-				Scrimmage.debug(returnValue, ".");
 				if (returnValue.contains("Not Found")){
 				   return false;
 				}
@@ -55,7 +53,12 @@ public class DownloadMapUtil {
 		return false;
 	}
 
-	public static void downloadMap(String mapName){
+	public static String parseMapName(String mapName){
+		String parsedMapName;
+		return parsedMapName = mapName.replace(" ","%20").replace("/","");
+	}
+
+	public static boolean downloadMap(String mapName){
 		String parsedMapName = mapName.replace(" ", "%20").replace("/", "");
 		try
 		{
@@ -67,12 +70,19 @@ public class DownloadMapUtil {
 				FileOutputStream fos1 = new FileOutputStream("temp/" + mapName + ".zip");
 				fos1.getChannel().transferFrom(rbc1, 0, 1 << 24);
 				fos1.close();
-				ZipUtil.unZip("temp/" + mapName + ".zip", "maps/");
+				File f = new File(Scrimmage.getMapRoot() + File.separator + mapName);
+				f.mkdir();
+				File f1 = new File(f + File.separator + "region");
+				f1.mkdir();
+				ZipUtil.unzipFile("temp" + File.separator + mapName + ".zip");
+				File f2 = new File("temp" + File.separator + mapName + ".zip");
+				f2.delete();
+				return true;
 
 
 		}catch (IOException e)
 		{
-			return;
+			return false;
 			//e.printStackTrace();
 		}
 	}

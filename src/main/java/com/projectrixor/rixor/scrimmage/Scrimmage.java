@@ -114,7 +114,7 @@ public class Scrimmage extends JavaPlugin {
 			if(!zips.exists())
 				zips.mkdirs();
 			
-			ZipUtil.unZip(file, getMapRoot());
+			//ZipUtil.unZip(file, getMapRoot());
 			try {
 				FileUtil.move(file, new File(zips.getAbsolutePath() + "/" + file.getName()));
 			} catch (IOException e) {
@@ -169,6 +169,8 @@ public class Scrimmage extends JavaPlugin {
 		cmdRegister.register(RestartCommand.class);
 		cmdRegister.register(StartCommand.class);
 		cmdRegister.register(UpdateCommand.class);
+		cmdRegister.register(TestCommand.class);
+		cmdRegister.register(DownloadMapCommand.class);
 
 	}
 

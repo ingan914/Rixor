@@ -23,13 +23,8 @@ commands:
     description: Lists off staff.
   help:
     description: Help on ParaPGM commands.
-  stoptheserver:
-    aliases: [sts]
-    description: Stops the server.
   request:
     description: Send a request to online staff.
   match:
     aliases: [info,next,map]
     description: Check the map status.
-  test:
-    description: so yeah tests woo.
