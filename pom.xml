@@ -10,11 +10,6 @@
     <description>A scrimmage plugin based off of PGM's XML system</description>
     <dependencies>
         <dependency>
-            <groupId>tc.oc</groupId>
-            <artifactId>sportbukkit-api</artifactId>
-            <version>1.6.4-R2.1-SNAPSHOT</version>
-        </dependency>
-        <dependency>
             <groupId>com.sk89q</groupId>
             <artifactId>command-framework-core</artifactId>
             <version>0.5-SNAPSHOT</version>
@@ -40,8 +35,17 @@
             <artifactId>command-framework-bukkit</artifactId>
             <version>0.5-SNAPSHOT</version>
         </dependency>
+        <dependency>
+            <groupId>org.bukkit</groupId>
+            <artifactId>bukkit</artifactId>
+            <version>1.7.2-R0.4</version>
+        </dependency>
     </dependencies>
     <repositories>
+        <repository>
+            <id>bukkit-repo</id>
+            <url>http://repo.bukkit.org/content/groups/public</url>
+        </repository>
         <repository>
             <id>confuser-repo</id>
             <url>http://ci.frostcast.net/plugin/repository/everything</url>
@@ -50,10 +54,6 @@
             <id>overcast</id>
             <name>Overcast Network repo</name>
             <url>https://repo.oc.tc/content/repositories/public</url>
-        </repository>
-        <repository>
-            <id>bukkit-repo</id>
-            <url>http://repo.bukkit.org/content/groups/public</url>
         </repository>
     </repositories>
     <build>
@@ -96,8 +96,6 @@
                             <artifactSet>
                                 <excludes>
                                     <exclude>org.bukkit:bukkit</exclude>
-                                    <exclude>tc.oc:sportbukkit</exclude>
-                                    <exclude>tc.oc:tracker</exclude>
                                     <exclude>org.bukkit:craftbukkit</exclude>
                                 </excludes>
                             </artifactSet>
