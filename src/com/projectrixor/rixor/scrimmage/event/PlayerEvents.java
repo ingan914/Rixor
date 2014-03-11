@@ -245,8 +245,11 @@ public class PlayerEvents implements Listener {
 		}
 		Player clicker = event.getPlayer();
 		Player clicked = (Player) event.getRightClicked();
+		Client client = Client.getClient(clicker);
+		if ((client.isObserver() || !Scrimmage.getRotation().getSlot().getMatch().isCurrentlyRunning())) {
 		Inventory clickedinv = InvUtil.obsInvPreview(clicked, clicked.getInventory());
 		clicker.openInventory(clickedinv);
+		}
 	}
 	
 	@EventHandler
