@@ -1,4 +1,4 @@
-package main.java.com.projectrixor.rixor.scrimmage.player;
+package com.projectrixor.rixor.scrimmage.player;
 
 import java.util.ArrayList;
 import java.util.HashMap;
