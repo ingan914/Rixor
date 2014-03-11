@@ -27,8 +27,8 @@ public class PickerUtil {
     	final Inventory preview = Bukkit.getServer().createInventory(null, 27, ChatColor.RED + string);
     	
     	//Setup Aesthetic Team Picker Items ( I'm so inefficient :( )
-    	preview.setItem(0, new ItemStack(Material.WEB));
-    	preview.setItem(8, new ItemStack(Material.WEB));
+    	preview.setItem(0, new ItemStack(Material.STAINED_GLASS_PANE));
+    	preview.setItem(8, new ItemStack(Material.STAINED_GLASS_PANE));
     	
     	preview.setItem(1, new ItemStack(Material.STAINED_GLASS_PANE));
     	preview.setItem(2, new ItemStack(Material.STAINED_GLASS_PANE));

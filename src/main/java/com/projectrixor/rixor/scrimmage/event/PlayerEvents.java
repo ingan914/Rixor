@@ -184,15 +184,13 @@ public class PlayerEvents implements Listener {
 							Scrimmage.broadcast(team.getColor() + player.getName() + ChatColor.GRAY + " has joined the " + team.getColor() + team.getDisplayName() + ChatColor.GRAY + ".");
 						}
 						player.closeInventory();
-						return;
 					} else if (event.getCurrentItem().getType().equals(Material.EYE_OF_ENDER)) {
 						player.closeInventory();
-						return;
 					} else {
-						player.openInventory(event.getInventory());
+						event.setCancelled(true);
 					}
 				} else {
-					player.openInventory(event.getInventory());
+					event.setCancelled(true);
 				}
 			}
 	}
