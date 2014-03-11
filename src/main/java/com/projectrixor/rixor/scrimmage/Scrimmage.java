@@ -209,7 +209,6 @@ public class Scrimmage extends JavaPlugin {
 		registerCommand("request", new RequestCommand());
 
 		registerCommand("match", new MatchCommand());
-		registerCommand("test", new TestCommand());
 		enableTracker();
 	}
 
