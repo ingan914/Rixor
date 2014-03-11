@@ -6,6 +6,7 @@ import lombok.Getter;
 
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
+import org.bukkit.DyeColor;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.Inventory;
@@ -13,38 +14,75 @@ import org.bukkit.inventory.InventoryHolder;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.PlayerInventory;
 import org.bukkit.inventory.meta.ItemMeta;
+import org.bukkit.material.Wool;
 
+import com.projectrixor.rixor.scrimmage.map.MapTeam;
 import com.projectrixor.rixor.scrimmage.Scrimmage;
 import com.projectrixor.rixor.scrimmage.map.Map;
-import com.projectrixor.rixor.scrimmage.map.MapTeam;
 import com.projectrixor.rixor.scrimmage.match.Match;
 
 public class PickerUtil {
 	@Getter Map map;
     public static Inventory obsInvPreview(String string) {
-    	final Inventory preview = Bukkit.getServer().createInventory(null, 45, ChatColor.RED + string);    
+    	final Inventory preview = Bukkit.getServer().createInventory(null, 27, ChatColor.RED + string);
+    	
+    	//Setup Aesthetic Team Picker Items ( I'm so inefficient :( )
+    	preview.setItem(0, new ItemStack(Material.WEB));
+    	preview.setItem(8, new ItemStack(Material.WEB));
+    	
+    	preview.setItem(1, new ItemStack(Material.STAINED_GLASS_PANE));
+    	preview.setItem(2, new ItemStack(Material.STAINED_GLASS_PANE));
+    	preview.setItem(3, new ItemStack(Material.STAINED_GLASS_PANE));
+    	preview.setItem(4, new ItemStack(Material.STAINED_GLASS_PANE));
+    	preview.setItem(5, new ItemStack(Material.STAINED_GLASS_PANE));
+    	preview.setItem(6, new ItemStack(Material.STAINED_GLASS_PANE));
+    	preview.setItem(7, new ItemStack(Material.STAINED_GLASS_PANE));
+    	preview.setItem(9, new ItemStack(Material.STAINED_GLASS_PANE));
+    	preview.setItem(17, new ItemStack(Material.STAINED_GLASS_PANE));
+    	preview.setItem(19, new ItemStack(Material.STAINED_GLASS_PANE));
+    	preview.setItem(20, new ItemStack(Material.STAINED_GLASS_PANE));
+    	preview.setItem(21, new ItemStack(Material.STAINED_GLASS_PANE));
+    	preview.setItem(22, new ItemStack(Material.STAINED_GLASS_PANE));
+    	preview.setItem(23, new ItemStack(Material.STAINED_GLASS_PANE));
+    	preview.setItem(24, new ItemStack(Material.STAINED_GLASS_PANE));
+    	preview.setItem(25, new ItemStack(Material.STAINED_GLASS_PANE));
+    	
+    	//Setup Observers Wool
+    	Wool obs = new Wool(DyeColor.LIGHT_BLUE);
+    	ItemStack obsItem = obs.toItemStack(Scrimmage.getMap().getObservers().getTeam().getPlayers().size());
+    	ItemMeta obsItemMeta = obsItem.getItemMeta();
+    	obsItemMeta.setDisplayName(ChatColor.AQUA + "Observers");
+    	obsItemMeta.setLore(Arrays.asList(ChatColor.BLUE + "Join the" + ChatColor.AQUA + " Observers" + ChatColor.BLUE + "!"));
+    	obsItem.setItemMeta(obsItemMeta);
+    	
+    	preview.setItem(26, obsItem);
+    	
+    	//Setup Eye of Ender Close Item
+    	ItemStack closer = new ItemStack(Material.EYE_OF_ENDER);
+    	ItemMeta closerMeta = closer.getItemMeta();
+    	closerMeta.setDisplayName(ChatColor.RED + "Close");
+    	closerMeta.setLore(Arrays.asList(ChatColor.BLUE + "Close the picker!"));
+    	closer.setItemMeta(closerMeta);
+    	
+    	preview.setItem(18, closer);
+    	
     	for (MapTeam teams : Scrimmage.getMap().getTeams()) {
-    		int i = 0;
-        	ItemStack wow = new ItemStack(Material.WOOL, 1, (short) 1);
-        	ItemMeta meta = wow.getItemMeta();
-        	meta.setDisplayName(teams.getName());
-        	meta.setLore(Arrays.asList(ChatColor.BLUE + "Join the" + teams.getColor() + " " + teams.getDisplayName() + ChatColor.BLUE + "!"));
-        	wow.setItemMeta(meta);
-        	preview.addItem(wow);
+    		int i = 10;
+    		if (i >= 7) {
+    		DyeColor dye = DyeColor.WHITE;
+    		dye = ConversionUtil.convertTeamColorToDyeColor(teams);
+        	Wool wool = new Wool(dye);
+        	ItemStack stack = wool.toItemStack(teams.getTeam().getSize());
+        	
+        	ItemMeta meta = stack.getItemMeta();
+        	meta.setDisplayName(teams.getColor() + teams.getName());
+        	meta.setLore(Arrays.asList(ChatColor.GREEN + "Join the" + teams.getColor() + " " + teams.getDisplayName() + ChatColor.GREEN + "!"));
+        	stack.setItemMeta(meta);
+        	//preview.addItem(stack);
+        	preview.addItem(stack);
         	i = i + 1;
+    		}
     	}
     	return preview;
-    }
-   /* staffhead = new ItemStack(Material.SKULL_ITEM, 1, (byte) 3);
-    ItemMeta sheadmeta = staffhead.getItemMeta();
-    sheadmeta.setDisplayName(ChatColor.GOLD + "Staff");
-    sheadmeta.setLore(Arrays.asList(ChatColor.BLUE + "A list of all staff members!"));
-    staffhead.setItemMeta(sheadmeta);*/
-    public static int getInventoryPreviewSlot(final int inventorySlot) {
-        if (inventorySlot < 36) {
-            return inventorySlot;
-        }
-        return inventorySlot;
-        }
-	
+    }	
 }
