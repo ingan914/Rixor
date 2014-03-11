@@ -1,19 +1,14 @@
 package com.projectrixor.rixor.scrimmage.utils;
 
 
-<<<<<<< HEAD
-=======
 import com.projectrixor.rixor.scrimmage.Scrimmage;
-import org.bukkit.ChatColor;
->>>>>>> FETCH_HEAD
 
-import java.io.ByteArrayOutputStream;
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.IOException;
+import java.io.*;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLConnection;
+import java.nio.channels.Channels;
+import java.nio.channels.ReadableByteChannel;
 
 
 public class DownloadMapUtil {

@@ -1,13 +1,8 @@
 package com.projectrixor.rixor.scrimmage.player.commands;
 
 import com.projectrixor.rixor.scrimmage.utils.DownloadMapUtil;
-<<<<<<< HEAD
-=======
-import com.projectrixor.rixor.scrimmage.utils.UpdateUtil;
 import com.sk89q.minecraft.util.commands.CommandContext;
->>>>>>> FETCH_HEAD
-import org.bukkit.command.Command;
-import org.bukkit.command.CommandExecutor;
+
 import org.bukkit.command.CommandSender;
 
 public class TestCommand  {
