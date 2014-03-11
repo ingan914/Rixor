@@ -16,9 +16,7 @@ import java.net.URLConnection;
 import java.nio.channels.Channels;
 import java.nio.channels.ReadableByteChannel;
 
-/**
- * @author MasterEjay
- */
+
 public class UpdateUtil {
 
 	private static String version;
@@ -67,7 +65,7 @@ public class UpdateUtil {
 				FileOutputStream fos1 = new FileOutputStream("plugins/" + plugin_name + ".jar");
 				fos1.getChannel().transferFrom(rbc1, 0, 1 << 24);
 
-				p.sendMessage(ChatColor.GREEN + "["+plugin_name+"] " + ChatColor.GREEN + "Updated successfully! Restart the server for changes to take affect");
+				p.sendMessage(ChatColor.GREEN + "["+plugin_name+"] " + ChatColor.GREEN + "Updated successfully!" + ChatColor.AQUA + " Restart the server for changes to take affect");
 				return true;
 			}
 			else {
