@@ -1,32 +1,39 @@
 package com.projectrixor.rixor.scrimmage.player;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 public class StatTracker {
-	public static ArrayList<String> totalKills = new ArrayList<String>();
-	public static ArrayList<String> totalDeaths = new ArrayList<String>();
+	public static HashMap<String, Integer> totalKills = new HashMap<String, Integer>();
+	public static HashMap<String, Integer> totalDeaths = new HashMap<String, Integer>();
 	
 	public static void gainKill(String name) {
 		int kills = 0;
-		for (Object part : totalKills.toArray()) {
-			String[] parts = part.toString().split(":");
-			if (parts[0].equalsIgnoreCase(name)) {
-				totalKills.remove(part);
-				kills = Integer.parseInt(parts[1]);
-			}
+		if(totalKills.containsKey(name)) {
+			totalKills.remove(name);
+			kills = totalKills.get(name);
 		}
-		totalKills.add(name + ":" + kills);
+		totalKills.put(name, kills);
 	}
 	
 	public static void gainDeath(String name) {
-		int kills = 0;
-		for (Object part : totalDeaths.toArray()) {
-			String[] parts = part.toString().split(":");
-			if (parts[0].equalsIgnoreCase(name)) {
-				totalDeaths.remove(part);
-				kills = Integer.parseInt(parts[1]);
+		int deaths = 0;
+		if(totalDeaths.containsKey(name)) {
+			totalDeaths.remove(name);
+			deaths = totalDeaths.get(name);
+		}
+		totalDeaths.put(name, deaths);
+	}
+	
+	public static double getKDRatio(String name) {
+		double ratio = 0.0;
+		if(totalKills.containsKey(name)) {
+			if (totalDeaths.containsKey(name)) {
+				ratio = totalKills.get(name) / totalDeaths.get(name);
+			} else {
+				ratio = totalKills.get(name);
 			}
 		}
-		totalDeaths.add(name + ":" + kills);
+		return ratio;
 	}
 }
