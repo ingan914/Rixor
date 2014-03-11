@@ -42,6 +42,7 @@ public class JoinCommand{
 			Scrimmage.broadcast(team.getColor() + sender.getName() + ChatColor.GRAY + " has joined the " + team.getColor() + team.getDisplayName() + ChatColor.GRAY + ".");
 	    }
 		client.setTeam(team);
+		((Player) sender).setScoreboard(team.getMap().getBoard());
 
 	}
 	

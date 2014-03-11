@@ -11,7 +11,9 @@ import com.projectrixor.rixor.scrimmage.match.Match;
 import com.projectrixor.rixor.scrimmage.player.PlayerChatEvent;
 import com.projectrixor.rixor.scrimmage.utils.Characters;
 import com.projectrixor.rixor.scrimmage.utils.InvUtil;
+import com.projectrixor.rixor.scrimmage.utils.PickerUtil;
 import com.projectrixor.rixor.scrimmage.utils.UpdateUtil;
+import com.sk89q.minecraft.util.commands.CommandException;
 
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
@@ -24,11 +26,14 @@ import org.bukkit.entity.Projectile;
 import org.bukkit.entity.TNTPrimed;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
+import org.bukkit.event.block.Action;
 import org.bukkit.event.block.BlockCanBuildEvent;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.event.entity.EntityDeathEvent;
 import org.bukkit.event.entity.ExplosionPrimeEvent;
 import org.bukkit.event.entity.PlayerDeathEvent;
+import org.bukkit.event.inventory.InventoryClickEvent;
+import org.bukkit.event.inventory.InventoryType;
 import org.bukkit.event.player.AsyncPlayerChatEvent;
 import org.bukkit.event.player.PlayerCommandPreprocessEvent;
 import org.bukkit.event.player.PlayerInteractEntityEvent;
@@ -40,6 +45,7 @@ import org.bukkit.event.player.PlayerRespawnEvent;
 import org.bukkit.event.server.ServerListPingEvent;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
+import org.bukkit.inventory.meta.ItemMeta;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -153,8 +159,48 @@ public class PlayerEvents implements Listener {
 		} catch(NullPointerException e) {}
 	}
 	
+	@EventHandler
 	public void onPlayerExit(Player player) {
 		Client.getClients().remove(Client.getClient(player));
+	}
+	
+	@EventHandler
+	public void onInventoryClick(InventoryClickEvent event) {
+
+		Player player = (Player) event.getWhoClicked();
+		Client client = Client.getClient(player);
+		if ((client.isObserver() || !Scrimmage.getRotation().getSlot().getMatch().isCurrentlyRunning()) && (event.getInventory().getName().contains("Picker"))) {
+			Map map = Scrimmage.getRotation().getSlot().getMap();
+
+			//MapTeam team = map.getObservers();
+			event.setCancelled(true);
+			String name = event.getCurrentItem().getItemMeta().getDisplayName() + "";
+			MapTeam team = map.getTeam(name);
+			
+			if (client.getTeam().equals(team)) {
+				player.sendMessage(ChatColor.RED + "You are already on that team!");
+			} else {
+				client.setTeam(team);
+				Scrimmage.broadcast(team.getColor() + player.getName() + ChatColor.GRAY + " has joined the " + team.getColor() + team.getDisplayName() + ChatColor.GRAY + ".");
+			}
+			player.closeInventory();
+			return;
+			}
+		}
+	
+	@EventHandler
+    public void onPlayerInteract(PlayerInteractEvent event) {
+		Client client = Client.getClient(event.getPlayer());
+		if ((event.getAction() == Action.RIGHT_CLICK_BLOCK) || (event.getAction() == Action.RIGHT_CLICK_AIR)) {
+			if ((client.isObserver() || !Scrimmage.getRotation().getSlot().getMatch().isCurrentlyRunning())) { 
+				if(event.getPlayer().getItemInHand().getType().equals(Material.ENCHANTED_BOOK)) {
+					if (!(event.getPlayer().getItemInHand().getItemMeta().getDisplayName().contains(ChatColor.RED + "" + ChatColor.BOLD + "Team Picker"))) {
+					} else {
+						event.getPlayer().openInventory(PickerUtil.obsInvPreview("Picker"));
+					}
+				}
+			}
+		}
 	}
 	
 	@EventHandler

@@ -110,7 +110,7 @@ public class Client {
 		player.setScoreboard(team.getMap().getBoard());
 		if(load) team.loadout(this, teleport, clear);
 		
-		if(team.getTeam() == null) ServerLog.info("Scoreboard Team for '"+team.getName()+"' is null");
+		//if(team.getTeam() == null) ServerLog.info("Scoreboard Team for '"+team.getName()+"' is null");
 		if(clear) team.getTeam().addPlayer(getPlayer());
 		
 		getPlayer().setDisplayName(getStars() + getTeam().getColor() + getPlayer().getName());

@@ -445,12 +445,12 @@ public class MapTeam {
 			for(String perm : perms) client.getPerms().setPermission(perm, true);
 			client.getPlayer().setGameMode(GameMode.CREATIVE);
 			client.getPlayer().getInventory().setItem(0, new ItemStack(Material.COMPASS));
-			ItemStack mm = new ItemStack(Material.APPLE);
+			ItemStack mm = new ItemStack(Material.ENCHANTED_BOOK);
             ItemMeta mainMenuButton = mm.getItemMeta();
-            String mmName = ChatColor.BLUE + "" + ChatColor.BOLD + "Main Menu";
+            String mmName = ChatColor.RED + "" + ChatColor.BOLD + "Team Picker";
             mainMenuButton.setDisplayName(mmName);
             mm.setItemMeta(mainMenuButton);
-           // client.getPlayer().getInventory().addItem(mm);
+            client.getPlayer().getInventory().addItem(mm);
 		} else {
 			for(String perm : perms) client.getPerms().unsetPermission(perm);
 			client.getPlayer().setGameMode(GameMode.SURVIVAL);
