@@ -72,7 +72,13 @@ public class PickerUtil {
     		DyeColor dye = DyeColor.WHITE;
     		dye = ConversionUtil.convertTeamColorToDyeColor(teams);
         	Wool wool = new Wool(dye);
-        	ItemStack stack = wool.toItemStack(teams.getTeam().getSize());
+        	int size = 0;
+        	if (teams.getTeam().getSize() > 64) {
+        		size = 64;
+        	} else {
+        		size = teams.getTeam().getSize();
+        	}
+        	ItemStack stack = wool.toItemStack(size);
         	
         	ItemMeta meta = stack.getItemMeta();
         	meta.setDisplayName(teams.getColor() + teams.getName());
