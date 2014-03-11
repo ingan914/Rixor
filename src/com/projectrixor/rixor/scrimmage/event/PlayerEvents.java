@@ -175,7 +175,6 @@ public class PlayerEvents implements Listener {
 					if (event.getCurrentItem().getType().equals(Material.WOOL)) {
 						Map map = Scrimmage.getRotation().getSlot().getMap();
 						
-						//MapTeam team = map.getObservers();
 						event.setCancelled(true);
 						String name = event.getCurrentItem().getItemMeta().getDisplayName() + "";
 						name = ChatColor.stripColor(name);
