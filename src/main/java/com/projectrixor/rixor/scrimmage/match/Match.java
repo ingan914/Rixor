@@ -1,11 +1,8 @@
 package com.projectrixor.rixor.scrimmage.match;
 
 import java.io.File;
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
-
-
 
 import com.projectrixor.rixor.scrimmage.Scrimmage;
 import com.projectrixor.rixor.scrimmage.Var;
@@ -16,8 +13,6 @@ import com.projectrixor.rixor.scrimmage.player.Client;
 import com.projectrixor.rixor.scrimmage.rotation.RotationSlot;
 import com.projectrixor.rixor.scrimmage.utils.ConversionUtil;
 import com.projectrixor.rixor.scrimmage.utils.SchedulerUtil;
-
-import net.minecraft.util.org.apache.commons.io.FileDeleteStrategy;
 
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;

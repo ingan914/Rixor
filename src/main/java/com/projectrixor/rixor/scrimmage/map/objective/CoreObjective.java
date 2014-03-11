@@ -8,7 +8,6 @@ import com.projectrixor.rixor.scrimmage.map.Map;
 import com.projectrixor.rixor.scrimmage.map.MapTeam;
 
 import org.bukkit.Location;
-import org.bukkit.Material;
 import org.bukkit.scheduler.BukkitRunnable;
 
 public class CoreObjective extends TeamObjective {

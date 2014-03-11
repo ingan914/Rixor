@@ -1,6 +1,7 @@
 package com.projectrixor.rixor.scrimmage.player.commands;
 
 import com.projectrixor.rixor.scrimmage.player.Client;
+import com.sk89q.minecraft.util.commands.Command;
 import com.sk89q.minecraft.util.commands.CommandContext;
 import com.sk89q.minecraft.util.commands.CommandException;
 import com.projectrixor.rixor.scrimmage.Scrimmage;
@@ -14,7 +15,7 @@ import org.bukkit.entity.Player;
 
 public class ForceCommand {
 
-	@com.sk89q.minecraft.util.commands.Command(aliases = { "force"}, desc = "Forces a player onto a team", usage = "[name], [team]", min = 2, max = 2)
+	@Command(aliases = { "force"}, desc = "Forces a player onto a team", usage = "[name], [team]", min = 2, max = 2)
 	public static void force(final CommandContext args, CommandSender sender) throws Exception {
 		if(sender instanceof Player == false) {
 			throw new CommandException("This command is for players only!");

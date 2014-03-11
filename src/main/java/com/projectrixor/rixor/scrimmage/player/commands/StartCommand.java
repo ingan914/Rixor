@@ -1,5 +1,6 @@
 package com.projectrixor.rixor.scrimmage.player.commands;
 
+import com.sk89q.minecraft.util.commands.Command;
 import com.sk89q.minecraft.util.commands.CommandContext;
 import com.sk89q.minecraft.util.commands.CommandException;
 import com.sk89q.minecraft.util.commands.CommandPermissionsException;
@@ -15,7 +16,7 @@ import org.bukkit.entity.Player;
 
 public class StartCommand {
 
-	@com.sk89q.minecraft.util.commands.Command(aliases = { "start"}, desc = "Starts the match", usage = "[seconds]", flags = "f", min = 1, max = 1)
+	@Command(aliases = { "start"}, desc = "Starts the match", usage = "[seconds]", flags = "f", min = 1, max = 1)
 	public static void start(final CommandContext args, CommandSender sender) throws Exception {
 
 		if(sender instanceof Player) {

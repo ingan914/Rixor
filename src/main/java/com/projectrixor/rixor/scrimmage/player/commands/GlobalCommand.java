@@ -1,6 +1,7 @@
 package com.projectrixor.rixor.scrimmage.player.commands;
 
 import com.projectrixor.rixor.scrimmage.player.Client;
+import com.sk89q.minecraft.util.commands.Command;
 import com.sk89q.minecraft.util.commands.CommandContext;
 import com.projectrixor.rixor.scrimmage.Scrimmage;
 import com.projectrixor.rixor.scrimmage.player.PlayerChatEvent;
@@ -11,7 +12,7 @@ import org.bukkit.entity.Player;
 public class GlobalCommand  {
 
 
-	@com.sk89q.minecraft.util.commands.Command(aliases = { "g", "global"}, desc = "Speaks in Global Chat", usage = "[message]", min = 1, max = -1)
+	@Command(aliases = { "g", "global"}, desc = "Speaks in Global Chat", usage = "[message]", min = 1, max = -1)
 	public static void global(final CommandContext args, CommandSender sender) throws Exception {
 
 		String message = "";

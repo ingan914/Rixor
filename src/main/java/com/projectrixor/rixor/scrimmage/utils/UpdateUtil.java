@@ -1,12 +1,10 @@
 package com.projectrixor.rixor.scrimmage.utils;
 
-import com.projectrixor.rixor.scrimmage.Scrimmage;
 import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.PluginDescriptionFile;
 
 import java.io.ByteArrayOutputStream;
-import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
