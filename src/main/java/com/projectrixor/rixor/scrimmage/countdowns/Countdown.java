@@ -6,7 +6,7 @@ public abstract class Countdown
     {
     }
 
-    public void onTick(int secondsLeft)
+    public void onTick(int secondsLeft, int starttime)
     {
     }
 

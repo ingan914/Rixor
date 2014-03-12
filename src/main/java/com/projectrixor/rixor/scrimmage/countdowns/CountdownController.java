@@ -10,6 +10,7 @@ public class CountdownController
     protected final Countdown countdown;
     protected int secondsLeft = -1;
     protected int taskId = -1;
+    protected int starttime = -1;
 
     public CountdownController(Plugin plugin, Countdown countdown) {
         this.plugin = plugin;
@@ -23,6 +24,7 @@ public class CountdownController
     public CountdownController start(int secondsLeft) {
         if (this.taskId == -1) {
             this.secondsLeft = secondsLeft;
+            this.starttime = secondsLeft;
             this.taskId = getScheduler().scheduleSyncRepeatingTask(this.plugin, this, 0L, 20L);
             this.countdown.onStart(secondsLeft);
         }
@@ -50,7 +52,7 @@ public class CountdownController
             this.countdown.onEnd();
             stop();
         } else {
-            this.countdown.onTick(this.secondsLeft);
+            this.countdown.onTick(this.secondsLeft, this.starttime);
         }
         this.secondsLeft -= 1;
     }
