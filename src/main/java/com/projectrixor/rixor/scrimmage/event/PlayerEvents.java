@@ -4,7 +4,7 @@ import com.projectrixor.rixor.scrimmage.ServerLog;
 import com.projectrixor.rixor.scrimmage.player.Client;
 import com.projectrixor.rixor.scrimmage.player.StatTracker;
 import com.projectrixor.rixor.scrimmage.Scrimmage;
-import com.projectrixor.rixor.scrimmage.map.Map;
+import com.projectrixor.rixor.scrimmage.Map;
 import com.projectrixor.rixor.scrimmage.map.MapTeam;
 import com.projectrixor.rixor.scrimmage.map.MapTeamSpawn;
 import com.projectrixor.rixor.scrimmage.match.Match;

@@ -2,7 +2,7 @@ package com.projectrixor.rixor.scrimmage.match.events;
 
 import lombok.Getter;
 import lombok.Setter;
-import com.projectrixor.rixor.scrimmage.map.Map;
+import com.projectrixor.rixor.scrimmage.Map;
 
 import org.bukkit.entity.Player;
 import org.bukkit.event.Event;

@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.projectrixor.rixor.scrimmage.Scrimmage;
-import com.projectrixor.rixor.scrimmage.map.MapLoader;
+import com.projectrixor.rixor.scrimmage.MapLoader;
 import lombok.Getter;
 import lombok.Setter;
 

@@ -8,18 +8,14 @@ import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.DyeColor;
 import org.bukkit.Material;
-import org.bukkit.entity.Player;
 import org.bukkit.inventory.Inventory;
-import org.bukkit.inventory.InventoryHolder;
 import org.bukkit.inventory.ItemStack;
-import org.bukkit.inventory.PlayerInventory;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.material.Wool;
 
 import com.projectrixor.rixor.scrimmage.map.MapTeam;
 import com.projectrixor.rixor.scrimmage.Scrimmage;
-import com.projectrixor.rixor.scrimmage.map.Map;
-import com.projectrixor.rixor.scrimmage.match.Match;
+import com.projectrixor.rixor.scrimmage.Map;
 
 public class PickerUtil {
 	@Getter Map map;

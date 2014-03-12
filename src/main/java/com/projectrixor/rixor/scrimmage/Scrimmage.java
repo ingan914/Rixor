@@ -9,7 +9,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.projectrixor.rixor.scrimmage.event.PlayerEvents;
-import com.projectrixor.rixor.scrimmage.map.MapLoader;
 import com.projectrixor.rixor.scrimmage.map.filter.FilterEvents;
 import com.projectrixor.rixor.scrimmage.map.objective.ObjectiveEvents;
 import com.projectrixor.rixor.scrimmage.player.Client;
@@ -38,12 +37,10 @@ import org.bukkit.scheduler.BukkitRunnable;
 
 import lombok.Getter;
 import lombok.Setter;
-import com.projectrixor.rixor.scrimmage.map.Map;
 import com.projectrixor.rixor.scrimmage.map.MapTeam;
 import com.projectrixor.rixor.scrimmage.map.region.Region;
 import com.projectrixor.rixor.scrimmage.rotation.Rotation;
 import com.projectrixor.rixor.scrimmage.utils.JarUtils;
-import com.projectrixor.rixor.scrimmage.utils.ZipUtil;
 
 
 public class Scrimmage extends JavaPlugin {

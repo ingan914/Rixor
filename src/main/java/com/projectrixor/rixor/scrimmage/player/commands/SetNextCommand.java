@@ -2,7 +2,7 @@ package com.projectrixor.rixor.scrimmage.player.commands;
 
 import com.projectrixor.rixor.scrimmage.Scrimmage;
 import com.projectrixor.rixor.scrimmage.Var;
-import com.projectrixor.rixor.scrimmage.map.MapLoader;
+import com.projectrixor.rixor.scrimmage.MapLoader;
 import com.projectrixor.rixor.scrimmage.player.Client;
 import com.projectrixor.rixor.scrimmage.rotation.Rotation;
 import com.projectrixor.rixor.scrimmage.rotation.RotationSlot;

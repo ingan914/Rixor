@@ -3,6 +3,7 @@ package com.projectrixor.rixor.scrimmage.map;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.projectrixor.rixor.scrimmage.Map;
 import com.projectrixor.rixor.scrimmage.Scrimmage;
 import com.projectrixor.rixor.scrimmage.map.region.ConfiguredRegion;
 import lombok.Getter;
@@ -15,7 +16,8 @@ public class MapTeamSpawn {
 	public static float DEFAULT_YAW_VALUE = 0;
 	public static float DEFAULT_PITCH_VALUE = 0;
 	
-	@Getter Map map;
+	@Getter
+    Map map;
 	
 	@Getter List<Location> possibles = new ArrayList<Location>();
 	@Getter String kitName;
