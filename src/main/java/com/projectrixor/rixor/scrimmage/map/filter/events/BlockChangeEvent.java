@@ -2,7 +2,7 @@ package com.projectrixor.rixor.scrimmage.map.filter.events;
 
 import com.projectrixor.rixor.scrimmage.player.Client;
 import lombok.Getter;
-import com.projectrixor.rixor.scrimmage.Map;
+import com.projectrixor.rixor.scrimmage.map.Map;
 
 import org.bukkit.block.BlockState;
 import org.bukkit.event.Cancellable;

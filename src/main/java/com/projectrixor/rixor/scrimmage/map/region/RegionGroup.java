@@ -4,8 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import lombok.Getter;
-import com.projectrixor.rixor.scrimmage.Map;
-import com.projectrixor.rixor.scrimmage.MapLoader;
+import com.projectrixor.rixor.scrimmage.map.Map;
+import com.projectrixor.rixor.scrimmage.map.MapLoader;
 
 import org.bukkit.Location;
 import org.dom4j.Element;

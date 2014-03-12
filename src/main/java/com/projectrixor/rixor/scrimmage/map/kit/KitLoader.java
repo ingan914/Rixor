@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.projectrixor.rixor.scrimmage.ServerLog;
-import com.projectrixor.rixor.scrimmage.MapLoader;
+import com.projectrixor.rixor.scrimmage.map.MapLoader;
 import com.projectrixor.rixor.scrimmage.utils.ConversionUtil;
 import org.bukkit.Color;
 import org.bukkit.Material;
@@ -17,7 +17,7 @@ import org.bukkit.potion.PotionEffectType;
 import org.dom4j.Element;
 
 import lombok.Getter;
-import com.projectrixor.rixor.scrimmage.Map;
+import com.projectrixor.rixor.scrimmage.map.Map;
 
 public class KitLoader {
 	

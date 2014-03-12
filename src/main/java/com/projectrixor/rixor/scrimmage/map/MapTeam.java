@@ -3,8 +3,6 @@ package com.projectrixor.rixor.scrimmage.map;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.projectrixor.rixor.scrimmage.Map;
-import com.projectrixor.rixor.scrimmage.MapLoader;
 import com.projectrixor.rixor.scrimmage.Scrimmage;
 import com.projectrixor.rixor.scrimmage.ServerLog;
 import com.projectrixor.rixor.scrimmage.map.objective.CoreObjective;
@@ -50,8 +48,7 @@ public class MapTeam {
 		return null;
 	}
 	
-	@Getter
-    Map map;
+	@Getter Map map;
 	@Getter Team team;
 	
 	@Getter String name;

@@ -4,7 +4,7 @@ import java.util.List;
 
 import com.projectrixor.rixor.scrimmage.map.extras.SidebarType;
 import com.projectrixor.rixor.scrimmage.Scrimmage;
-import com.projectrixor.rixor.scrimmage.Map;
+import com.projectrixor.rixor.scrimmage.map.Map;
 import com.projectrixor.rixor.scrimmage.map.MapTeam;
 import com.projectrixor.rixor.scrimmage.map.filter.events.BlockChangeEvent;
 import com.projectrixor.rixor.scrimmage.match.events.PlayerDiedEvent;

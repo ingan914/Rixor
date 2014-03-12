@@ -25,7 +25,7 @@ import lombok.Getter;
 import lombok.Setter;
 import me.confuser.barapi.BarAPI;
 
-import com.projectrixor.rixor.scrimmage.Map;
+import com.projectrixor.rixor.scrimmage.map.Map;
 import org.bukkit.inventory.ItemStack;
 
 public class Match {
@@ -441,6 +441,40 @@ public class Match {
 		setCurrentlyCycling(true);
 	}
 
+
+	public void restarting(){
+		String p = "s";
+
+		if(restarting == 1) p = "";
+		for (Player Online : Bukkit.getOnlinePlayers()) {
+				BarAPI.setMessage(Online, ChatColor.DARK_AQUA + "Restarting "
+						+ "in " + ChatColor.DARK_RED + restarting + ChatColor.DARK_AQUA + " second" + p + "!", (float) restarting / originalRestart * 100);
+
+		}
+		setCurrentlyRestarting(true);
+		if (restarting == 0){
+			this.restartingTask.getTask().cancel();
+			for (Player p1 : Bukkit.getOnlinePlayers()){
+				p1.kickPlayer(ChatColor.GREEN + "Server has shutdown! " + ChatColor.GOLD + "Rejoin!");
+			}
+
+			for (Map m : Scrimmage.getMapsPlayed()){
+				Scrimmage.getInstance().getServer().unloadWorld(m.getWorld(), false);
+				//Scrimmage.getInstance().getLogger().info(m.getName() + " " + m.getFolder().getAbsolutePath());
+				//for (File file : m.getFolder().listFiles()) {
+				//	try{
+				//		FileDeleteStrategy.FORCE.delete(file);
+				//	}catch(IOException e){
+			//			Scrimmage.getInstance().getLogger().info(e.getMessage());
+			//		}
+			//	}
+		//	}
+			Scrimmage.getInstance().getServer().shutdown();
+		}
+		restarting--;
+		}
+	}
+
 	public static boolean delete(File path) {
 		if( path.exists() ) {
 			File files[] = path.listFiles();
@@ -454,6 +488,41 @@ public class Match {
 			}
 		}
 		return( path.delete() );
+	}
+	
+	public boolean cycling(RotationSlot next) {
+		String p = "s";
+		if (next == null){
+			restart(30);
+			return true;
+		}
+		if(cycling == 1) p = "";
+		for (Player Online : Bukkit.getOnlinePlayers()) {
+			BarAPI.setMessage(Online, ChatColor.DARK_AQUA + "Cycling to " + ChatColor.AQUA + next.getLoader().getName() + ChatColor.DARK_AQUA
+					+ " in " + ChatColor.DARK_RED + cycling + ChatColor.DARK_AQUA + " second" + p + "!", (float) cycling / cycleTime * 100);
+		}
+		
+		setCurrentlyCycling(true);
+		if(cycling == 0) {
+			Var.canSetNext = 0;
+			cyclingTask.getTask().cancel();
+			setCurrentlyCycling(false);
+			Scrimmage.getRotation().setSlot(next);
+			for(Client client : Client.getClients())
+				client.setTeam(next.getMap().getObservers(), true, true, true);
+			next.getMatch().start();
+			Scrimmage.addMapToMapsPlayed(next.getMap());
+			hasEnded = false;
+			return true;
+		}
+		
+		if(cycling == 1 && !loaded && next != null) {
+			setLoaded(true);
+			next.load();
+		}
+		
+		cycling--;
+		return false;
 	}
 	
 }

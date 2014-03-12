@@ -4,7 +4,7 @@ import com.projectrixor.rixor.scrimmage.player.Client;
 import com.sk89q.minecraft.util.commands.CommandContext;
 import com.sk89q.minecraft.util.commands.CommandException;
 import com.projectrixor.rixor.scrimmage.Scrimmage;
-import com.projectrixor.rixor.scrimmage.Map;
+import com.projectrixor.rixor.scrimmage.map.Map;
 import com.projectrixor.rixor.scrimmage.map.MapTeam;
 
 import org.bukkit.ChatColor;

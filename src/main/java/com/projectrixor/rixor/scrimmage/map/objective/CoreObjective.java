@@ -4,7 +4,7 @@ import java.util.List;
 
 import com.projectrixor.rixor.scrimmage.utils.RegionUtil;
 import lombok.Getter;
-import com.projectrixor.rixor.scrimmage.Map;
+import com.projectrixor.rixor.scrimmage.map.Map;
 import com.projectrixor.rixor.scrimmage.map.MapTeam;
 
 import org.bukkit.Location;
