@@ -63,42 +63,6 @@ public class Match {
 		this.length = length;
 		this.map = slot.getMap();
 		
-		this.startingTask = new SchedulerUtil() {
-			
-			@Override
-			public void runnable() {
-				starting();
-			}
-			
-		};
-		
-		this.timingTask = new SchedulerUtil() {
-			
-			@Override
-			public void runnable() {
-				timing();
-			}
-			
-		};
-
-		this.restartingTask = new SchedulerUtil() {
-
-			@Override
-			public void runnable() {
-				restarting();
-			}
-
-		};
-		
-		this.cyclingTask = new SchedulerUtil() {
-			
-			@Override
-			public void runnable() {
-				cycling(Scrimmage.getRotation().getNext());
-			}
-			
-		};
-		
 		map.update(true);
 		setCurrentlyStarting(true);
 		setCurrentlyRunning(false);
