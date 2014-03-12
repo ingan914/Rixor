@@ -3,7 +3,7 @@ package com.projectrixor.rixor.scrimmage.rotation;
 import com.projectrixor.rixor.scrimmage.map.MapLoader;
 import lombok.Getter;
 import com.projectrixor.rixor.scrimmage.map.Map;
-import com.projectrixor.rixor.scrimmage.match.Match;
+import com.projectrixor.rixor.scrimmage.Match;
 
 public class RotationSlot {
 	

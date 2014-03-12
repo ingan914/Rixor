@@ -3,7 +3,7 @@ package com.projectrixor.rixor.scrimmage.player.commands;
 import com.projectrixor.rixor.scrimmage.Scrimmage;
 import com.projectrixor.rixor.scrimmage.player.Client;
 import me.confuser.barapi.BarAPI;
-import com.projectrixor.rixor.scrimmage.match.Match;
+import com.projectrixor.rixor.scrimmage.Match;
 
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;

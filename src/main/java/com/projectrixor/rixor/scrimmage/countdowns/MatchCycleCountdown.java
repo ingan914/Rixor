@@ -2,9 +2,7 @@ package com.projectrixor.rixor.scrimmage.countdowns;
 
 import com.projectrixor.rixor.scrimmage.Map;
 import com.projectrixor.rixor.scrimmage.Scrimmage;
-import com.projectrixor.rixor.scrimmage.match.Match;
-import com.projectrixor.rixor.scrimmage.rotation.Rotation;
-import com.projectrixor.rixor.scrimmage.rotation.RotationSlot;
+import com.projectrixor.rixor.scrimmage.Match;
 import me.confuser.barapi.BarAPI;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;

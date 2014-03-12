@@ -7,7 +7,7 @@ import com.sk89q.minecraft.util.commands.CommandContext;
 import com.sk89q.minecraft.util.commands.CommandException;
 import com.sk89q.minecraft.util.commands.CommandPermissionsException;
 import com.projectrixor.rixor.scrimmage.Scrimmage;
-import com.projectrixor.rixor.scrimmage.match.Match;
+import com.projectrixor.rixor.scrimmage.Match;
 
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;

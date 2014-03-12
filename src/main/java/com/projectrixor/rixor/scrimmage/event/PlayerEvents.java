@@ -7,7 +7,7 @@ import com.projectrixor.rixor.scrimmage.Scrimmage;
 import com.projectrixor.rixor.scrimmage.map.Map;
 import com.projectrixor.rixor.scrimmage.map.MapTeam;
 import com.projectrixor.rixor.scrimmage.map.MapTeamSpawn;
-import com.projectrixor.rixor.scrimmage.match.Match;
+import com.projectrixor.rixor.scrimmage.Match;
 import com.projectrixor.rixor.scrimmage.player.PlayerChatEvent;
 import com.projectrixor.rixor.scrimmage.utils.Characters;
 import com.projectrixor.rixor.scrimmage.utils.InvUtil;

@@ -1,5 +1,6 @@
 package com.projectrixor.rixor.scrimmage.match;
 
+import com.projectrixor.rixor.scrimmage.Match;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -10,7 +11,8 @@ public class MatchTickTimer extends Event {
 	
     private static final HandlerList handlers = new HandlerList();
     @Getter @Setter boolean ended = false;
-    @Getter Match match;
+    @Getter
+    Match match;
  
     public MatchTickTimer(Match match) {
     	this.match = match;

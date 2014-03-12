@@ -44,16 +44,16 @@ public class ModuleFactory
         return null;
     }
 
-    public Set<ModuleInfo> getModules()
+    public Set<ModuleClass> getModules()
     {
         return this.modules;
     }
 
-    public Module create(ModuleContext context, ModuleClass info, Document doc)
+    public Module create(ModuleFactory context, ModuleClass info, Document doc)
     {
         try
         {
-            Method parser = info.getModuleClass().getMethod("parse", new Class[] { ModuleContext.class, Logger.class, Document.class });
+            Method parser = info.getModuleClass().getMethod("parse", new Class[] { ModuleFactory.class, Logger.class, Document.class });
             return (Module)parser.invoke(null, new Object[] { context, this.log, doc });
         } catch (InvocationTargetException e) {
             e.getCause().printStackTrace();

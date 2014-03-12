@@ -1,4 +1,4 @@
-package com.projectrixor.rixor.scrimmage.match;
+package com.projectrixor.rixor.scrimmage;
 
 import java.io.File;
 import java.util.ArrayList;
