@@ -321,7 +321,7 @@ public class PlayerEvents implements Listener {
 		if(attacker.getTeam() == damaged.getTeam() || attacker.getTeam().isObserver() || damaged.getTeam().isObserver())
 			event.setCancelled(true);
 		}
-		if (Scrimmage.getRotation().getSlot().getMap().isRage() && InvUtil.isItemWeapon(attackerPlayer.getItemInHand())F){
+		if (Scrimmage.getRotation().getSlot().getMap().isRage() && InvUtil.isItemWeapon(attackerPlayer.getItemInHand())){
 			event.setDamage(300);
 		}
 	}

@@ -206,7 +206,6 @@ public class Scrimmage extends JavaPlugin {
 		registerCommand("end", new StopCommand());
 
 		registerCommand("staff", new StaffCommand());
-		registerCommand("help", new HelpCommand());
 		registerCommand("request", new RequestCommand());
 
 		registerCommand("match", new MatchCommand());
