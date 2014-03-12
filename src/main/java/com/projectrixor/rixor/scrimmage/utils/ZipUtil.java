@@ -1,9 +1,7 @@
 package com.projectrixor.rixor.scrimmage.utils;
 
 import com.projectrixor.rixor.scrimmage.Scrimmage;
-import net.lingala.zip4j.core.ZipFile;
-import net.lingala.zip4j.exception.ZipException;
-import net.lingala.zip4j.model.FileHeader;
+
 
 import java.io.BufferedInputStream;
 import java.io.File;
