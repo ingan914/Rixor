@@ -55,13 +55,7 @@ public class Map {
 	RotationSlot slot;
 	@Getter World world;
 	@Getter File folder;
-	
-	@Getter String name;
-	@Getter String version;
-	@Getter String objective;
-	@Getter List<String> rules;
-	@Getter List<Contributor> authors;
-	@Getter List<Contributor> contributors;
+
 	@Getter List<ItemKit> kits;
 	@Getter List<ItemStack> itemRemove = new ArrayList<ItemStack>();
 	@Getter ItemStack killReward;
@@ -81,16 +75,9 @@ public class Map {
 	@Getter int timeLimit;
 	@Getter int scoreLimit;
 	
-	public Map(MapLoader loader, RotationSlot slot, String name, String version, String objective, List<String> rules,
-			List<Contributor> authors, List<Contributor> contributors, List<MapTeam> teams, MapTeam observers, int maxbuildheight, SidebarType sidebar, int timeLimit, int scoreLimit) {
+	public Map(MapLoader loader, RotationSlot slot, List<MapTeam> teams, MapTeam observers, int maxbuildheight, SidebarType sidebar, int timeLimit, int scoreLimit) {
 		this.loader = loader;
 		this.slot = slot;
-		this.name = name;
-		this.version = version;
-		this.objective = objective;
-		this.rules = rules;
-		this.authors = authors;
-		this.contributors = contributors;
 		if(teams != null) this.teams = teams;
 		if(observers != null) this.observers = observers;
 		this.maxbuildheight = maxbuildheight;
