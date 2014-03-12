@@ -300,17 +300,17 @@ public class PlayerEvents implements Listener {
 	
 	@EventHandler
 	public void onEntityDamageEvent(EntityDamageByEntityEvent event) {
-		if(event.getDamager() instanceof Player == false && event.getDamager() instanceof Projectile == false)
+		if(!(event.getDamager() instanceof Player)&& !(event.getDamager() instanceof Projectile))
 			return;
 		
-		if(event.getEntity() instanceof Player == false)
+		if(!(event.getEntity() instanceof Player))
 			return;
 		
 		Client damaged = Client.getClient((Player) event.getEntity());
 		Player attackerPlayer = null;
 		if(event.getDamager() instanceof Projectile) {
 			Projectile proj = (Projectile) event.getDamager();
-			if(proj.getShooter() instanceof Player == false)
+			if(!(proj.getShooter() instanceof Player))
 				return;
 			
 			attackerPlayer = (Player) proj.getShooter();
@@ -320,6 +320,9 @@ public class PlayerEvents implements Listener {
 		
 		if(attacker.getTeam() == damaged.getTeam() || attacker.getTeam().isObserver() || damaged.getTeam().isObserver())
 			event.setCancelled(true);
+		}
+		if (Scrimmage.getRotation().getSlot().getMap().isRage() && InvUtil.isItemWeapon(attackerPlayer.getItemInHand())F){
+			event.setDamage(300);
 		}
 	}
 }

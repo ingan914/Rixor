@@ -64,6 +64,7 @@ public class Map {
 	@Getter List<Contributor> contributors;
 	@Getter List<ItemKit> kits;
 	@Getter List<ItemStack> itemRemove = new ArrayList<ItemStack>();
+	@Getter boolean rage = false;
 	@Getter ItemStack killReward;
 	@Getter TNTSettings tntsettings = new TNTSettings();
 	@Getter List<MapTeam> teams = new ArrayList<MapTeam>();
@@ -347,6 +348,10 @@ public class Map {
 					killReward = itemStack;
 					Scrimmage.getInstance().getLogger().info("KillReward is - " + itemStack.getType().toString());
 				}
+			}
+
+			if (MapLoader.getElements(root, "rage").size() >= 1){
+				rage = true;
 			}
 			for(MapTeam team : teams)
 				team.load(root.element("spawns"), -1);

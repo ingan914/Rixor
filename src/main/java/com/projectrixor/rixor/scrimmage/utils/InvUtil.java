@@ -38,5 +38,15 @@ public class InvUtil {
         }
         return inventorySlot;
         }
+
+	public static boolean isItemWeapon(ItemStack item){
+		if (item.getType() == Material.DIAMOND_SWORD || item.getType() == Material.IRON_SWORD || item.getType() == Material.STONE_SWORD
+				|| item.getType() == Material.WOOD_SWORD || item.getType() == Material.GOLD_SWORD || item.getType() == Material.BOW){
+			return true;
+		}
+		else {
+			return false;
+		}
+	}
 	
 }
