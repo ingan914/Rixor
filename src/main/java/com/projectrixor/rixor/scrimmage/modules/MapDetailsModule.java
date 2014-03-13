@@ -1,7 +1,7 @@
 package com.projectrixor.rixor.scrimmage.modules;
 
 import com.projectrixor.rixor.scrimmage.map.MapDetails;
-import com.projectrixor.rixor.scrimmage.map.extras.Contributor;
+import com.projectrixor.rixor.scrimmage.map.Contributor;
 import com.projectrixor.rixor.scrimmage.utils.XMLUtils;
 import org.bukkit.Difficulty;
 import org.bukkit.World;
@@ -12,7 +12,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Logger;
 
-@ModuleAnnotation(name="Details")
+@ModuleDescription(name="Details")
 public class MapDetailsModule extends Module
 {
     private final MapDetails details;
@@ -26,7 +26,7 @@ public class MapDetailsModule extends Module
         return this.details;
     }
 
-    public static MapDetailsModule parse(ModuleFactory context, Logger logger, Document doc) {
+    public static MapDetailsModule parse(ModuleContext context, Logger logger, Document doc) {
         Element root = doc.getRootElement();
 
         String name = root.elementText("name");
