@@ -1,8 +1,8 @@
-package com.projectrixor.rixor.scrimmage.map.filter;
+package com.projectrixor.rixor.scrimmage.filter;
 
 import java.util.List;
 
-import com.projectrixor.rixor.scrimmage.map.filter.events.BlockChangeEvent;
+import com.projectrixor.rixor.scrimmage.filter.events.BlockChangeEvent;
 import com.projectrixor.rixor.scrimmage.Scrimmage;
 import com.projectrixor.rixor.scrimmage.map.Map;
 

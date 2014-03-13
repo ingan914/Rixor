@@ -1,4 +1,4 @@
-package com.projectrixor.rixor.scrimmage.map.objective;
+package com.projectrixor.rixor.scrimmage.objective;
 
 import lombok.Getter;
 import com.projectrixor.rixor.scrimmage.map.Map;

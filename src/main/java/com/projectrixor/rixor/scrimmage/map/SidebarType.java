@@ -1,4 +1,4 @@
-package com.projectrixor.rixor.scrimmage.map.extras;
+package com.projectrixor.rixor.scrimmage.map;
 
 public enum SidebarType {
 	

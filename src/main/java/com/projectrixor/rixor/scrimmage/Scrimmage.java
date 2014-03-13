@@ -10,8 +10,9 @@ import java.util.List;
 
 import com.projectrixor.rixor.scrimmage.event.PlayerEvents;
 import com.projectrixor.rixor.scrimmage.map.MapLoader;
-import com.projectrixor.rixor.scrimmage.map.filter.FilterEvents;
-import com.projectrixor.rixor.scrimmage.map.objective.ObjectiveEvents;
+import com.projectrixor.rixor.scrimmage.filter.FilterEvents;
+import com.projectrixor.rixor.scrimmage.map.MapTeamFactory;
+import com.projectrixor.rixor.scrimmage.objective.ObjectiveEvents;
 import com.projectrixor.rixor.scrimmage.player.Client;
 import com.projectrixor.rixor.scrimmage.player.commands.*;
 import com.projectrixor.rixor.scrimmage.tracker.GravityKillTracker;
@@ -40,10 +41,9 @@ import lombok.Getter;
 import lombok.Setter;
 import com.projectrixor.rixor.scrimmage.map.Map;
 import com.projectrixor.rixor.scrimmage.map.MapTeam;
-import com.projectrixor.rixor.scrimmage.map.region.Region;
+import com.projectrixor.rixor.scrimmage.region.Region;
 import com.projectrixor.rixor.scrimmage.rotation.Rotation;
 import com.projectrixor.rixor.scrimmage.utils.JarUtils;
-import com.projectrixor.rixor.scrimmage.utils.ZipUtil;
 
 
 public class Scrimmage extends JavaPlugin {
@@ -124,6 +124,13 @@ public class Scrimmage extends JavaPlugin {
 		setupCommands();
 	}
 
+
+    public static MapTeamFactory createDefaultTeam()
+    {
+        String name = "Observers";
+        ChatColor color = ChatColor.AQUA;
+        return new MapTeamFactory(MapTeamFactory.Type.Observing, name, color, null, Integer.MAX_VALUE);
+    }
 
 	@Override
 	public boolean onCommand(CommandSender sender, Command cmd, String commandLabel, String[] args) {

@@ -1,12 +1,12 @@
-package com.projectrixor.rixor.scrimmage.map.objective;
+package com.projectrixor.rixor.scrimmage.objective;
 
 import java.util.List;
 
-import com.projectrixor.rixor.scrimmage.map.extras.SidebarType;
+import com.projectrixor.rixor.scrimmage.map.SidebarType;
 import com.projectrixor.rixor.scrimmage.Scrimmage;
 import com.projectrixor.rixor.scrimmage.map.Map;
 import com.projectrixor.rixor.scrimmage.map.MapTeam;
-import com.projectrixor.rixor.scrimmage.map.filter.events.BlockChangeEvent;
+import com.projectrixor.rixor.scrimmage.filter.events.BlockChangeEvent;
 import com.projectrixor.rixor.scrimmage.match.events.PlayerDiedEvent;
 import com.projectrixor.rixor.scrimmage.player.Client;
 import com.projectrixor.rixor.scrimmage.utils.FireworkUtil;

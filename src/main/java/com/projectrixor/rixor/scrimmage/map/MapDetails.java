@@ -1,8 +1,6 @@
 package com.projectrixor.rixor.scrimmage.map;
 
-import com.projectrixor.rixor.scrimmage.map.extras.Contributor;
 import lombok.Getter;
-import org.bukkit.ChatColor;
 import org.bukkit.Difficulty;
 import org.bukkit.World;
 

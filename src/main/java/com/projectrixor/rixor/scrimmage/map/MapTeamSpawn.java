@@ -4,9 +4,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.projectrixor.rixor.scrimmage.Scrimmage;
-import com.projectrixor.rixor.scrimmage.map.region.ConfiguredRegion;
+import com.projectrixor.rixor.scrimmage.region.ConfiguredRegion;
 import lombok.Getter;
-import com.projectrixor.rixor.scrimmage.map.kit.ItemKit;
+import com.projectrixor.rixor.scrimmage.kit.ItemKit;
 
 import org.bukkit.Location;
 

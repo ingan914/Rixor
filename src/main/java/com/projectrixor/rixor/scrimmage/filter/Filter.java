@@ -1,4 +1,4 @@
-package com.projectrixor.rixor.scrimmage.map.filter;
+package com.projectrixor.rixor.scrimmage.filter;
 
 import java.util.ArrayList;
 import java.util.List;

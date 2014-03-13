@@ -1,4 +1,4 @@
-package com.projectrixor.rixor.scrimmage.map.region;
+package com.projectrixor.rixor.scrimmage.region;
 
 public enum RegionGroupType {
 	

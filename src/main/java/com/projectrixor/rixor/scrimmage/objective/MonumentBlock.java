@@ -1,4 +1,4 @@
-package com.projectrixor.rixor.scrimmage.map.objective;
+package com.projectrixor.rixor.scrimmage.objective;
 
 import com.projectrixor.rixor.scrimmage.player.Client;
 import org.bukkit.Location;

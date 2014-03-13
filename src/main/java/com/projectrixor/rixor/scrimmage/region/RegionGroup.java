@@ -1,4 +1,4 @@
-package com.projectrixor.rixor.scrimmage.map.region;
+package com.projectrixor.rixor.scrimmage.region;
 
 import java.util.ArrayList;
 import java.util.List;

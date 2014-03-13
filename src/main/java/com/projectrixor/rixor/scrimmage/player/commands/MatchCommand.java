@@ -3,7 +3,7 @@ package com.projectrixor.rixor.scrimmage.player.commands;
 import com.projectrixor.rixor.scrimmage.Scrimmage;
 import com.projectrixor.rixor.scrimmage.Var;
 import com.projectrixor.rixor.scrimmage.map.Map;
-import com.projectrixor.rixor.scrimmage.map.extras.Contributor;
+import com.projectrixor.rixor.scrimmage.map.Contributor;
 import com.projectrixor.rixor.scrimmage.rotation.Rotation;
 
 import org.bukkit.ChatColor;

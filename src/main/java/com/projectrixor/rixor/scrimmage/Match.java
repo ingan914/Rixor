@@ -4,11 +4,9 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.projectrixor.rixor.scrimmage.Scrimmage;
-import com.projectrixor.rixor.scrimmage.Var;
 import com.projectrixor.rixor.scrimmage.map.MapTeam;
-import com.projectrixor.rixor.scrimmage.map.extras.SidebarType;
-import com.projectrixor.rixor.scrimmage.map.objective.CoreObjective;
+import com.projectrixor.rixor.scrimmage.map.SidebarType;
+import com.projectrixor.rixor.scrimmage.objective.CoreObjective;
 import com.projectrixor.rixor.scrimmage.player.Client;
 import com.projectrixor.rixor.scrimmage.rotation.RotationSlot;
 import com.projectrixor.rixor.scrimmage.utils.ConversionUtil;

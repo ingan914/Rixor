@@ -4,7 +4,6 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.projectrixor.rixor.scrimmage.map.extras.SidebarType;
 import com.projectrixor.rixor.scrimmage.utils.ConversionUtil;
 import org.dom4j.Document;
 import org.dom4j.DocumentException;
@@ -13,8 +12,7 @@ import org.dom4j.io.SAXReader;
 
 import lombok.Getter;
 import com.projectrixor.rixor.scrimmage.Scrimmage;
-import com.projectrixor.rixor.scrimmage.map.extras.Contributor;
-import com.projectrixor.rixor.scrimmage.map.region.Region;
+import com.projectrixor.rixor.scrimmage.region.Region;
 import com.projectrixor.rixor.scrimmage.rotation.RotationSlot;
 
 public class MapLoader {

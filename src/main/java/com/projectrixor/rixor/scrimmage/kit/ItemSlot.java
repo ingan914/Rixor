@@ -1,4 +1,4 @@
-package com.projectrixor.rixor.scrimmage.map.kit;
+package com.projectrixor.rixor.scrimmage.kit;
 
 import com.projectrixor.rixor.scrimmage.player.Client;
 import org.bukkit.inventory.ItemStack;

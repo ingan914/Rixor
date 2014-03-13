@@ -3,14 +3,13 @@ package com.projectrixor.rixor.scrimmage.player;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.projectrixor.rixor.scrimmage.ServerLog;
 import lombok.Getter;
 import com.projectrixor.rixor.scrimmage.Scrimmage;
 import com.projectrixor.rixor.scrimmage.map.Map;
 import com.projectrixor.rixor.scrimmage.map.MapLoader;
 // import ServerLog;
 import com.projectrixor.rixor.scrimmage.map.MapTeam;
-import com.projectrixor.rixor.scrimmage.map.extras.Contributor;
+import com.projectrixor.rixor.scrimmage.map.Contributor;
 
 import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;

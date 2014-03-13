@@ -1,9 +1,9 @@
-package com.projectrixor.rixor.scrimmage.map.objective;
+package com.projectrixor.rixor.scrimmage.objective;
 
 import com.projectrixor.rixor.scrimmage.Scrimmage;
 import com.projectrixor.rixor.scrimmage.map.Map;
 import com.projectrixor.rixor.scrimmage.map.MapTeam;
-import com.projectrixor.rixor.scrimmage.map.extras.SidebarType;
+import com.projectrixor.rixor.scrimmage.map.SidebarType;
 import com.projectrixor.rixor.scrimmage.utils.Characters;
 import org.bukkit.ChatColor;
 

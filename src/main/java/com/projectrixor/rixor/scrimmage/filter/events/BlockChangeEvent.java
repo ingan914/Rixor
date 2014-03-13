@@ -1,4 +1,4 @@
-package com.projectrixor.rixor.scrimmage.map.filter.events;
+package com.projectrixor.rixor.scrimmage.filter.events;
 
 import com.projectrixor.rixor.scrimmage.player.Client;
 import lombok.Getter;

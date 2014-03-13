@@ -1,4 +1,4 @@
-package com.projectrixor.rixor.scrimmage.map.filter;
+package com.projectrixor.rixor.scrimmage.filter;
 
 import lombok.Getter;
 
